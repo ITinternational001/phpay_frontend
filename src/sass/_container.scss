@@ -1,0 +1,40 @@
+
+.card-wrapper{
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    background-color: $color-bg-inactive;
+    //margin: 1.25rem 0 1.25rem 1rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    
+    .card-header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1rem 1rem 1rem 0.5rem;
+        .card-title{
+            font-size: 24px;
+            color: $color-text-white;
+            font-weight: 500;
+            align-items: center;
+           
+        }
+        .card-actions{
+            display: flex;
+            flex-direction: row;
+           
+        }
+    }
+    .card-body{
+        //border:1px solid white;
+       padding: 1rem 1rem 1rem 1rem;
+       
+    }
+
+      
+    
+        
+}
+

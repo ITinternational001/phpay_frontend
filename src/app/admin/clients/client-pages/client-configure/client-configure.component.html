@@ -1,0 +1,154 @@
+<div class="row">
+  <div *ngFor="let data of topData" class="col-sm-4">
+    <app-card [isVisible]="false" [isVisiblebtn]="true" label="{{data.label | translate}}" icon="{{data.icon}}"
+      value="{{data.value}}"></app-card>
+  </div>
+</div>
+<div class="card-wrapper">
+  <div class="card-header">
+    <div class="card-title p-3">{{Name}} {{"configuration" | translate}}</div>
+    <div class="card-actions">
+
+      <button class="btn btn modal-botton" (click)="onFormSubmit()"><i class="fa-regular fa-save"></i>
+        {{"saveConfiguration" | translate}}</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="spinnerContainer">
+			<mat-spinner *ngIf="isLoading"></mat-spinner>
+		</div>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="{{ 'cashIn' | translate }}">
+        <div class="config-wrapper">
+          <div class="config-container" *ngFor="let vendor of clientData?.Vendors; let i=index">
+            <table class="dynastyTable">
+              <tr style="align-items: center;">
+                <th><mat-slide-toggle (change)="toggleMerchantStatus($event, vendor?.Merchants, i,'CashInFee')" [checked]="cashInStatuses[i]"></mat-slide-toggle></th>
+                <th>{{vendor?.Name}}</th>
+                <th colspan="2" style="text-align: center;"></th>
+                <th colspan="2" style="text-align: center;"></th>
+              </tr>
+              <tr style="align-items: center;">
+                <td rowspan="2">Status</td>
+                <td rowspan="2">Method</td>
+                <td colspan="2" style="text-align: center;">Fee At Cost</td>
+                <td colspan="2" style="text-align: center;">Fee On Top</td>
+              </tr>
+              <tr>
+                <td class="c-val">CI. Fee %</td>
+                <td class="c-val">CI. Fee Fixed</td>
+                <td class="c-val">CI. Fee %</td>
+                <td class="c-val">CI. Fee Fixed</td>
+              </tr>
+              <tr  *ngFor="let merchant of vendor?.Merchants; let j=index;">
+                <td><mat-slide-toggle [checked] = "getStatusValue(merchant?.CashInFee?.Status,'Cashin')" (change)="toggleCICOStatus(vendor?.Merchants, $event, 'cashin', j, i,'Status')" ></mat-slide-toggle></td>
+                <td>{{merchant?.PaymentChannel?.Name}}</td>
+                <td class="c-val">{{merchant?.CashInFee?.FeeAtCostPercent}}%</td>
+                <td class="c-val">{{merchant?.CashInFee?.FeeAtCostFixed}}</td>
+                <td class="c-val">      
+                  <input type="text" placeholder="0" [value]="merchant?.CashInFee?.FeeOnTopPercent"  (keyup)="onKey($event, 'cashin', j, i,'FeeOnTopPercent')">
+                </td>
+                <td class="c-val">
+                  <input type="text" placeholder="0" [value]="merchant?.CashInFee?.FeeOnTopFixed" (keyup)="onKey($event, 'cashin', j, i,'FeeOnTopFixed')">
+                </td>
+              </tr>
+         </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="{{ 'cashOut' | translate }}">
+        <div class="config-wrapper">
+          <div class="config-container" *ngFor="let vendor of clientData?.Vendors; let v=index">
+            <table class="dynastyTable">
+              <tr style="align-items: center;">
+                <th><mat-slide-toggle (change)="toggleMerchantStatus($event, vendor?.Merchants,v,'CashOutFee')" [checked]="cashOutStatuses[v]"></mat-slide-toggle></th>
+                <th>{{vendor?.Name}}</th>
+                <th colspan="2" style="text-align: center;"></th>
+                <th colspan="2" style="text-align: center;"></th>
+              </tr>
+              <tr style="align-items: center;">
+                <td rowspan="2">Status</td>
+                <td rowspan="2">Method</td>
+                <td colspan="2" style="text-align: center;">Fee At Cost</td>
+                <td colspan="2" style="text-align: center;">Fee On Top</td>
+              </tr>
+              <tr>
+                <td class="c-val">CO. Fee %</td>
+                <td class="c-val">CO. Fee Fixed</td>
+                <td class="c-val">CO. Fee %</td>
+                <td class="c-val">CO. Fee Fixed</td>
+              </tr>
+              <tr  *ngFor="let merchant of vendor?.Merchants; let m=index;">
+                <td><mat-slide-toggle [checked] = "getStatusValue(merchant?.CashOutFee?.Status,'Cashin')" (change)="toggleCICOStatus(vendor?.Merchants, $event, 'cashout', m, v,'Status')"></mat-slide-toggle></td>
+                <td>{{merchant?.PaymentChannel?.Name}}</td>
+                <td class="c-val">{{merchant?.CashOutFee?.FeeAtCostPercent}}%</td>                
+                <td class="c-val">{{merchant?.CashOutFee?.FeeAtCostFixed}}</td>
+                <td class="c-val">      
+                  <input type="number" placeholder="0" [value]="merchant?.CashOutFee?.FeeOnTopPercent" (keyup)="onKey($event, 'cashout', m, v,'FeeOnTopPercent')">
+                </td>
+                <td class="c-val">
+                  <input type="number" placeholder="0" [value]="merchant?.CashOutFee?.FeeOnTopFixed" (keyup)="onKey($event, 'cashout', m, v,'FeeOnTopFixed')">
+                </td>
+              </tr>
+         </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="{{ 'withdrawal' | translate }}">
+        <div class="config-wrapper">
+          <div class="config-container">
+            <table class="dynastyTable">
+              <tr style="align-items: center;">
+                <th colspan="2"></th>
+                <th colspan="2" style="text-align: center;"></th>
+                <th colspan="2" style="text-align: center;"></th>
+              </tr>
+              <tr style="align-items: center;">
+                <td rowspan="2">Status</td>
+                <td rowspan="2">Method</td>
+                <td colspan="2" style="text-align: center;">Fee At Cost</td>
+                <td colspan="2" style="text-align: center;">Fee On Top</td>
+              </tr>
+              <tr>                
+                <td class="c-val">W. Fee %</td>
+                <td class="c-val">W. Fee Fixed</td>
+                <td class="c-val">W. Fee %</td>
+                <td class="c-val">W. Fee Fixed</td>
+              </tr>
+              <tr *ngFor="let withdrawal of clientData?.WithdrawalFees; let w = index">
+                <td><mat-slide-toggle [checked] = "getStatusValue(withdrawal?.Status,'Withdrawal')"></mat-slide-toggle></td>
+                <td>{{withdrawal.MethodDescription}}</td>
+                <td class="c-val">
+                  <input type="number" placeholder="0%" [value]="withdrawal?.FeeAtCostPercent" (keyup)="onKey($event, 'withdrawal', w,100,'FeeAtCostPercent')"/>
+                </td>
+                <td class="c-val">
+                  <input type="number" placeholder="0" [value]="withdrawal?.FeeAtCostFixed" (keyup)="onKey($event, 'withdrawal', w,100,'FeeAtCostFixed')"/>
+                </td>
+                <td class="c-val">
+                  <input type="number" placeholder="0%" [value]="withdrawal?.FeeOnTopPercent" (keyup)="onKey($event, 'withdrawal', w,100,'FeeOnTopPercent')"/>
+                </td>
+                <td class="c-val">
+                  <input type="number" placeholder="0" [value]="withdrawal?.FeeOnTopFixed" (keyup)="onKey($event, 'withdrawal', w,100,'FeeOnTopFixed')"/>
+                </td>
+              </tr> 
+              <tr *ngIf="!clientData ?.WithdrawalFees || clientData?.WithdrawalFees?.length === 0">
+                <td colspan="6" style="text-align: center;">
+                  <i>No withdrawal fees yet.</i>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="6">
+                  <i><span (click)="openForm()" class="btn-add-method">click here</span> to add withdrawal method </i>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+ 
+  </div>
+
+  <div class="card-footer"></div>
+</div>

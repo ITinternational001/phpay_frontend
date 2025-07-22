@@ -1,0 +1,209 @@
+<div class="row">
+    <div class="col-md-4">
+        <form [formGroup]="WithdrawalsForm">
+            <div class="formContainer">
+                <!-- Add a container for the two columns -->
+                <div class="two-column-layout">
+                    <div class="col-md-6">
+                        <div class="item">
+                            <!-- <mat-form-field>
+                                <mat-label>Method</mat-label>
+                                <mat-select placeholder="Select Method..." disableRipple formControlName="Method">
+                                    <mat-option disabled>Select Method</mat-option>
+                                    <mat-option *ngFor="let method of methods" [value]="method.id">{{method.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+
+                            <app-select-search 
+                                [options]="methods" 
+                                placeholder="Select Method" 
+                                [disabled]="!isReadAndWrite"
+                                [showSearch]="false"
+                                (optionSelected)="onMethodSelect($event)">
+                            </app-select-search>
+                        </div>
+                    </div>
+                    <div *ngIf="isAdmin" class="col-md-6">
+                        <div class="item">
+                            <!-- <mat-form-field>
+                                <mat-label>Client</mat-label>
+                                <mat-select placeholder="Select Client..." disableRipple formControlName="ClientId" (selectionChange)="onClientChange($event)">
+                                    <mat-option disabled>Select Client</mat-option>
+                                    <mat-option *ngFor="let client of clients" [value]="client.id">{{client.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+
+                            <app-select-search 
+                                [options]="clients" 
+                                placeholder="Select Client" 
+                                [disabled]="!isReadAndWrite"
+                                [showSearch]="true"
+                                (optionSelected)="onClientChange($event)">
+                            </app-select-search>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-calendar">
+                    <mat-form-field>
+                        <mat-label>StartDate - EndDate</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate formControlName="StartDate" placeholder="Start date">
+                            <input matEndDate formControlName="EndDate" placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div class="row form-container">
+            <div class="col-md-12">
+                <div class="total-section" *ngFor="let data of totalData">
+                    <div class="title">
+                        <div class="image-section">
+                            <img src="{{data.img}}" alt="">
+                        </div>
+                        <span>{{data.label | translate}}</span>
+                    </div>
+                    <div class="value"><span>&#8369; {{data.value}}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row form-container">
+            <div class="col-md-12">
+                <div class="total-section" *ngFor="let data of incomeTotals">
+                    <div class="title">
+                        <div class="image-section">
+                            <img src="{{data.img}}" alt="">
+                        </div>
+                        <span>{{data.label | translate}}</span>
+                    </div>
+                    <div class="value"><span>&#8369; {{data.value}}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="actions">
+            <app-search (search)="onSearch($event)"></app-search>
+            <div class="h-divider"></div>
+            <app-button [disabled]="!isReadAndWrite" [text]="'download' | translate" [icon]="'fa-download'" [btnClass]="'btn-theme btn-lg'" (click)="onDownloadExcel()"></app-button>
+        </div>
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="container-with-table">
+            <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="Type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{isAdmin ? 'Type': 'Transaction'}} </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Type}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Client">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th> 
+                    <td mat-cell *matCellDef="let row"> {{row.ClientName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="BankDetails">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Bank Details </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.CardAccountName }} - {{row.CardAccountNumber}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Source">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Source </th>
+                    <td *matCellDef="let row" mat-cell>{{ row.MotherCardAccountName }} - {{row.MotherCardAccountNumber}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Method">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Method </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Method}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Requested">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Requested </th>
+                    <td mat-cell *matCellDef="let row"> {{row.DateRequested}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Released">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Released </th>
+                    <td mat-cell *matCellDef="let row"> {{row.DateRemitted}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Requestee">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Requestee </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Requestee}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="RemittanceId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Remittance Id</th>
+                    <td mat-cell *matCellDef="let row"> {{row.RemittanceId}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ReferenceNo">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Reference Number </th>
+                    <td *matCellDef="let row" mat-cell>
+                      <div class="reference-number">
+                        {{ wrapReferenceNumber(row.ReferenceNumber) }}
+                      </div>
+                    </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="RequestedAmount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> GrossAmount </th>
+                    <td mat-cell *matCellDef="let row"> {{row.RequestedAmount | number : '1.2-2'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="onTopFee">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> OnTop Fee </th>
+                    <td mat-cell *matCellDef="let row"> {{row.OnTopFee | number : '1.2-2'}} </td>
+                </ng-container>
+
+		        <ng-container matColumnDef="AtCostFee">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> AtCost Fee </th>
+                    <td mat-cell *matCellDef="let row"> {{row.AtCostFee | number : '1.2-2'}} </td>
+                </ng-container>
+
+		        <ng-container matColumnDef="WFee">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> W. Fee </th>
+                    <td mat-cell *matCellDef="let row"> {{row.WFeeFixed | number : '1.2-2'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="NetAmount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Net Amount </th>
+                    <td mat-cell *matCellDef="let row"> {{row.NetAmount | number : '1.2-2'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ApproveBy">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Approver</th>
+                    <td mat-cell *matCellDef="let row"> {{row.ApproverName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
+                    <td mat-cell *matCellDef="let row">  <span [ngStyle]="row.Status | statusColor">{{ row.Status }}</span> </td>
+                </ng-container>
+        
+                <tr *matHeaderRowDef="displayedColumns; sticky:true" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="17" style="text-align: center;">
+                        <app-nodata></app-nodata>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+            (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+            (lastData)="onLastPage()" (itemsPerPageChange)="onItemsPerPageChanged($event)">
+        </app-pagination>
+    </div>
+</div>

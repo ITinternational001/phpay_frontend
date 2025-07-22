@@ -1,0 +1,62 @@
+<div class="col-md-3 col-lg-12">
+  <div class="card-wrapper">
+    <div class="card-header">
+      <div class="card-title p-3">
+        {{"transferBalance" | translate}}
+      </div>
+    </div>
+    <div class="card-body">
+
+        <ng-container *ngIf="isBalanceTopup">
+          <form [formGroup]="balanceTransferForm" (ngSubmit)="onSubmitBalanceTransfer()">
+            <!-- Admin side only -->
+            <ng-container>
+              <div class="row" *ngIf="isAdmin">
+                <div style="margin-bottom: -10px;">
+                  <app-select-search 
+                    [options]="transferTypes" 
+                    placeholder="Select transaction type..." 
+                    [showSearch]="false"
+                    [resetFormTrigger]="resetDropdown"
+                    (optionSelected)="onTransferTypeChange($event)">
+                  </app-select-search>
+                </div>
+              </div>
+              <div class = "row" *ngIf="isAdmin">
+                <app-select-search 
+                  [options]="clientsList" 
+                  placeholder="Select Client" 
+                  [showSearch]="true"
+                  [resetFormTrigger]="resetDropdown"
+                  (optionSelected)="onClientChange($event)">
+                </app-select-search>
+              </div>
+              
+            </ng-container>
+            
+            <app-input-text-field
+              [formGroup]="balanceTransferForm"
+              controlName="Amount"
+              type="text"
+              placeholder="Amount"
+              appNumberFormat
+              [isInvalid]="balanceTransferForm.controls['Amount'].invalid && balanceTransferForm.controls['Amount'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+
+            <app-input-text-field
+              [formGroup]="balanceTransferForm"
+              controlName="Remarks"
+              type="text"
+              placeholder="Remarks"
+            ></app-input-text-field>
+
+            <div class="form-box mb-5 d-flex justify-content-center align-items-center">
+              <button class="btn btn-primary btnreq" type="submit" [disabled]="!isReadAndWrite" [disabled]="actionDisable"> {{"submitTransfer" | translate}} </button>
+            </div>
+          </form>
+        </ng-container>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+@import "../sass/variables";
+.modal-botton {
+    background-color: $color-text-yellow !important;
+    color: $color-text-white !important;
+    border-width: 0;
+    height: 40px;
+}
+
+.mat-icon-style{
+
+    color: $spinner;
+}

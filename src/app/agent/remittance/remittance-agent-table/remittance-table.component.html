@@ -1,0 +1,63 @@
+<div class="row1">
+    <div class="col-lg-12">
+        <div class="card-wrapper">
+            <div class="card-header">
+                <div class="card-title p-3">{{"listOfAgents" | translate}}</div>
+                <div class="card-actions">
+                    <app-search (search)="onSearch($event)"></app-search>
+                    <div class="h-divider"></div>
+                </div>
+            </div>
+            <div class="card-body-table">
+                <app-spinner *ngIf="isLoading"></app-spinner>
+                <div class="container-with-table">
+                    <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                        <ng-container matColumnDef="agentId">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Agent ID</th>
+                            <td *matCellDef="let row" mat-cell> {{ row.agentId }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Name </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.name }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="noClient">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> No. of Clients </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.noClient }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="remittance">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Remittance </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.remittance | number:'1.2-2' }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="walletBalance">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Wallet Balance </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.walletBalance | number:'1.2-2'}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                            <td *matCellDef="let row" mat-cell >{{ row.status }}
+                                <!-- <span [ngStyle]="row.Status | statusColor"></span></td> -->
+                        </ng-container>
+                       
+                        <tr *matHeaderRowDef="displayedColumns; sticky:true" mat-header-row></tr>
+                        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="6" style="text-align: center;">No data matching the filter
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <app-pagination 
+            [totalItems]="this.totalItems" 
+            [itemsPerPage]="itemsPerPage" 
+            [currentPage]="currentPage"
+            (firstData)="onFirstPage()" 
+            (nextData)="onNextPage()" 
+            (previousData)="onPreviousPage()"
+            (lastData)="onLastPage()"
+            (itemsPerPageChange)="onItemsPerPageChanged($event)">
+            </app-pagination>
+        </div>
+        
+    </div>
+</div>

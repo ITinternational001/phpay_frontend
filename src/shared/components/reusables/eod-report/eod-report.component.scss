@@ -1,0 +1,24 @@
+@import "/src/sass/modalbutton";
+@import "/src/sass/scrollbar";
+.container-with-table{
+    height: 425px;
+    overflow: auto;
+  }
+
+  .btn-theme-vert{
+    background-color: $color-text-yellow;
+}
+.form-container {
+    display: flex;
+    justify-content: flex-end; 
+
+}
+
+.Header {
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+

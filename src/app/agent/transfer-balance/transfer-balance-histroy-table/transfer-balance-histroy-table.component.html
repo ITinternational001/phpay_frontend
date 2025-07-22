@@ -1,0 +1,85 @@
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">{{ title }}</div>
+        <div class="card-actions">
+            <app-search (search)="onSearch($event)"></app-search>
+            <div class="h-divider"></div>
+            <form [formGroup]="agentTransferHistroy">
+                <mat-form-field>
+                    <mat-label>StartDate - EndDate</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" formControlName="StartDate">
+                        <input matEndDate placeholder="End date" formControlName="EndDate">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </form>
+            <div class="h-divider"></div>
+            <app-button [disabled]="!isReadAndWrite" [text]="'download' | translate" [icon]="'fa-download'" [btnClass]="'btn-theme btn-lg'" (click)="exportToExcel()"></app-button>
+            <div class="h-divider"></div>
+        </div>
+    </div>
+    <div class="card-body-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="container-with-table">
+            <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                <!-- Table Columns Definition Here -->
+                <ng-container matColumnDef="timestamp">
+                  <th *matHeaderCellDef mat-header-cell mat-sort-header> Timestamp </th>
+                  <td *matCellDef="let row" mat-cell> {{ row.TimeStamp }} </td>
+              </ng-container>
+              <ng-container matColumnDef="transactionId">
+                  <th *matHeaderCellDef mat-header-cell mat-sort-header>Request id </th>
+                  <td *matCellDef="let row" mat-cell> {{ row.RequestID }} </td>
+              </ng-container>
+              <ng-container matColumnDef="status">
+                  <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                  <td *matCellDef="let row" mat-cell>
+                      <span [ngStyle]="row.Status | statusColor">{{ row.StatusDescription }}</span></td>
+              </ng-container>
+              <ng-container matColumnDef="clientname">
+                  <th *matHeaderCellDef mat-header-cell mat-sort-header> Client </th>
+                  <td *matCellDef="let row" mat-cell> {{ row.ClientName }} </td>
+              </ng-container>
+              <ng-container matColumnDef="channelname">
+                  <th *matHeaderCellDef mat-header-cell mat-sort-header> Channel </th>
+                  <td *matCellDef="let row" mat-cell> {{ row.PaymentChannelName }} </td>
+              </ng-container>
+              <ng-container matColumnDef="amountInputted">
+                  <th *matHeaderCellDef mat-header-cell mat-sort-header>Amount </th>
+                  <td *matCellDef="let row" mat-cell> &#8369; {{ row.TotalAmount | number:'1.2-2' }} </td>
+              </ng-container>
+              <ng-container matColumnDef="requestBy">
+                  <th *matHeaderCellDef mat-header-cell mat-sort-header>Requestee </th>
+                  <td *matCellDef="let row" mat-cell> {{ row.Requestee }} </td>
+              </ng-container>
+              <ng-container matColumnDef="approveBy">
+                  <th mat-header-cell *matHeaderCellDef> Approve By </th>
+                  <td mat-cell *matCellDef="let row"> {{ row.ApproverName }} </td>
+              </ng-container>
+              <ng-container matColumnDef="remarks">
+                <th mat-header-cell *matHeaderCellDef> Remarks </th>
+                <td mat-cell *matCellDef="let row"> {{row.Remarks}} </td>
+            </ng-container>
+                <tr *matHeaderRowDef="displayedColumnsCompleted; sticky:true" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumnsCompleted" mat-row></tr>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="12" style="text-align: center;">No data matching the filter</td>
+                </tr>
+            </table>
+        </div>
+        <app-pagination 
+        [totalItems]="this.totalItems" 
+        [itemsPerPage]="itemsPerPage" 
+        [currentPage]="currentPage"
+        (firstData)="onFirstPage()" 
+        (nextData)="onNextPage()" 
+        (previousData)="onPreviousPage()"
+        (lastData)="onLastPage()"
+        (itemsPerPageChange)="onItemsPerPageChanged($event)">
+        </app-pagination>
+
+    </div>
+</div>

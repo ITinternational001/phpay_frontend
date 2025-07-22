@@ -1,0 +1,42 @@
+.holder {
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    
+}
+
+.holder h1 {
+  
+    font-size: 5em;
+    color: #ffffff;
+    line-height: 27px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+}
+
+.holder h1 span.tbl {
+    font-size: 35px;
+    color: #ffffff;
+    line-height: 1em;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.holder h1 span {
+    font-size: 1em;
+    color: #ffffff;
+    line-height: 1em;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+
+}

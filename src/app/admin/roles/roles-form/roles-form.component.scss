@@ -1,0 +1,56 @@
+@import "/src/sass/modalbutton";
+@import "/src/sass/scrollbar";
+  
+  /* Optional: Add padding or other styling as needed */
+  .column {
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .permission-section{
+    padding:10px;
+  
+  }
+
+
+  .container-assign {
+    column-width: 300px; /* Adjust the width of the columns */
+    column-gap: 20px;    /* Space between columns */
+    height: 400px;       /* Max height of the container */
+    overflow: auto;      /* Allows scrolling if content exceeds height */
+  }
+  
+  .item {
+    break-inside: avoid; /* Prevents items from being split between columns */
+    margin-bottom: 8px;  /* Adds spacing between items */
+    .label{
+      color:#fff;
+      font-size: 18px;
+      padding-left: 10px ;
+    }
+
+    .form-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .fixed-field, 
+  .fixed-dropdown {
+      width: 100%; /* Adjust as needed */
+      min-width: 400px;
+      max-width: 700px;
+      display: block;
+  }
+  
+  .custom-width {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+  }
+  
+
+
+  
+  }

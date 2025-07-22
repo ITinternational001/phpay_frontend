@@ -1,0 +1,24 @@
+@import "/src/sass/modalbutton";
+
+
+input[type="text"],
+input[type="number"],
+      textarea {
+        border: none;
+        outline: none;
+        border-bottom:2px solid #ccc; /* You can adjust the color and thickness of the outline */
+        background-color: rgba(52, 152, 219,0);
+        width: 3vw;
+        height: 1.5vw;
+        text-align: center;
+        caret-color: #fff;
+        color: #fff;
+      }
+
+      .c-val{
+        text-align: center;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+      }

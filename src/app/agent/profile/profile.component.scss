@@ -1,0 +1,22 @@
+@import"/src/sass/variables";
+
+
+.details-container{
+    background: #1f1f1f;
+    border-radius: 5px;
+    padding:20px;
+    .details{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+        border:1px solid white;
+        .label{
+            color: #cecece;
+            font-size: 18px;
+        }
+        .value{
+            color: #cecece;
+            font-size: 18px;
+        }
+    }  
+}

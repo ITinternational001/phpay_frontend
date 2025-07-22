@@ -1,0 +1,57 @@
+.InputTextField {
+    margin-bottom: 0.5rem;
+    position: relative; /* Required for absolute positioning of the label */
+}
+
+.form-control {
+    background-color: #3e3e3e;
+    color: white;
+    border: none;
+    outline: none; /* Removes the default focus outline */
+    padding: 1rem 0.5rem; /* Add padding for better spacing */
+    // border-bottom: 1px solid white; /* Initial underline */
+    transition: border-color 0.3s ease; /* Smooth transition for focus */
+}
+
+/* Add a highlighted underline on focus */
+.form-control:focus {
+    border-bottom: 2px solid #8d2090; /* Thicker blue underline when focused */
+    box-shadow: none;
+}
+
+/* Keep the invalid border color only when invalid */
+.is-invalid {
+    border-bottom: 1px solid #dc3545; /* Red underline when invalid */
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+}
+
+// label {
+//     position: absolute;
+//     top: 50%;
+//     left: 0.5rem; /* Adjust based on your padding */
+//     transform: translateY(-50%);
+//     transition: 0.2s ease all; /* Smooth transition for moving */
+//     color: white; /* Color for the label */
+// }
+
+// label.floating {
+//     top: -0.5rem; /* Move the label up */
+//     left: 0.5rem; /* Adjust based on your padding */
+//     font-size: 0.75em; /* Smaller font for floating label */
+//     color: white; /* Color for the label */
+// }
+
+::placeholder {
+    color: white;
+    opacity: 0.6; /* Ensure full opacity */
+    padding-left: 5px;
+}
+
+.form-control::placeholder {
+    color: white;
+    opacity: 0.6;
+}

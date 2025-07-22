@@ -1,0 +1,20 @@
+@import"/src/sass/variables";
+
+.wallet{
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    background: linear-gradient(107deg, #D9D9D9 1.68%, #616161 93.93%);
+    margin: 1.25rem 0 1.25rem 0;
+    .wallet-head{
+        padding: 1rem 0 1rem 1rem;
+        font-size: 1.3rem;
+        color:#000;
+    }
+}
+
+table,tr,td{
+    background-color: transparent;
+    color: #000;
+    border-bottom: #D9D9D9;
+}

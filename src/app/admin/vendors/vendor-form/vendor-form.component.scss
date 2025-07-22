@@ -1,0 +1,6 @@
+
+@import "/src/sass/modalbutton";
+
+::ng-deep .mat-form-field-disabled .mat-input-element {
+    color: #999; /* Set the desired color for disabled text */
+  }

@@ -1,0 +1,99 @@
+<app-maintenance-message>
+  <div class="row mb-3">
+    <div *ngFor="let data of topData" class="col-sm-3">
+      <app-card [isVisible]="false" [isVisiblebtn]="true" label="{{data.label | translate}}" icon="{{data.icon}}"
+        value="{{data.value}}"></app-card>
+    </div>
+  </div>
+
+  <div class="card-wrapper">
+
+    <div class="card-header">
+      <div class="card-title p-3">
+        {{'userList' | translate}}
+      </div>
+      <div class="card-actions">
+        <app-search (search)="onSearch($event)"></app-search>
+        <div class="h-divider"></div>
+        <app-button [disabled]="!isReadAndWrite" [text]="'addUser' | translate" [icon]="'fa-plus'" [btnClass]="'btn-theme btn-lg'"
+          (click)="openForm()"></app-button>
+        <div class="h-divider"></div>
+      </div>
+    </div>
+
+    <div class="card-body-table">
+      <div class="container-with-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+            <td mat-cell *matCellDef="let row"> {{row.Id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+            <td mat-cell *matCellDef="let row"> {{row.Username}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail Address </th>
+            <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+            <td mat-cell *matCellDef="let row"> {{row.Role}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
+            <td mat-cell *matCellDef="let row"> {{row.Status}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Client">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Client</th>
+            <td mat-cell *matCellDef="let row"> {{row.Client}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions </th>
+            <td mat-cell *matCellDef="let row">
+              <button [disabled]="!isReadAndWrite" class="btn-theme-vert" mat-mini-fab
+              [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item (click)="openEditForm(row,'userupdate')">
+                  <mat-icon>edit</mat-icon>
+                  <span>{{"editUser" | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="openEditForm(row,'permission')">
+                  <mat-icon>edit</mat-icon>
+                  <span>{{"editPermission" | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="openResetPasswordForm(row)">
+                  <mat-icon>account_box</mat-icon>
+                  <span>{{"resetPassword" | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="openDeleteForm(row)">
+                  <mat-icon>lock</mat-icon>
+                  <span>{{ (row.Status == 'Active' ? 'disabled' : 'enabled') | translate }} {{"user"  | translate}}</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="7">
+              <app-nodata></app-nodata>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+        (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()" (lastData)="onLastPage()"
+        (itemsPerPageChange)="onItemsPerPageChanged($event)">
+      </app-pagination>
+    </div>
+  </div>
+  <div class="card-footer"></div>
+</app-maintenance-message>

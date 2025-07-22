@@ -1,0 +1,95 @@
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">Balance Transfer Transactions</div>
+        <div class="card-actions">
+            <app-search></app-search>
+            <div class="h-divider"></div>
+            <form [formGroup]="BalanceTransferForm">
+                <mat-form-field>
+                    <mat-label>StartDate - EndDate</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" formControlName="StartDate">
+                        <input matEndDate placeholder="End date" formControlName="EndDate">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </form>
+            <div class="h-divider"></div>
+            <app-button [text]="'Download'" [icon]="'fa-download'" [btnClass]="'btn-theme btn-lg'"></app-button>
+        </div>
+    </div>
+    <div class="card-body-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="container-with-table">
+            <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="id">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> id </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.Id }} </td>
+                </ng-container>
+                <ng-container matColumnDef="clientName">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Client </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.ClientName }} </td>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Amount </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.Amount | number : '1.2-2' }} </td>
+                </ng-container>
+                <ng-container matColumnDef="transactionNo">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Transaction # </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.TransactionNo }} </td>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Created Date </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.CreatedDate }} </td>
+                </ng-container>
+                <ng-container matColumnDef="completedDate">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Completed Date </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.CompletedDate }} </td>
+                </ng-container>
+                <ng-container matColumnDef="requestee">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Requestee</th>
+                    <td *matCellDef="let row" mat-cell>{{ row.RequesteeName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                    <td *matCellDef="let row" mat-cell>{{ row.Status }}</td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Action</th>
+                    <td *matCellDef="let row" mat-cell>
+                        <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon class="mat-icon-style">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" xPosition="before">
+                            <button mat-menu-item 
+                                (click)="onApproveTransfer(row)">
+                                <mat-icon>check</mat-icon>
+                                <span>Approve Transfer</span>
+                            </button>   
+                            <button mat-menu-item 
+                                (click)="onDeclineTransfer(row)">
+                                <mat-icon>highlight_off</mat-icon>
+                                <span>Decline Transfer</span>
+                            </button>    
+                        </mat-menu>
+                    </td>
+                </ng-container>
+        
+                <tr *matHeaderRowDef="displayedColumns; sticky:true" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="13" style="text-align: center;">No data matching the filter
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+            (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+            (lastData)="onLastPage()">
+        </app-pagination>
+    </div>
+</div>
+<div class="card-footer"></div>

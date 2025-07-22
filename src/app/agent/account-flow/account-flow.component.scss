@@ -1,0 +1,49 @@
+.card-wrapper {
+    padding-bottom: 10px;
+}
+
+.FormName {
+    padding: 0px 20px 0px 25px;
+    color: white;
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: left; 
+    position: relative;
+    display: inline-block; 
+
+}
+
+.Selection {
+    width: 100%;
+    max-width: 200px; 
+    padding-right: 10px;
+    margin-top: 0px;
+    position: relative;
+}
+
+.fixed-form {
+    display: flex; 
+    align-items: center; 
+    gap: 5px;
+    margin-top: -10px;
+}
+
+.form-item {
+    display: flex;
+    align-items: center; 
+}
+
+.fixed-select {
+    display: block;
+    width: 100%;
+    max-width: 200px; 
+    height: 40px; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+app-select-search {
+    width: 250px; 
+    max-width: 250px; 
+}

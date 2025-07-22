@@ -1,0 +1,28 @@
+@import "/src/sass/variables";
+@import "/src/sass/upload";
+@import "/src/sass/modalbutton";
+
+.bank-details{
+    background-color: #424242;
+    width: 100%;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    max-width: 100%; 
+
+    border-radius: 0.5rem;
+}
+.bank-name,
+.account-info {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 30ch; 
+  line-height: 1.5;
+}
+
+.account-info span {
+    margin-right: 5px;
+}
+

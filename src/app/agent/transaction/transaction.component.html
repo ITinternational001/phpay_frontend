@@ -1,0 +1,200 @@
+<app-maintenance-message>
+    <div class="header">
+          <ng-container>
+              <span class="Download">
+                  <app-button [disabled]="!isReadAndWrite" [text]="'download' | translate" [icon]="'fa-download'" [btnClass]="'btn-theme btn-lg'" (click)="exportToExcel()"></app-button>
+              </span>
+          </ng-container>
+    </div>
+    
+    <div class="row">     
+      <div class="col-lg-8 col-md-12">
+          <div class="card-wrapper equal-width">
+              <div class="card-header">
+                  <div class="card-title p-3">{{"totalCommission" | translate}}</div>
+                  <div class="card-actions">
+                      <div class="h-divider"></div>
+                  </div>
+              </div>
+    
+              <div class="card-body-table">
+                  <app-spinner *ngIf="isLoading"></app-spinner>
+    
+                  <ng-container *ngIf="!isLoading && row; else noDataTemplate">
+                      <table class="CommsTable">
+                          <tbody>
+                              <tr class="Table">
+                                  <td class="table-padding">{{"todayIncome" | translate}}</td>
+                                  <td class="total">{{ row.TodayIncome ?? 0 | number:'1.2-2' }}</td>
+                              </tr>
+                              <tr>
+                                  <td></td>
+                              </tr>                         
+                              <tr class="TotaTable">
+                                  <td class="table-padding">{{"yesterdayIncome" | translate}}</td>
+                                  <td class="total">{{ row.YesterdayIncome ?? 0  | number:'1.2-2' }}</td>
+                              </tr>
+                              <tr>
+                                  <td></td>
+    
+                              </tr>
+                          
+                              <tr class="Table">
+                                  <td class="table-padding">{{"thisWeekIncome" | translate}}</td>
+                                  <td class="total">{{ row.ThisWeekIncome ?? 0  | number:'1.2-2' }}</td>
+                              </tr>
+                              <tr>
+                                  <td></td>
+                              </tr>
+                          
+                              <tr class="Table">
+                                  <td class="table-padding">{{"thisMonthIncome" | translate}}</td>
+                                  <td class="total">{{ row.ThisMonthIncome ?? 0  | number:'1.2-2' }}</td>
+                              </tr>
+                              <tr>
+                                  <td></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </ng-container>
+    
+                  <!-- No Data Available Message -->
+                  <ng-template #noDataTemplate>
+                      <div style="text-align: center;">No data available</div>
+                  </ng-template>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-12">
+          <div class="wrapper">
+              <div *ngFor="let data of topData" class="col-12">
+                  <app-card
+                      [isVisible]="false"
+                      [isVisiblebtn]="true"
+                      [label]="data.label | translate"
+                      [value]="data.value.toString()"
+                      icon="{{data.icon}}">
+                  </app-card>
+              </div>
+          </div>
+      </div>
+    </div>
+    
+    <ng-container>
+      <div class="card-wrapper">
+          <div class="card-header">
+              <div class="card-title p-3">{{"transactions" | translate}}</div>
+              <div class="card-actions">
+                  <form [formGroup]="agentTransactionLogs">
+                      <mat-form-field>
+                          <mat-label>StartDate - EndDate</mat-label>
+                          <mat-date-range-input [rangePicker]="picker">
+                              <input matStartDate placeholder="Start date" formControlName="StartDate">
+                              <input matEndDate placeholder="End date" formControlName="EndDate">
+                          </mat-date-range-input>
+                          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-date-range-picker #picker></mat-date-range-picker>
+                      </mat-form-field>
+                  </form>
+    
+                  <div class="h-divider"></div>
+                  <app-select-search class="fixed-form"
+                        [options]="selectType" 
+                        placeholder="Select Type" 
+                        [showSearch]="true"
+                        (optionSelected)="onSelectType($event)">
+                    </app-select-search>
+                    <div class="h-divider"></div>
+    
+                  <form [formGroup]="agentlistofClient" class="fixed-form">
+                      <!-- <mat-form-field class="example-full-width">
+                          <mat-label>Select Client</mat-label>
+                          <mat-select formControlName="ClientId" (selectionChange)="onClientChange($event)">
+                            <mat-option *ngFor="let client of clientsDropdown" [value]="client.id">
+                              {{ client.name }}
+                            </mat-option>                        
+                          </mat-select>
+                      </mat-form-field> -->
+    
+                    <app-select-search 
+                        [options]="clientsDropdown" 
+                        placeholder="Select Client" 
+                        [showSearch]="true"
+                        (optionSelected)="onClientChange($event)">
+                    </app-select-search>
+                  </form>
+    
+                  <div class="h-divider"></div>
+                  <app-search (search)="onSearch($event)"></app-search>
+                  <div class="h-divider"></div>
+              </div>
+          </div>
+    
+          <ng-container>
+              <div class="card-body-table">
+                  <app-spinner *ngIf="isLoading"></app-spinner>
+                  <div class="container-with-table">
+                      <div class="table-container">
+                           <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                    <!-- Table Columns Definition Here -->
+                    <ng-container matColumnDef="timesTamp">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
+                      <td mat-cell *matCellDef="let element">{{ element.Timestamp }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="transactionNo">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Transaction No.</th>
+                      <td mat-cell *matCellDef="let element">{{ element.TransactionNo }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="clientName">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Client</th>
+                      <td mat-cell *matCellDef="let element">{{ element.ClientName }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="type">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+                      <td mat-cell *matCellDef="let element">
+                          <span [ngStyle]="{'color': element.TypeColor}">{{ element.Type }}</span>
+                      </td>
+                  </ng-container>
+                    <ng-container matColumnDef="vendorName">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vendor</th>
+                      <td mat-cell *matCellDef="let element">{{ element.VendorName }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="channelName">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Channel</th>
+                      <td mat-cell *matCellDef="let element">{{ element.Channelname }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="grossAmount">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Gross Amount</th>
+                      <td mat-cell *matCellDef="let element">₱{{ element.GrossAmount | number:'1.2-2' }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalComms">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Comms</th>
+                      <td mat-cell *matCellDef="let element">{{ element.Commissions | number:'1.2-2' }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="netAmount">
+                      <th mat-header-cell *matHeaderCellDef>Net Amount</th>
+                      <td mat-cell *matCellDef="let element">{{ element.NetAmount | number:'1.2-2' }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                      <td *matCellDef="let element" mat-cell >
+                          <span [ngStyle]="element.Status | statusColor">{{ element.Status }}</span></td>
+                  </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayTransaction; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let elemet; columns: displayTransaction"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="10" style="text-align: center;">No data matching the filter</td>
+                    </tr>
+                  </table>
+                          <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+                              (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+                              (lastData)="onLastPage()" (itemsPerPageChange)="onItemsPerPageChanged($event)">
+                          </app-pagination>
+                      </div>
+                  </div>
+              </div>
+          </ng-container>
+      </div>
+    </ng-container>
+    </app-maintenance-message>
+    

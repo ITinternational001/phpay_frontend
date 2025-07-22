@@ -1,0 +1,44 @@
+@import"../../../../sass//variables";
+
+.body-custom {
+    height: 524px;
+    overflow-y: auto;
+}
+
+.wallet-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    padding:20px;
+
+    .wallet-container {
+        margin-right: 10px;
+        min-width: 32%;
+        background-color: rgb(215, 213, 213);
+        margin-bottom: 30px;
+        color: white;
+        border-radius: 10px;
+        .pads{
+           padding:20px;
+        }
+        .card-value {
+            padding-top: 20px;
+            font-size: 28px;
+            font-weight: 500;
+            color: black
+        }
+
+        .card-title {
+
+            font-size: 20px;
+            color: #383737;
+        }
+
+        .action-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+}

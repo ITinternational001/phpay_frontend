@@ -1,0 +1,12 @@
+<div *ngIf="isMaintenance; else normalContent">
+
+    <div class="holder">
+        <img src="assets/maintenance.png" style="width:500px;" />
+        <h1><span class="tbl">{{ message }}</span></h1>
+
+        <br />
+    </div>
+</div>
+<ng-template #normalContent>
+    <ng-content></ng-content> 
+</ng-template>

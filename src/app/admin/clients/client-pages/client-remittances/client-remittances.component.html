@@ -1,0 +1,275 @@
+<app-maintenance-message>
+	<div class="row">
+		<div class="col-md-3 col-sm-6">
+			<div class="card-wrapper">
+				<div class="card-header">
+					<div class="card-title p-3">
+						{{"requestForRemittance" | translate}}
+						<p style="color:white; padding-left: 3px;"><i>{{"pleaseAnticipateWaitingPeriod" | translate}}</i></p>
+					</div>
+				</div>
+				<div class="body-header">
+					<div class="co-card-title p-3">
+						<ng-container *ngFor="let item of headerTop">
+							<div 
+								(click)="changeActiveHeader(item)"
+								[ngClass]="item.isActive ? 'header-active' : 'header-inactive'">
+								{{item.label | translate}}
+							</div>
+						</ng-container>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="max-height">
+						<ng-container *ngIf="isRemittances; else cashPickUpTemplate">
+							<form [formGroup]="requestForm" (ngSubmit)="onRequestRemittance()">
+								<div class="example-full-width" style="margin-bottom: 5px">
+								<app-select-search 
+									[options]="clientsDropdown" 
+									placeholder="Select Client" 
+									[disabled]="!isReadAndWrite"
+									[showSearch]="true"
+									[resetFormTrigger]="resetDropdown"
+									(optionSelected)="onClientChange($event)">
+								</app-select-search>
+								</div>
+								<div class="example-full-width" style="margin-bottom: 5px">
+								<app-select-search 
+									[options]="transferMethod" 
+									placeholder="Select Method" 
+									[disabled]="!isReadAndWrite"
+									[showSearch]="false"
+									[resetFormTrigger]="resetDropdown"
+									(optionSelected)="onSelectChange($event)">
+								</app-select-search>
+								</div>
+								<div class="example-full-width" style="margin-bottom: 15px">
+								<app-select-search 
+									[options]="listOfDestination" 
+									placeholder="Select Card" 
+									[showErrorMessage]="true"
+									[disabled]="!isReadAndWrite"
+									[showSearch]="false"
+									[resetFormTrigger]="resetDropdown"
+									(optionSelected)="onSelectIdDestination($event)">
+								</app-select-search>
+							</div>
+							<div class="example-full-width">
+								<app-input-text-field
+									[formGroup]="requestForm"
+									controlName="Amount"
+									type="text"
+									placeholder="Amount"
+									appNumberFormat
+									[isInvalid]="requestForm.controls['Amount'].invalid && requestForm.controls['Amount'].touched || isInsufficient"
+									errorMessage="{{amountErrorMessage}}">
+								</app-input-text-field>
+							</div>
+							<div class="example-full-width">
+								<app-input-text-field
+									[formGroup]="requestForm"
+									controlName="WithdrawalFee"
+									type="text"
+									placeholder="Remittance Fee per transaction"
+									[readonly]="true"
+									appNumberFormat>
+								</app-input-text-field>
+							</div>
+							<div class="example-full-width">
+								<app-input-text-field
+									[formGroup]="requestForm"
+									controlName="Remarks"
+									type="text"
+									placeholder="Remarks">
+								</app-input-text-field>
+							</div>
+								<div class="form-box mb-5 d-flex justify-content-center align-items-center">
+									<button class="btn btn-primary btnreq" type="submit" [disabled]="!isReadAndWrite"  [disabled]="actionDisable"> {{"requestRemittance" | translate}} </button>
+								</div>
+							</form>
+						</ng-container>
+						<ng-template #cashPickUpTemplate>
+							<form [formGroup]="cashPickUpForm" (ngSubmit)="onSubmitcashPickup()">
+								<div class="scrollable-container">
+									<!-- <mat-form-field class="example-full-width">
+										<mat-label>Select Client</mat-label>
+										<mat-select formControlName="ClientId" (selectionChange)="onClientRemittanceChange($event)">
+											<mat-option [disabled]="!isReadAndWrite" *ngFor="let client of clientsDropdown" [value]="client.id">
+												{{client.name}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field> -->
+								<div class="example-full-width" style="margin-bottom: 5px">
+									<app-select-search 
+										[options]="clientsDropdown" 
+										placeholder="Select Client" 
+										[disabled]="!isReadAndWrite"
+										[resetFormTrigger]="resetDropdown"
+										[showSearch]="true"
+										(optionSelected)="onClientRemittanceChange($event)">
+									</app-select-search>
+								</div>
+								
+		
+									<!-- <mat-form-field class="example-full-width">
+										<mat-label>Method</mat-label>
+										<mat-select formControlName="Method" [disabled]="true">
+										  <mat-option [disabled]="!isReadAndWrite" *ngFor="let method of cashPickupMethod" [value]="method.id">
+											{{ method.name }}
+										  </mat-option>
+										</mat-select>
+									  </mat-form-field> -->
+								<div class="example-full-width" style="margin-bottom: 5px">
+									  <app-select-search 
+										[options]="cashPickupMethod" 
+										placeholder="Select Method" 
+										[disabled]="!isReadAndWrite"
+										[showSearch]="false"
+										[readonly]="isReadonly"
+										[preselectedOption]="selectedCashPickUpMethod">
+									</app-select-search>
+								</div>
+									  
+		
+									<!-- <mat-form-field class="example-full-width">
+										<mat-label>ID Type</mat-label>
+										<mat-select formControlName="CardIDType" (selectionChange)="onClientPhilId($event.value)">
+											<mat-option [disabled]="!isReadAndWrite" *ngFor="let card of cardPhilIds" [value]="card.id">
+												{{card.name}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field> -->
+								<div class="example-full-width" style="margin-bottom: 16px">
+									<app-select-search 
+										[options]="cardPhilIds" 
+										placeholder="Select Card" 
+										[disabled]="!isReadAndWrite"
+										[showSearch]="false"
+										[resetFormTrigger]="resetDropdown"
+										(optionSelected)="onClientPhilId($event)">
+									</app-select-search>
+								</div>
+									<app-input-text-field
+										[formGroup]="cashPickUpForm"
+										controlName="AuthorizedPerson"
+										type="text"
+										placeholder="Name of Authorized Person"
+										[isInvalid]="cashPickUpForm.controls['AuthorizedPerson'].invalid && cashPickUpForm.controls['AuthorizedPerson'].touched"
+										errorMessage="This field is required">
+									</app-input-text-field>
+		
+									<div class="input-group mb-3">
+										<input type="file" #fileInputId accept="image/*" multiple
+										(change)="onFilesSelectedId($event)" style="display: none;">
+										<input type="text" class="form-control inputUpload" placeholder="Upload ID"
+										[value]="fileNamesId.join(', ')" readonly>
+										<div class="input-group-append">
+										<button class="btn btnUpload" type="button" (click)="triggerUploadId()" [disabled]="!isReadAndWrite">Upload</button>
+										</div>
+									</div>
+									
+									<app-input-text-field
+										[formGroup]="cashPickUpForm"
+										controlName="IdNumber"
+										type="text"
+										placeholder="ID Number"
+										[isInvalid]="cashPickUpForm.controls['IdNumber'].invalid && cashPickUpForm.controls['IdNumber'].touched"
+										errorMessage="This field is required">
+									</app-input-text-field>
+									
+									<div class="input-group mb-3">
+										<input type="file" #fileInputLetter accept="image/*" multiple
+										(change)="onFilesSelectedLetter($event)" style="display: none;">
+										<input type="text" class="form-control inputUpload" placeholder="Upload Authorization Letter"
+										[value]="fileNamesLetter.join(', ')" readonly>
+										<div class="input-group-append">
+										<button class="btn btnUpload" type="button" (click)="triggerUploadLetter()" [disabled]="!isReadAndWrite">Upload</button>
+										</div>
+									</div>
+									
+		
+									<app-input-text-field
+									[formGroup]="cashPickUpForm"
+									controlName="Amount"
+									type="text"
+									placeholder="Amount"
+									appNumberFormat
+									[isInvalid]="cashPickUpForm.controls['Amount'].invalid && cashPickUpForm.controls['Amount'].touched"
+									errorMessage="This field is required">
+								</app-input-text-field>
+		
+								<app-input-text-field
+									[formGroup]="cashPickUpForm"
+									controlName="WithdrawalFee"
+									type="text"
+									placeholder="Remittance Fee per transaction"
+									[readonly]="true"
+									appNumberFormat>
+								</app-input-text-field>
+		
+									<app-input-text-field
+										[formGroup]="cashPickUpForm"
+										controlName="Remarks"
+										type="text"
+										placeholder="Remarks">
+									</app-input-text-field>
+								</div>
+									<div class="form-box mb-5 d-flex justify-content-center align-items-center">
+										<button class="btn btn-primary btnreq" type="submit" [disabled]="!isReadAndWrite" [disabled]="actionDisable">{{"requestRemittance" | translate}}</button>
+									</div>
+							</form>
+						</ng-template>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9 col-sm-6">
+			<div class="card-wrapper">
+			  <div class="card-header">
+				<div class="card-title text-center p-3">{{"listOfClient" | translate}}</div>
+				<div class="card-actions">
+				  <app-search (search)="onSearch($event)"></app-search>
+				  <div class="h-divider"></div>
+				  <form [formGroup]="clientList"></form>
+				  <div class="h-divider"></div>
+				</div>
+			  </div>
+			  <div class="card-body-table">
+				<app-spinner *ngIf="isLoading"></app-spinner>
+				<div class="container-with-table">
+				  <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+					<ng-container matColumnDef="WalletBalance">
+					  <th *matHeaderCellDef mat-header-cell mat-sort-header> Wallet Balance </th>
+					  <td *matCellDef="let row" mat-cell> {{ row.AvailableBalance  | number:'1.2-2'}} </td>
+					</ng-container>
+					<ng-container matColumnDef="ClientName">
+					  <th *matHeaderCellDef mat-header-cell mat-sort-header> Name </th>
+					  <td *matCellDef="let row" mat-cell> {{ row.ClientName }} </td>
+					</ng-container>
+					<ng-container matColumnDef="RemittanceWallet">
+					  <th *matHeaderCellDef mat-header-cell mat-sort-header> Settlement Wallet </th>
+					  <td *matCellDef="let row" mat-cell> &#8369; {{ row.RemittanceWallet | number:'1.2-2' }} </td>
+					</ng-container>
+					
+					<tr *matHeaderRowDef="displayedClientList; sticky:true" mat-header-row></tr>
+					<tr *matRowDef="let row; columns: displayedClientList" mat-row></tr>
+					<tr class="mat-row" *matNoDataRow>
+					  <td class="mat-cell" colspan="6" style="text-align: center;">No data matching the filter</td>
+					</tr>
+				  </table>
+				</div>
+				<app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+								(firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+								(lastData)="onLastPage()">
+				</app-pagination>
+			  </div>
+			</div>
+		  </div>
+	</div>
+	<section class="remittance">
+		<!-- <app-client-remittance-transactions [data] = "isRemittanceChanged"></app-client-remittance-transactions> -->
+		 <app-remittance-table [data]="isRemittanceChanged" [isAdmin]="true" [remittanceStatus] = "0" title = "pendingRemittanceTransactions"></app-remittance-table>
+	</section>
+	</app-maintenance-message>
+	
+	

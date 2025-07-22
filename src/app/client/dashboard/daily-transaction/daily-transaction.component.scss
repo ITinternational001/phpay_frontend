@@ -1,0 +1,74 @@
+@import "../../../../sass/dropdown";
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    // align-items: center;
+    // padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto !important; /* Maintains aspect ratio */
+  }
+  
+  .legend-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .legend-label {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .card-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    mat-form-field {
+      width: 100%;
+    }
+  
+    .legend-container {
+      justify-content: flex-start;
+    }
+  }
+  

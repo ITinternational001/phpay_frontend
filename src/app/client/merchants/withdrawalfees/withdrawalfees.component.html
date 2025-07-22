@@ -1,0 +1,20 @@
+<div class="card-wrapper">
+  <div class="card-header">
+    <div class="card-title p-3">Withdrawal Fees</div>
+    <div class="card-actions"></div>
+  </div>
+  <div class="card-body-table">
+    <table class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="Vendor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Method</th>
+        <td mat-cell *matCellDef="let row"> {{ row.Vendor }} </td>
+      </ng-container>
+      <ng-container matColumnDef="WithdrawalFee">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Withdrawal Fee</th>
+        <td mat-cell *matCellDef="let row"> {{ row.Fee | number: '1.2-2' }} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+@import "../../../sass/variables";
+@import "/src/sass/modalbutton";
+@import "/src/sass/scrollbar";
+/* Structure */
+.example-container {
+    position: relative;
+  }
+  
+  .example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .view-receipt{
+    cursor: pointer;
+    background-color: $color-text-yellow;
+    color:$color-text-white;
+    padding-top: 5px;
+    border-radius: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+  .example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-rate-limit-reached {
+    max-width: 360px;
+    text-align: center;
+  }
+  
+  /* Column Widths */
+  .mat-column-number,
+  .mat-column-state {
+    max-width: 64px;
+  }
+  
+  .mat-column-created {
+    max-width: 124px;
+  }
+
+  .btn-theme-vert{
+    background-color: $color-text-yellow;
+}
+
+
+  .pagination {
+    display: inline-block;
+  }
+  
+  .pagination a {
+    color: rgb(255, 255, 255);
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  .pagination a.active {
+    background-color: $color-text-yellow;
+    color: $color-bg-sidenav;
+    border-radius: 5px;
+  }
+  
+  .pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+  }
+
+  /* spinner.component.css */
+::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: $spinner !important;
+}
+
+.wrapper .col-lg-3 {
+  margin-right: 43px;
+}
+
+.dropdown {
+  margin-top: -10px;
+  display: inline-block;
+  width: 150px; 
+}
+
+.additionaldropdown {
+  margin-top: -10px;
+  display: inline-block;
+  width: 250px; 
+}
+
+app-select-search {
+    width: 100% !important;
+}
+
+.h-divider {
+    margin: 10px 0;
+    border-bottom: 1px solid #ccc;
+}

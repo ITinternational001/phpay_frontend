@@ -1,0 +1,74 @@
+@import"/src/sass/variables";
+
+.card{
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    background-color: $color-bg-inactive;
+    margin: 0 0 1.25rem 0;
+    border-bottom: 5px solid $color-text-yellow;
+    font-family: 'Poppins', sans-serif;
+    //box-shadow: 0 .25rem .5rem #e6edef;
+    .card-head{
+        padding: 1rem 0 0 1rem;
+        //border-bottom: 1px solid #edf1f7;
+        font-size: 1.3rem;
+        //font-weight: 600;
+        color: $color-text-white;
+    }
+
+    .card-body{
+        padding:1rem 0 1.5rem 1rem;
+        .card-content{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+           
+            .card-icon{
+                font-size:30px;
+                color: $color-text-white;
+                margin-right: 1.53rem;
+            }
+            .card-value{
+                font-size: 30px;
+                font-weight: 400;
+                color: $color-text-white;
+            }
+            .btn{
+                padding: 100px 10px;
+                
+                
+            }
+        }
+        .card-sub-content{
+            display: flex;
+            flex-direction: row;
+             padding:0.5rem;
+            // background-color: grey;
+            border-radius: 0.5rem;
+            align-items: center;
+            margin-top: 20px;
+            width: 150px;
+            min-width: 150px;
+            card-sub-icon{
+                 font-size:18px;
+                 color: $color-text-white;
+                 margin-right: 0.5rem;
+             }
+             .card-sub-value{
+                 font-size: 18px;
+                 color: $color-text-white;
+             }
+        }
+    }
+}
+#btnadd{
+    background: #373737;
+    border: 1px solid #373737;
+}
+
+@media screen and (max-width:900px) {
+    .card { 
+        width: 100%;
+     }
+}

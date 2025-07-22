@@ -1,0 +1,51 @@
+<form [formGroup]="topUpForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-title>
+      <div class="header">
+        <h1>Manual Top Up</h1>
+      </div>
+  
+    </div>
+    <div mat-dialog-content>
+        <ng-container *ngIf="isApproved">
+            <mat-form-field>
+                <mat-label>Select vendor...</mat-label>
+                <mat-select placeholder="Select Vendor..." formControlName  = "VendorId">
+                  <mat-option value="n/a" disabled>Select vendor</mat-option>
+                  <mat-option *ngFor="let vendor of vendors" [value]="vendor.Id">{{vendor.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Select Channel</mat-label>
+                <mat-select placeholder="Select channel..." formControlName = "PaymentChannelId">
+                  <mat-option value="n/a" disabled>Select channel</mat-option>
+                  <mat-option *ngFor = "let channel of channels" [value]="channel.Id">{{channel.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field>       
+        </ng-container>
+        <ng-container *ngIf="!isApproved">
+          <div class="mycontainer">
+            <div class="text">
+              Are you sure you want to Decline this Top-Up?
+            </div>
+            <div class="input-field-container">
+              <app-input-text-field
+                [formGroup]="topUpForm"
+                controlName="Remarks"
+                type="text"
+                placeholder="Remarks"
+                [isInvalid]="topUpForm.controls['Remarks'].invalid && topUpForm.controls['Remarks'].touched"
+                errorMessage="This field is required">
+              </app-input-text-field>
+            </div>
+          </div>
+        </ng-container>
+        
+        
+        
+    </div>
+    <div mat-dialog-actions>
+      <button class="btn btn-light" type="button" [mat-dialog-close]="false">Cancel</button>
+      <div class="h-divider"></div>
+      <button type="submit" class="btn modal-botton"><span class="fa fa-exchange"></span> {{data.type}} Topup</button>
+    </div>
+  </form>

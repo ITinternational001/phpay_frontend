@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-12" style ="padding-bottom: 20px;">
+        <app-profile-details [details]="data ? data : null"></app-profile-details>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div *ngFor="let data of topData" class="col-md-4">
+                <app-card [isVisible]="false" [isVisiblebtn]="true" label="{{data.label | translate}}" icon="{{data.icon}}"
+                    value="{{data.value | number:'1.2-2'}}"></app-card>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <app-agent-list-of-brands [isAdmin]="isAdmin" [data]="data ? data : null" (agentClientSaved)="onAgentSaved()"></app-agent-list-of-brands>
+    </div>
+    <div class="col-md-12">
+        <app-agent-downline  [isAdmin]="isAdmin" [data]="data ? data : null" (agentClientSaved)="onAgentSaved()"></app-agent-downline>
+    </div>
+</div>

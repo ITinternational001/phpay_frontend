@@ -1,0 +1,105 @@
+.dropdown-menu {
+    background-color: transparent;
+}
+
+.custom-button {
+    height: 55px;
+    width: 200px;
+    font-size: 17px; /* Optional: hides the text if it’s too small for the button */
+    overflow: hidden; /* Optional: hides overflow if contents are larger */
+}
+
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: white; /* Adjust based on your theme */
+    background-color: #575757;
+}
+
+// .card-body-table {
+//     width: 100%; /* Ensure the body takes full width */
+// }
+
+.CommsTable, .app-card {
+    width: 100%; /* Make sure these components take full width */
+    height: 100%; /* Full height to fill the wrapper */
+}
+
+.Table, .TotaTable {
+    font-size: 16px;
+    color: white;
+}
+
+.table-padding {
+    padding-left: 40px;
+    font-size: 40px;
+    font-weight: bold;
+    padding-bottom: 57px;
+    padding-top: 30px;
+}
+
+.total {
+    font-size: 35px;
+    font-weight: bold;
+    color: #979797;
+    padding-bottom: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+    width: 100%; 
+  }
+  
+  .form-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+  }
+
+.wrapper {
+    min-height: 400px; /* Adjust to match .card-wrapper */
+}
+
+.card-wrapper {
+    min-height: 400px; /* Adjust based on content */
+}
+.col-12 {
+   padding-top: 0px;
+   padding-bottom: 20px;
+}
+
+.table-container, .card-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.Download {
+    padding-bottom: 20px;
+}
+
+.container-with-table {
+    max-height: 800px;
+    height: auto;
+    overflow: auto;
+  }
+
+  .fixed-form {
+    width: 250px; 
+    margin-top: -10px;
+    // margin-bottom: 25px;
+}
+
+.fixed-select {
+    display: block;
+    width: 100%;
+    max-width: 300px; 
+    min-width: 300px; 
+    height: 40px; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}

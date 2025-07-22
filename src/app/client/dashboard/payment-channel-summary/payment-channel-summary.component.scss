@@ -1,0 +1,27 @@
+
+@import "/src/sass/modalbutton";
+@import "/src/sass/scrollbar";
+@import "/src/sass/variables";
+.container-with-table{
+     height: auto;
+    overflow: auto;
+    display: block;
+    overflow-x: auto;
+    max-height: 600px;
+  }
+
+  @media (max-width: 768px) {
+    .dynastyTable {
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+
+    .mat-header-cell, .mat-cell {
+        padding: 4px; /* Adjust padding for smaller screens */
+    }
+}
+
+::ng-deep .custom-modal .mat-dialog-container {
+  background-color: black;
+  color: white;
+}
+

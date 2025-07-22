@@ -1,0 +1,109 @@
+.table-container {
+    width: 100%;
+    margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  button {
+    margin-right: 3px;
+    color: white; /* Updated Text color to white */
+    background-color: #575757; /* Background color */
+    border-top-left-radius: 0.5rem; /* Rounded top-left corner */
+    border-top-right-radius: 0.5rem; /* Rounded top-right corner */
+    padding: 10px 40px; /* Padding to make the button look better */
+    font-size: 13px; /* Font size */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    border: none; /* Removing any default border */
+
+  }
+  
+  button:hover {
+    background-color: #a0a0a0; /* Slightly darker gray on hover */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th:hover {
+    background-color: #1565c0; /* Slightly darker blue on hover */
+  }
+  
+  .mat-elevation-z8 {
+    background-color: #424242; /* Dark theme */
+    color: white;
+  }
+  
+  .title{
+    color: white !important;
+    opacity: 0.4;
+  }
+
+  .form-container{
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+
+  // bar chart
+  .chart {
+    width: 100% !important;  /* Full width */
+    height: 200px !important;  /* Fixed height of 200px */
+  }
+  
+
+  .grand-total-row {
+    font-weight: bold;
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.active-tab {
+  background-color: #800080 !important;
+  border-color: #800080 !important;
+  color: white !important;
+}
+
+
+.chart-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  margin-bottom: 30px;
+}
+
+
+@media (max-width: 768px) {
+  .container-with-table {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .chart-wrapper {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 30px;
+  }
+}

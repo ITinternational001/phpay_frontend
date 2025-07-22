@@ -1,0 +1,29 @@
+@import "/src/sass/modalbutton";
+@import "/src/sass/scrollbar";
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: white !important;
+  }
+  
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__leading,.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__notch,.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-color: white !important;
+  }
+  
+  .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch {
+    border-left: none;
+  }
+  
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+    color: white;
+  }
+  .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: white;
+  }
+  
+  .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: #f44336;
+  }
+  
+  .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: white;
+  }

@@ -1,0 +1,28 @@
+@import "/src/sass/modalbutton";
+@import "/src/sass/input-text";
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2f2f2f;
+    padding: 10px;
+  }
+  .grid-item {
+    //background-color: rgba(101, 99, 99, 0.8);
+    //border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    font-size: 20px;
+    color: white;
+    vertical-align: middle;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.header {
+  margin-top: 15px;
+}

@@ -1,0 +1,35 @@
+@import '/src/sass/modalbutton';
+  
+  .card-wrapper{
+      margin: 0px;
+  }
+  .row {
+    margin-top: 20px;
+  }
+  .dynastyTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center; /* This will center the text in both th and td */
+  }
+  
+  .dynastyTable th, .dynastyTable td {
+    padding: 10px;
+    vertical-align: middle; /* Center vertically */
+  }
+  
+  .dynastyTable th {
+    background-color: #f2f2f2;
+   
+  }
+
+  .container-with-table {
+    max-height: 800px;
+    height: auto;
+    overflow: auto;
+  }
+
+  .btn-theme-vert{
+    background-color: $color-text-yellow;
+  }
+  
+  

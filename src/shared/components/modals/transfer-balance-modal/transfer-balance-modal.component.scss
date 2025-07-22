@@ -1,0 +1,74 @@
+@import "/src/sass/variables";
+@import "/src/sass/upload";
+@import "/src/sass/input-text";
+
+.btn-theme-vert{
+    background-color: $color-text-yellow;
+}
+.source-label{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.label-container {
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding-top: 18px;
+}
+
+.hint {
+  font-size: 14px;
+  color: $spinner;
+  margin-top: 0px;
+}
+
+.top-details {
+  margin-bottom: 20px;
+  color: white;
+  font-size: 15px;
+
+  .details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+}  
+.label-details{
+  color:$table-header
+}
+
+.btn-theme{
+  background-color: $color-text-yellow;
+  color:$color-text-white;
+  font-size: 18px;
+}
+
+
+// Design for the input text field in this modal
+
+
+
+.input-container {
+  position: relative;
+}
+
+.peso-sign {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white; /* Set the color to match the text */
+  opacity: 0.6;
+}
+
+.form-control {
+  padding-left: 1.5rem; 
+}
+
+.accordion-title{
+  font-size: 20px;
+  color: white;
+}

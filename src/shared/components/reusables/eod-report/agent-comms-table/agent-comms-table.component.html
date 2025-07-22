@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="card-wrapper">
+        <div class="card-header">
+            <div class="card-title p-3">Agent Comms</div>
+            <div class="card-actions">
+                <app-search (search)="onSearch($event)"></app-search>
+                <div class="h-divider"></div>
+            </div>
+        </div>
+        <div class="card-body-table">
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <div class="container-with-table">
+                <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                    <!-- Agent Column -->
+                    <ng-container matColumnDef="agent">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Agent </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.Agent }} </td>
+                        <td mat-footer-cell *matFooterCellDef> Grand Total: </td> 
+                    </ng-container>
+                    <ng-container matColumnDef="CIgross">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> CI Gross </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.CiGross | number : '1.2-2' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> </td> 
+                    </ng-container>
+                    <ng-container matColumnDef="COgross">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> CO Gross </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.CoGross | number : '1.2-2' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> </td> 
+                    </ng-container>
+                    <ng-container matColumnDef="eodComms">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> EOD Comms </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.EODComms | number : '1.2-2' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ GrandTotalEODComms | number : '1.2-2' }} </td> 
+                    </ng-container>
+                    <ng-container matColumnDef="walletBalance">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Wallet Balance </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.WaletBalance | number : '1.2-2' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ GrandTotalWalletBalance | number : '1.2-2' }} </td> 
+                    </ng-container>
+
+                    <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="5" style="text-align: center;">No data matching the filter</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div>

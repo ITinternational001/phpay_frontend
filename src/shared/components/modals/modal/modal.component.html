@@ -1,0 +1,24 @@
+<div mat-dialog-actions>
+    <i class="close-icon fa fa-times-circle-o" [mat-dialog-close]="false"></i>
+</div>
+<div mat-dialog-content>
+    <ng-container *ngIf="data.formType == 'Password'">
+        <div class="mycontainer">
+                <i class="icon fa-regular fa-circle-check"></i>
+        </div>
+        <div class="mycontainer">
+            <div class="text">{{data.message}}</div>
+        </div>
+        <div class="mycontainer">
+        <div class="info">
+            <div class="temporarypass-container">Email Address: <span class="email">{{data.email}}</span></div>
+            <span class="temporarypass-container withbg">Temporary Password: <span class="tpass"> {{data.value}} <i class="copy-button fa fa-copy" (click)="copyText()"></i></span></span>
+            <div class="btn-container">
+                <button class="btn btn-theme" (click)="onFinished()">Finished</button>
+            </div>
+        </div>
+    </div>
+    </ng-container>
+</div>
+<div mat-dialog-actions>
+</div>

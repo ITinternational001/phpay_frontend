@@ -1,0 +1,66 @@
+<app-maintenance-message> 
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+      <div class="card-wrapper">
+        <app-agent-remittance-transferbalance-form [isAdmin]="isAdmin" (transactionSubmitted)="transferHistoryTable.loadData()"></app-agent-remittance-transferbalance-form>
+      </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="col-md-9">
+      <div class="row">
+        <div *ngFor="let data of topData" style="margin-top: -20px;" class="col-md-6">
+          <app-card [isVisible]="false" id="wallets" style="background-color: transparent;" label="{{data.label | translate}}"
+            icon="fa fa-wallet" value="{{data.value}}"></app-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-wrapper">
+            <div class="card-header">
+              <div class="card-title p-3">{{"listOfClients" | translate}}</div>
+              <div class="card-actions">
+                <app-search (search)="onSearch($event)"></app-search>
+              </div>
+            </div>
+            <div class="row">
+              <div *ngFor="let channel of channels" class="col-md-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12 d-flex justify-content-between align-items-center">
+                        <div class="label">{{ channel.name }}</div>
+                        <span>
+                          <!-- <button class="btn button" (click)="onViewDetails(channel)">
+                            <i class="fa fa-eye"></i> {{"viewDetails" | translate}}
+                          </button> -->
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="balance-container">
+                        <div class="balance">{{"commissionWallet" | translate}}</div>
+                        <div class="card-value">{{ channel.walletBalance | currency:'PHP' }}</div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 col-sm-6" style="margin-bottom: 20px;">
+    <app-agent-transfer-balance-histroy-table [isAdmin]="isAdmin" [title]="'transferBalanceRecord' | translate" #transferHistoryTable></app-agent-transfer-balance-histroy-table>
+  </div>
+
+
+  <div class="col-md-12 col-sm-6" style="margin-bottom: 20px;">
+    <app-agentremittance-transaction-table [isAdmin]="isAdmin"></app-agentremittance-transaction-table>
+  </div>
+</app-maintenance-message>

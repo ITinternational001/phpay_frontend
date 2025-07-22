@@ -1,0 +1,60 @@
+<div class="row">     
+    <div class="col-lg-12 col-md-12">
+        <div class="card-wrapper equal-width">
+            <div class="card-header">
+                <div class="card-title p-3">{{"totalIncome" | translate}}</div>
+                <div class="card-actions">
+                    <div class="h-divider"></div>
+                </div>
+            </div>
+  
+            <div class="card-body-table">
+                <app-spinner *ngIf="isLoading"></app-spinner>
+  
+                <ng-container *ngIf="!isLoading && data?.TotalIncome; else noDataTemplate">
+                    <table class="CommsTable">
+                        <tbody>
+                            <tr class="Table">
+                                <td class="table-padding">{{"todayIncome" | translate}}</td>
+                                <td class="total">{{ Summary.NetIncomeToday ?? 0 | number:'1.2-2' }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>                         
+                            <tr class="TotaTable">
+                                <td class="table-padding">{{"yesterdayIncome" | translate}}</td>
+                                <td class="total">{{ Summary.NetIncomeYesterday ?? 0  | number:'1.2-2' }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+  
+                            </tr>
+                        
+                            <tr class="Table">
+                                <td class="table-padding">{{"thisWeekIncome" | translate}}</td>
+                                <td class="total">{{ Summary.NetIncomeThisWeek ?? 0  | number:'1.2-2' }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        
+                            <tr class="Table">
+                                <td class="table-padding">{{"thisMonthIncome" | translate}}</td>
+                                <td class="total">{{ Summary.NetIncomeThisMonth?? 0  | number:'1.2-2' }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-container>
+  
+                <!-- No Data Available Message -->
+                <ng-template #noDataTemplate>
+                    <div style="text-align: center;">No data available</div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+  </div>
+

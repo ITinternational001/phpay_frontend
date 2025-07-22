@@ -1,0 +1,26 @@
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">LIST OF WALLETS</div>
+        <div class="card-actions">
+            <app-button [text]="'Transfer History'" [icon]="'fa-eye'" [btnClass]="'btn-theme btn-lg'"
+			></app-button>
+        </div>
+    </div>
+    <div class="card-body" class="body-custom">
+        <div class="wallet-wrapper">
+        <div *ngFor="let group of groupedArray;" class="wallet-container">
+            <div class="pads">
+                <div class="card-title" >{{group[0].VendorName}}</div>
+                <div class="card-value">P {{group[0].TotalBalance | number : '1.2-2' }}</div>
+                <div class="action-container">
+                    <div (click)="onTransferFunds(group,'transfer', group[0].TotalBalance)" class=" btn-transfer" style="padding-top: 20px; font-size: 18px; color: #383737;"><i>
+                        <span class="fa fa-exchange"></span> transfer balance</i></div>
+                    <div (click)="onTransferFunds(group,'view',group[0].TotalBalance)" class=" btn-transfer" style="padding-top: 20px; font-size: 18px; font-weight: 400; color: #383737;">
+                        <span class="fa fa-eye btn-transfer"></span> view wallets</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="card-footer"></div>
+</div>

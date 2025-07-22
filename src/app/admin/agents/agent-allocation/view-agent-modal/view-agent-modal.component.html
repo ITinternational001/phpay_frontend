@@ -1,0 +1,120 @@
+<div class="card-body">
+  <div class="h-divider"></div>
+  <div class ="card-title">  {{"client" | translate}} - {{ClientName}}</div>
+ 
+  <form [formGroup]="agentForm">
+    
+    <!-- Elite Agents Section -->
+    <div formArrayName="eliteAgent">
+      <div *ngFor="let agent of eliteAgent.controls; let i = index" [formGroupName]="i" class="agent-group">
+        <table class = "Table">
+          <tbody>
+            <tr class="yellow-row">
+              <th class = "label">{{ agent.get('Label')?.value || 'N/A' }}</th>
+              <th>CI Comms: <span class="percent">{{ agent.get('CommIn')?.value || 'N/A' }}</span></th>
+              <th>CO Comms: <span class="percent">{{ agent.get('CommOut')?.value || 'N/A' }}</span></th>
+              <th colspan="4"></th>
+            </tr>
+            <tr class="green-row">
+              <td> Agent ID: </td>
+              <td>{{ agent.get('AgentId')?.value || 'N/A' }}</td>
+              <td> Email:</td>
+              <td>{{ agent.get('Email')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+            <tr class="yellow-row">
+              <td> Name:</td>
+              <td>{{ agent.get('AgentName')?.value || 'N/A' }}</td>
+              <td> Date Added: </td>
+              <td>{{ agent.get('DateAdded')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+            <tr class="green-row">
+              <td> Username: </td>
+              <td>{{ agent.get('Username')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- Core Agents Section -->
+    <div formArrayName="coreAgent">
+      <div *ngFor="let agent of coreAgent.controls; let i = index" [formGroupName]="i" class="agent-group">
+        <table class = "Table" >
+          <tbody>
+            <tr class="yellow-row">
+              <th class = "label">{{ agent.get('Label')?.value || 'N/A' }}</th>
+              <th> CI Comms: <span class="percent">{{ agent.get('CommIn')?.value || 'N/A' }}</span></th>
+              <th> CO Comms: <span class="percent">{{ agent.get('CommOut')?.value || 'N/A' }}</span></th>
+              <th colspan="2"></th>
+              <th class="btn-container">
+                <button class="btn button" (click)="onDisableAgent(agent.get('AgentId')?.value)">Disable CORE Agent</button>
+              </th>
+            </tr>
+            <tr class="green-row">
+              <td> Agent ID: </td>
+              <td>{{ agent.get('AgentId')?.value || 'N/A' }}</td>
+              <td> Email: </td>
+              <td>{{ agent.get('Email')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+            <tr class="yellow-row">
+              <td> Name: </td>
+              <td>{{ agent.get('AgentName')?.value || 'N/A' }}</td>
+              <td> Date Added: </td>
+              <td>{{ agent.get('DateAdded')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+            <tr class="green-row">
+              <td> Username: </td>
+              <td>{{ agent.get('Username')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Prime Agents Section -->
+    <div formArrayName="primeAgent">
+      <div *ngFor="let agent of primeAgent.controls; let i = index" [formGroupName]="i" class="agent-group">
+        <table class = "Table">
+          <tbody>
+            <tr class="yellow-row">
+              <th class = "label">{{ agent.get('Label')?.value || 'N/A' }}</th>
+              <th> CI Comms: <span class="percent">{{ agent.get('CommIn')?.value || 'N/A' }}</span></th>
+              <th> CO Comms: <span class="percent">{{ agent.get('CommOut')?.value || 'N/A' }}</span></th>
+              <th colspan="2"></th>
+              <th class="btn-container">
+                <button class="btn button" (click)="onDisableAgent(agent.get('AgentId')?.value)">Disable PRIME Agent</button>
+              </th>
+            </tr>
+            <tr class="green-row">
+              <td> Agent ID: </td>
+              <td>{{ agent.get('AgentId')?.value || 'N/A' }}</td>
+              <td> Email: </td>
+              <td>{{ agent.get('Email')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+            <tr class="yellow-row">
+              <td> Name: </td>
+              <td>{{ agent.get('AgentName')?.value || 'N/A' }}</td>
+              <td> Date Added: </td>
+              <td>{{ agent.get('DateAdded')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+            <tr class="green-row">
+              <td> Username: </td>
+              <td>{{ agent.get('Username')?.value || 'N/A' }}</td>
+              <td colspan="4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </form>
+</div>

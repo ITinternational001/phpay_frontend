@@ -1,0 +1,14 @@
+@import"/src/sass/variables";
+
+
+select{
+    background-color:#373737;
+    color: $color-text-white;
+    border: none;
+    padding: 10px;
+}
+option{
+   line-height: 16px;
+    background-color: #373737;
+    border: none;
+}

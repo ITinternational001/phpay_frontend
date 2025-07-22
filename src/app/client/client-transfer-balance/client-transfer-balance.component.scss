@@ -1,0 +1,145 @@
+.example-full-width {
+    width: 100%;
+  }
+
+#wallets{
+    background-color: rgba(99, 110, 114, 0.5);
+}
+
+p{
+    font-size: 16px;
+    color: #8E8E8E;
+    font-weight: lighter;
+}
+
+
+p{
+    font-size: 16px;
+    color: #FFF;
+    padding: 10px;
+}
+#report .row{
+    line-height: 0;
+}
+#mop{
+    font-weight: 500;
+    font-size: 18px;
+    color: #FFF ;
+}
+.paymentChannel{
+    padding: none;
+    font-size: 18px;
+    color: #FFF;
+    margin: auto;
+    width: 90%;
+}
+
+.dropdown-toggle{
+    background-color: #313131;
+    color: white;
+    border: none;
+}
+.row {
+    padding: 0px 15px 0px 15px;
+    margin-top: 20px;
+    margin-bottom:30px;
+    
+}
+.container-with-table{
+    height: 525px;
+    overflow: auto;
+    margin-bottom: 20px;
+  }
+  
+  .card-wrapper{
+      margin: 0px;
+  }
+
+
+
+.dynastyTable th, .dynastyTable td {
+    text-align: center; /* Centers text in table headers and cells */
+}
+
+  
+.custom-date-range {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .date-range-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center; /* Center the label text */
+  }
+  
+  .date-range-container {
+    font-size: 14px;
+    border-bottom: 2px #8d2090;
+
+    
+  }
+  
+  .custom-input input {
+    border: none;
+    outline: none;
+    padding: 2px;
+    width: 100px;
+    font-size: 13.5px;
+    font-weight: normal;
+    background-color: transparent;
+    color: #ffffff;
+    text-align: center; /* Center the text inside the input */
+  }
+  
+  .custom-input input::placeholder {
+    color: #888;
+    text-align: center; /* Center the placeholder text */
+  }
+  
+  .custom-icon {
+    cursor: pointer;
+    color: #8d2090;
+  }
+  
+  .custom-input input:focus {
+    outline: none;
+    border-bottom: 2px solid #8d2090; /* Add highlighted underline on focus */
+  }
+  
+  .date-range-container:hover {
+    border-color: #8d2090;
+  }
+  
+  /* Add a highlighted underline on focus */
+  .form-control:focus {
+    border-bottom: 2px solid #8d2090; /* Thicker blue underline when focused */
+    box-shadow: none;
+  }
+  
+  /* Keep the invalid border color only when invalid */
+  .is-invalid {
+    border-bottom: 1px solid #dc3545; /* Red underline when invalid */
+  }
+  
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+  }
+
+
+  
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+

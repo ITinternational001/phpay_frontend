@@ -1,0 +1,201 @@
+<!-- dialog title -->
+<div mat-dialog-title>
+  <h1 class="Title">{{ ( 
+      data.type === 'agentAdd' ? 'addNewClient' : 
+      data.type === 'agentUpdate' ? 'editAgentProfile' : 
+      data.type === 'agentAddPrime' ? 'addNewPrimeAgent' :
+      data.type === 'clientAgentAdd' ? 'assignNewClient' : 
+      'Configure agent commission' ) | translate }}</h1>
+</div>
+
+
+<!-- form -->
+<form [formGroup]="agentForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="col-md-6">
+        <app-input-text-field *ngIf="data.type === 'agentAdd' || data.type === 'agentUpdate' || data.type === 'agentAddPrime'"
+          [formGroup]="agentForm"
+          controlName="Name"
+          type="text"
+          placeholder="Name"
+          [isInvalid]="agentForm.controls['Name'].invalid && agentForm.controls['Name'].touched"
+          errorMessage="This field is required"
+        ></app-input-text-field>
+      </div>
+      <div class="col-md-6">
+        <app-input-text-field *ngIf="data.type === 'agentAdd' || data.type === 'agentUpdate' || data.type === 'agentAddPrime'"
+          [formGroup]="agentForm"
+          controlName="Username"
+          type="text"
+          placeholder="Username"
+          [isInvalid]="agentForm.controls['Username'].invalid && agentForm.controls['Username'].touched"
+          errorMessage="This field is required"
+        ></app-input-text-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <app-input-text-field *ngIf="data.type === 'agentAdd' || data.type === 'agentUpdate' || data.type === 'agentAddPrime'"
+          [formGroup]="agentForm"
+          controlName="Email"
+          type="text"
+          placeholder="Email Address"
+          [isInvalid]="agentForm.controls['Email'].invalid && agentForm.controls['Email'].touched"
+          errorMessage="This field is required"
+        ></app-input-text-field>
+      </div>
+      <div class="col-md-6" style="margin-top: -10px">
+        <!-- <mat-form-field *ngIf="data.type === 'agentAdd' || data.type === 'agentUpdate' || data.type === 'agentAddPrime'">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="Status">
+            <mat-option value="n/a" disabled>Select status</mat-option>
+            <mat-option *ngFor="let status of statuses" [value]="status.id">{{status.name}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+        <app-select-search *ngIf="data.type === 'agentAdd' || data.type === 'agentUpdate' || data.type === 'agentAddPrime'"  
+          [options]="statuses" 
+          placeholder="Select Status" 
+          [showSearch]="false"
+          [preselectedOption]="selectedStatus"
+          (optionSelected)="onSelectStatus($event)">
+      </app-select-search>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <app-input-text-field *ngIf="data.type === 'agentAdd' || data.type === 'agentUpdate' || data.type === 'agentAddPrime'"
+          [formGroup]="agentForm"
+          controlName="BankWFee"
+          type="text"
+          placeholder="Bank withdrawal fee"
+          appNumberFormat
+          [isInvalid]="agentForm.controls['BankWFee'].invalid && agentForm.controls['BankWFee'].touched"
+          errorMessage="This field is required"
+        ></app-input-text-field>
+      </div>
+      <div class="col-md-6">
+        <app-input-text-field *ngIf="data.type === 'agentAdd' || data.type === 'agentUpdate' || data.type === 'agentAddPrime'"
+          [formGroup]="agentForm"
+          controlName="UsdtWFee"
+          type="text"
+          placeholder="USDT withdrawal fee"
+          appNumberFormat
+          [isInvalid]="agentForm.controls['UsdtWFee'].invalid && agentForm.controls['UsdtWFee'].touched"
+          errorMessage="This field is required"
+        ></app-input-text-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <app-input-text-field *ngIf="data.type === 'agentAdd' || data.type === 'agentUpdate' || data.type === 'agentAddPrime'"
+          [formGroup]="agentForm"
+          controlName="CashPickupWFee"
+          type="text"
+          placeholder="Cash Pickup withdrawal fee"
+          appNumberFormat
+          [isInvalid]="agentForm.controls['CashPickupWFee'].invalid && agentForm.controls['CashPickupWFee'].touched"
+          errorMessage="This field is required"
+        ></app-input-text-field>
+      </div>
+    </div>
+
+    <!-- Client Agent Add or Update -->
+    <div *ngIf="data.type === 'clientAgentAdd' || data.type === 'clientAgentUpdate'">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Wrapper for app-select-search with custom margin -->
+          <div class="custom-margin-select-search"  style="margin-top: -10px;">
+            <app-select-search  
+              *ngIf="data.type ==='clientAgentAdd'"
+              [options]="clientsDropdown" 
+              placeholder="Select Client" 
+              [showSearch]="false"
+              [preselectedOption]="selectedClient"
+              (optionSelected)="onSelectClient($event)">
+            </app-select-search>
+          </div>
+        
+          <!-- Wrapper for app-input-text-field with custom margin -->
+          <div class="custom-margin-input-text-field"  style="margin-top: 10px">
+            <app-input-text-field 
+              *ngIf="data.type ==='clientAgentUpdate'"
+              [formGroup]="agentForm"
+              controlName="ClientName"
+              type="text"
+              placeholder="Client Name"
+              appNumberFormat
+              [isInvalid]="agentForm.controls['ClientName'].invalid && agentForm.controls['ClientName'].touched"
+              errorMessage="This field is required"
+              class="custom-margin-top">
+            </app-input-text-field>
+          </div>
+        </div>
+        
+
+
+        <div class="col-md-6"  style="margin-top: -10px">
+          <!-- <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="Status">
+              <mat-option value="n/a" disabled>Select status</mat-option>
+              <mat-option *ngFor="let status of statuses" [value]="status.id">{{status.name}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+          <app-select-search  
+            [options]="statuses" 
+            placeholder="Select Status" 
+            [showSearch]="false"
+            [preselectedOption]="selectedStatus"
+            (optionSelected)="onSelectStatus($event)">
+        </app-select-search>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <app-input-text-field *ngIf="data.type === 'clientAgentAdd' || data.type === 'clientAgentUpdate'"
+            [formGroup]="agentForm"
+            controlName="CiComms"
+            type="text"
+            placeholder="Cash In Commission (%)"
+            appNumberFormat
+            [isInvalid]="agentForm.controls['CiComms'].invalid && agentForm.controls['CiComms'].touched"
+            errorMessage="This field is required"
+          ></app-input-text-field>
+        </div>
+        <div class="col-md-6">
+          <app-input-text-field *ngIf="data.type === 'clientAgentAdd' || data.type === 'clientAgentUpdate'"
+            [formGroup]="agentForm"
+            controlName="CoComms"
+            type="text"
+            placeholder="Cash Out Commission (%)"
+            appNumberFormat
+            [isInvalid]="agentForm.controls['CoComms'].invalid && agentForm.controls['CoComms'].touched"
+            errorMessage="This field is required"
+          ></app-input-text-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>Date Effectivity (MM/DD/YYYY)</mat-label>
+            <input type="date" matInput formControlName="DateEffectivity">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button class="btn btn-light" type="button" [mat-dialog-close]="false">Cancel</button>
+    <div class="h-divider"></div>
+    <button class="btn btn-theme" type="submit" [mat-dialog-close]="false" [disabled]="actionDisable">Register</button>
+  </div>
+</form>

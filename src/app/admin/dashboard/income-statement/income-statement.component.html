@@ -1,0 +1,33 @@
+<div class="card-wrapper">
+  <div class="card-header">
+      <div class="card-title">{{'incomeStatement' | translate}}</div>
+      <div class="card-actions">
+          <form [formGroup]="incomeStatementForm">
+              <mat-form-field  class="w-100">
+                <mat-label>StartDate - EndDate</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate placeholder="Start date" formControlName="StartDate">
+                  <input matEndDate placeholder="End date" formControlName="EndDate">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+            </form>
+      </div>
+  </div>
+  <div class="card-body">
+          <canvas style="width:100%;" baseChart height="400" 
+          [type]="'line'"
+          [data]="lineChartData"
+          [options]="lineChartOptions"
+          [legend]="false">
+        </canvas>
+  </div>
+  <div class="card-footer">
+      <div class="legend-container d-flex justify-content-center"> 
+           <div *ngFor="let label of legendLabels; let i = index" class="legend-item">
+              <div class="legend-label p-2" [style.color]="getLegendColor(i)"><i class="fa-solid fa-circle"></i> {{ label }}</div>
+          </div>
+      </div>
+  </div>
+</div>

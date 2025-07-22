@@ -1,0 +1,30 @@
+<div mat-dialog-actions>
+    <i class="close-icon fa fa-times-circle-o" [mat-dialog-close]="false"></i>
+</div>
+<div mat-dialog-content>
+   <div class="receipt-container">
+        <div class="logo">
+            <img src="../../../assets/dpaylogo.svg" alt="Dynasty Pay logo" 
+                style="width: 190px; height: auto;"/>
+        </div>
+        <div class="receipt-details">
+            <div class="item" *ngFor="let detail of details">
+                <div class="key">{{detail.key}}</div>
+                <div class="value">{{detail.value}}</div>
+            </div> 
+        </div>
+        <div class="amount-container">
+            <div class="item">
+                <div class="key">Amount</div>
+                <div class="value">{{amount}}</div>
+            </div>
+        </div>
+        
+        <div class="note">
+            <p>NOTE: This document serves solely as proof of payment. To
+                obtain you official receipt, kindly contact biller directly
+            </p>
+        </div>
+   </div>
+</div>
+

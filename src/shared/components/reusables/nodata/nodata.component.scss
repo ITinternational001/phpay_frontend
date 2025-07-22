@@ -1,0 +1,12 @@
+.nodata-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 20px;
+    height: 700px;
+    .icon{
+        padding:20px;
+       font-size: 60px;
+    }
+}

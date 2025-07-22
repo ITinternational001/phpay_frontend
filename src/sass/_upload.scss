@@ -1,0 +1,26 @@
+@import "../sass/variables";
+.inputUpload {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    border-radius: 0px;
+    color: white;
+}
+
+.inputUpload,
+.btnUpload {
+    height: 5vh;
+}
+
+.inputUpload::placeholder {
+    color: #fff;
+    opacity: 1;
+    /* Firefox */
+}
+
+.btnUpload {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    background-color: $color-text-yellow;
+    color: $color-text-white;
+}

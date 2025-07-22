@@ -1,0 +1,40 @@
+@import '/src/sass/modalbutton';
+
+:host {
+    display: block;
+    background-color: black;
+    opacity: 85%;
+    color: white;
+    padding: 16px;
+  }
+
+
+  .container-with-table {
+    max-height: calc(10 * 48px); /* Assuming 48px per row */
+    overflow-y: auto;
+    display: block;
+  }
+  
+  .dynastyTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .dynastyTable th, .dynastyTable td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .dynastyTable th {
+    position: sticky;
+    top: 0;
+  }
+  
+  .dynastyTable tbody {
+    display: block;
+    overflow-y: auto;
+    max-height: calc(10 * 48px); /* Adjust as necessary */
+  }
+  
+
+

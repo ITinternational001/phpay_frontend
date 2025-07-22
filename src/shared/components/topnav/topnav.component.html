@@ -1,0 +1,128 @@
+<div class ="">
+    <div class="header-container" [ngClass]="getHeaderClass()">
+        <div class="header-content">
+            <div class="header-content-left">
+                <div class="page-title-container">
+                    <div class="page-title-text">
+                        <p>{{headerLabel | translate}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="header-content-right">
+                <div class="header-menu">
+                    <div class="header-menu-item">
+                        <mat-icon [ngStyle]="{'color':'#fff','font-size':'25px'}">help</mat-icon>
+                        <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon [ngStyle]="{'color':'#fff','font-size':'25px'}">help</mat-icon>
+                        </button> -->
+                    </div>
+                    <div class="header-menu-item">
+                        <div class="notification-container" (click)="toggleNotifications($event)">
+                          <div class="bell-icon">
+                            <mat-icon>notifications</mat-icon>
+                        
+                            <span class="badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+                          </div>
+                          <div class="dropdown" *ngIf="showNotifications">
+                            <div class="title-header" style="display: flex; justify-content: space-between; align-items: center;">
+                              <div style="flex: 1;">
+                                <div *ngIf="!showHistory">Unread Notifications</div>
+                                <div *ngIf="showHistory">History</div>
+                              </div>
+                              <div style="flex: 0;">
+                                <button class="btn" (click)="changeNotification()">{{ buttonLabel }}</button>
+                              </div>
+                            </div>
+                      
+                            <div *ngIf="showHistory">
+                                <div class="sub-title">{{ notificationList.length }} read notification</div>
+                                <div class="dropdown-item-history" *ngFor="let notification of notificationList">
+                                  <div class="row">
+                                    <div class="icon-column">
+                                   
+                                      <ng-container *ngIf="notification?.Title?.includes('Manual Top-Up')">
+                                        <img src="assets/icons/manual-top-up.png" alt="Manual Top-Up" />
+                                      </ng-container>
+                                      <ng-container *ngIf="notification?.Title?.includes('Balance Transfer')">
+                                        <img src="assets/icons/manual-top-up.png" alt="Balance Transfer" />
+                                      </ng-container>
+                                      <ng-container *ngIf="notification?.Title?.includes('Remittance Wallet Transfer')">
+                                        <img src="assets/icons/transfer balance.png" alt="Remittance Wallet Transfer" />
+                                      </ng-container>
+                                      <ng-container *ngIf="notification?.Title?.includes('Remittance') && !notification?.Title?.includes('Remittance Wallet Transfer')">
+                                        <img src="assets/icons/remittance request.png" alt="Remittance" />
+                                      </ng-container>
+                                      <ng-container *ngIf="!notification?.Title?.includes('Manual Top-Up') 
+                                                            && !notification?.Title?.includes('Balance Transfer') 
+                                                            && !notification?.Title?.includes('Remittance Wallet Transfer') 
+                                                            && !notification?.Title?.includes('Remittance')">
+                                        <img src="assets/icons/XLOGO.png" alt="Default Icon" />
+                                      </ng-container>
+                                    </div>
+                                    <div class="content-column">
+                                      <div class="header">
+                                        <div class="title">{{ notification.Title }}</div>
+                                        <button class="close-button" *ngIf="notification.Id" (click)="removeNotification(notification.Id, $event)">X</button>
+                                      </div>
+                                      <div class="message-history">{{ notification.Message }}</div>
+                                      <div class="date-history">{{ notification.DateCreated | date:'short' }}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                           
+                              <div *ngIf="!showHistory">
+                                <div class="sub-title">
+                                  <span class="notification-dot"></span>{{ notificationCount }} new notification
+                                </div>
+                                <div class="dropdown-item" *ngFor="let notification of notificationList; let i = index">
+                                  <div class="row">
+                                    <div class="icon-column">
+                                      <ng-container *ngIf="notification?.Title?.includes('Manual Top-Up')">
+                                        <img src="assets/icons/manual-top-up.png" alt="Manual Top-Up" />
+                                      </ng-container>
+                                      <ng-container *ngIf="notification?.Title?.includes('Balance Transfer')">
+                                        <img src="assets/icons/manual-top-up.png" alt="Balance Transfer" />
+                                      </ng-container>
+                                      <ng-container *ngIf="notification?.Title?.includes('Remittance Wallet Transfer')">
+                                        <img src="assets/icons/transfer balance.png" alt="Remittance Wallet Transfer" />
+                                      </ng-container>
+                                      <ng-container *ngIf="notification?.Title?.includes('Remittance') && !notification?.Title?.includes('Remittance Wallet Transfer')">
+                                        <img src="assets/icons/remittance request.png" alt="Remittance" />
+                                      </ng-container>
+                                      <ng-container *ngIf="!notification?.Title?.includes('Manual Top-Up') 
+                                                            && !notification?.Title?.includes('Balance Transfer') 
+                                                            && !notification?.Title?.includes('Remittance Wallet Transfer') 
+                                                            && !notification?.Title?.includes('Remittance')">
+                                        <img src="assets/icons/XLOGO.png" alt="Default Icon" />
+                                      </ng-container>
+                                    </div>
+                                    <div class="content-column">
+                                      <div class="header">
+                                        <div class="title">{{ notification.Title }}</div>
+                                        <button class="close-button" *ngIf="notification.Id" (click)="movetoHistory(notification.Id, $event)">X</button>
+                                      </div>
+                                      <div class="message">{{ notification.Message }}</div>
+                                      <div class="date">{{ notification.DateCreated | date:'short' }}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                              </div>
+                            <div class="dropdown-empty" *ngIf="notificationList.length === 0">
+                              No notifications
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                    <div class="header-menu-item">
+                        <span class="info"> {{UserEmail}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

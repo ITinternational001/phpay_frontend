@@ -1,0 +1,14 @@
+<div class = "row">
+    <div class="col-lg-12 col-md-12">
+        <div class="wrapper">
+            <div *ngFor="let data of topData" class="col-12">
+                <app-card
+                    [isVisible]="false"
+                    [isVisiblebtn]="true"
+                    [label]="data.label | translate" 
+                    [value]="(data.value | number: '1.2-2') || ''">
+                </app-card>
+            </div>
+        </div>
+    </div>
+</div>

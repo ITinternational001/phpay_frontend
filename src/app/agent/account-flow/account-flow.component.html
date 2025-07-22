@@ -1,0 +1,124 @@
+<app-maintenance-message>  
+    <div class="card-wrapper">
+        <div class="card-header">
+            <div class="card-title p-3">{{"incomeReport" | translate}}</div>
+            <div class="card-actions">
+                <app-search (search)="onSearch($event)"></app-search>
+                <div class="h-divider"></div>
+                <form [formGroup]="AgentIncomeReport">
+                    <mat-form-field>
+                        <mat-label>StartDate - EndDate</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="Start date" formControlName="StartDate">
+                            <input matEndDate placeholder="End date" formControlName="EndDate">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </form>
+                <div class="h-divider"></div>
+                <app-button [disabled]="!isReadAndWrite" [text]="'download' | translate" [icon]="'fa-download'" [btnClass]="'btn-theme btn-lg'" (click)="exportToExcel()"></app-button>
+                <div class="h-divider"></div>
+            </div>
+        </div>
+        <div class="row">
+            <form [formGroup]="incomeReportClient" class="fixed-form">
+                <!-- <mat-form-field class="example-full-width">
+                    <mat-label>Select Client</mat-label>
+                    <mat-select formControlName="ClientId" (selectionChange)="onClientChange($event)">
+                        <mat-option *ngFor="let client of clientsDropdown" [value]="client.Id">
+                        {{ client.Name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <div class="form-item">
+                    <span class="FormName">Client</span>
+                    <app-select-search
+                        [options]="clientsDropdown"
+                        placeholder="Select Client"
+                        [showSearch]="true"
+                        (optionSelected)="onClientChange($event)">
+                    </app-select-search>
+                </div>
+                <div class="form-item">
+                    <span class="FormName">Channel</span>
+                    <!-- <mat-form-field class="Selection">
+                        <mat-label>Select Channel</mat-label>
+                        <mat-select formControlName="ChannelId" (selectionChange)="onChannelChange($event)"> 
+                            <mat-option *ngFor="let agent of channelsDropdown" [value]="agent.Id">
+                                {{agent.Name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                    <app-select-search
+                        [options]="channelsDropdown"
+                        placeholder="Select Channel"
+                        [showSearch]="false"
+                        (optionSelected)="onChannelChange($event)">
+                    </app-select-search>
+                </div>
+            </form>
+        </div>
+        
+    
+        <div class="card-body-table">
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <div class="container-with-table">
+                <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="timeDate">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Time & Date </th>
+                        <td mat-cell *matCellDef="let item">{{ item.Timestamp }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="transactionId">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Transaction ID</th>
+                        <td mat-cell *matCellDef="let item">{{ item.TransactionNumber }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="clientName">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Client</th>
+                        <td mat-cell *matCellDef="let item">{{ item.ClientName }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef> Type </th>
+                        <td mat-cell *matCellDef="let row" [ngStyle]="{ color: getTypeColor(row.Type) }">
+                        {{ row.Type }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="bank">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Bank</th>
+                        <td mat-cell *matCellDef="let item">{{ item.Channel }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="initialAmount">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Initial Amount</th>
+                        <td mat-cell *matCellDef="let item">₱ {{ item.InitialAmount }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="adjustment">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Adjustment</th>
+                        <td mat-cell *matCellDef="let item">{{ item.Adjustment | number:'1.2-2'  }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="runningBalance">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Running Balance</th>
+                        <td mat-cell *matCellDef="let item">₱{{ item.RunningBalance | number:'1.2-2'  }}</td>
+                    </ng-container>
+
+                    <tr *matHeaderRowDef="displayedIncomeReport; sticky: true" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: displayedIncomeReport" mat-row></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="8" style="text-align: center;">No data matching the filter</td>
+                    </tr>
+                </table>
+            </div>
+            <app-pagination 
+                [totalItems]="this.totalItems"
+                [itemsPerPage]="itemsPerPage" 
+                [currentPage]="currentPage"
+                (firstData)="onFirstPage()" 
+                (nextData)="onNextPage()" 
+                (previousData)="onPreviousPage()"
+                (lastData)="onLastPage()"
+                (itemsPerPageChange)="onItemsPerPageChanged($event)">
+            </app-pagination>
+        </div>
+    </div>
+</app-maintenance-message>
+
+

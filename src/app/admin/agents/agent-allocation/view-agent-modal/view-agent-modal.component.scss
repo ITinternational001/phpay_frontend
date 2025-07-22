@@ -1,0 +1,89 @@
+/* Ensure the table takes full width and has proper styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  font-weight: normal;
+}
+
+/* Row color styling */
+.green-row {
+  background-color: #4b4b4b;
+  color: white;
+}
+
+.yellow-row {
+  background-color: #2d2d2d;
+  color: white;
+}
+
+.value {
+  font-weight: bold;
+}
+
+/* Card styling */
+.card {
+  border-radius: 1rem;
+}
+
+.card-body {
+  max-height: 90vh; /* Limiting height to 80% of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  margin: 20px;
+  padding-right: 15px; /* Add padding for smooth scrolling */
+}
+
+/* Spacing between agent groups */
+.agent-group {
+  padding-bottom: 20px;
+}
+
+/* Button container alignment */
+.btn-container {
+  text-align: right;
+}
+
+/* Button styling */
+.btn {
+  margin-left: auto;
+  display: inline-block;
+  background-color: #4b4b4b;
+  color: white;
+  border-radius: 0.5rem;
+  font-size: 13px;
+}
+
+/* Host styling */
+:host {
+  display: block;
+  background-color: #2d2d2d;
+  color: white;
+  padding: 16px;
+}
+
+/* Table border styling */
+.Table {
+  border-style: solid;
+  border-color: #5d5d5d;
+  border-radius: 1rem;
+}
+
+/* Title styling */
+.card-title {
+  font-size: 25px;
+  padding-top: 5px;
+  margin-bottom: 25px;
+}
+
+/* Label styling */
+.label {
+  font-weight: bold;
+  font-size: 18px;
+}

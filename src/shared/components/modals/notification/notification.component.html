@@ -1,0 +1,12 @@
+
+<div class="notif-title">
+  {{ data.type | titlecase }}
+  <!-- <mat-icon (click)="snackBarRef.dismiss()" aria-hidden="false" aria-label="Close" fontSet="material-icons">close</mat-icon> -->
+</div>
+<div class="notif-content">
+  <div class="notif-message">
+  <mat-icon *ngIf="data.type === 'success'" aria-hidden="false" aria-label="Check" fontSet="material-icons" class="icon">check_circle</mat-icon>
+  <mat-icon *ngIf="data.type === 'error'" aria-hidden="false" aria-label="Error" fontSet="material-icons" class="icon">cancel</mat-icon>
+  {{ data.message }}
+</div>
+</div>

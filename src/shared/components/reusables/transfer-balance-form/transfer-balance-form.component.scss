@@ -1,0 +1,101 @@
+@import "/src/sass/modalbutton";
+@import "/src/sass/upload";
+
+.example-full-width {
+    width: 100%;
+}
+p {
+    font-size: 16px;
+    color: #FFF; /* Updated to match the latest usage in HTML */
+    font-weight: lighter;
+    padding: 10px; /* Added padding */
+}
+
+span {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    padding-right: 10px;
+    background: transparent;
+    border: none;
+}
+
+.btnreq {
+    background-color: $color-text-yellow;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    width: 70%;
+    color: $color-text-white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.col-md-12 {
+    font-size: 14px;
+    color: $spinner; 
+}
+
+
+.header-inactive {
+    color: #fff;
+    cursor: pointer;
+}
+
+.max-height {
+    height: 400px;
+}
+
+.card-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.row {
+    margin-bottom: 0.5rem;
+}
+
+
+
+.form-group {
+    margin-bottom: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .form-label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-weight: 600;
+  }
+
+  .custom-select {
+    appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+
+  .custom-select:focus {
+    border-color: #007aff;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3);
+    outline: none;
+  }
+
+.text-color{
+    color: black;
+}
+
+.form-height{
+    height: 600px;
+}

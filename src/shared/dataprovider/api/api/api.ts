@@ -1,0 +1,24 @@
+export * from './auth.service';
+import { AuthService } from './auth.service';
+export * from './client.service';
+import { ClientService } from './client.service';
+export * from './fees.service';
+import { FeesService } from './fees.service';
+export * from './merchants.service';
+import { MerchantsService } from './merchants.service';
+export * from './otps.service';
+import { OtpsService } from './otps.service';
+export * from './paymentChannels.service';
+import { PaymentChannelsService } from './paymentChannels.service';
+export * from './providers.service';
+import { ProvidersService } from './providers.service';
+export * from './transactions.service';
+import { TransactionsService } from './transactions.service';
+export * from './user.service';
+import { UserService } from './user.service';
+export * from './vendors.service';
+import { VendorsService } from './vendors.service';
+export * from './activityLogs.service';
+import { ActivityLogsService } from './activityLogs.service';
+
+export const APIS = [ClientService, FeesService, MerchantsService, OtpsService, PaymentChannelsService, ProvidersService, TransactionsService, UserService, VendorsService, AuthService, ActivityLogsService];

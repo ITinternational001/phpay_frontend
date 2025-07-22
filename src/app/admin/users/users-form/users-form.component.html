@@ -1,0 +1,100 @@
+<div mat-dialog-title>
+  <h1>{{title | translate}}</h1>
+  <h4><i style="color:#fff" *ngIf="!data">
+    {{"credentialsNote" | translate}}</i></h4>
+</div>
+<form  [formGroup]="usersForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content>
+    <ng-container  *ngIf="type =='permission'">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="permissionTable">
+            <tbody>
+              <tr *ngFor="let p of ArrRolePermissionUser">
+                <td><mat-slide-toggle [checked]="p.Enabled" (change)="togglePermission(p, 'toggle')"></mat-slide-toggle></td>
+                <td><span class="label">{{p.PermissionName}}</span></td>
+                <td>
+                  <mat-form-field >
+                    <mat-label>Role Access</mat-label>
+                    <mat-select (selectionChange)="togglePermission(p, 'radio', $event)" [disabled]="!p.Enabled" [(value)]="!p.Enabled ? '': p.RoleAccessEnum">
+                        <mat-option *ngFor="let a of roleAccessEnum" [value]="a.Id" >{{a.Status}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="type=='userAdd' || type=='userupdate'">
+      <div class="row">
+        <div class="col-md-6">
+          <app-input-text-field
+              [formGroup]="usersForm"
+              controlName="Name"
+              type="text"
+              placeholder="Name"
+              [isInvalid]="usersForm.controls['Name'].invalid && usersForm.controls['Name'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+
+
+        </div>
+        <div class="col-md-6">
+
+          
+          <app-input-text-field
+              [formGroup]="usersForm"
+              controlName="Email"
+              type="text"
+              placeholder="Email Address"
+              [isInvalid]="usersForm.controls['Email'].invalid && usersForm.controls['Email'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <app-input-text-field
+              [formGroup]="usersForm"
+              controlName="Username"
+              type="text"
+              placeholder="Username"
+              [isInvalid]="usersForm.controls['Username'].invalid && usersForm.controls['Username'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>Client</mat-label>
+            <mat-select formControlName="ClientId" >
+              <mat-option value="n/a" disabled>Select client</mat-option>
+              <mat-option *ngFor="let client of clientsList" [value]="client.Id">{{ client.Name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>Role</mat-label>
+            <mat-select placeholder="Select role..." formControlName="RoleId" (selectionChange)="onSelectChange($event)">
+              <mat-option value="n/a" disabled>Select role</mat-option>
+              <mat-option [value]="role.RoleID" *ngFor="let role of ArrRoles">{{role.RoleName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+       
+      </div>
+    </ng-container>
+   
+  </div>
+
+  <div mat-dialog-actions>
+    <button class="btn btn-light" type="button" [mat-dialog-close]="false">{{"cancel" | translate}} </button>
+    <div class="h-divider"></div>
+    <button class="btn btn modal-botton" id="submit" type="submit" [disabled]="actionDisable">{{ action | translate}}</button>
+  </div>
+</form>

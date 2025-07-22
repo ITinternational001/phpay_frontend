@@ -1,0 +1,117 @@
+<form>
+  <div mat-dialog-title>
+    <div class="header">
+      <h1 class="header">{{"releaseRemittance" | translate}}</h1>
+    </div>
+  </div>
+  <div mat-dialog-content>
+    <ng-container>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3 d-flex align-items-center">
+            <label class="me-2 mb-0" style="color: white; font-size: 17px;">Requested:</label>
+            <p class="mb-0" style="color: lightgreen; font-size: 17px;">
+              {{ data.TimeStamp }}
+            </p>
+          </div>
+
+          <div class="mb-3 d-flex align-items-center">
+            <label class="me-2 mb-0" style="color: white; font-size: 17px;">Client:</label>
+            <p class="mb-0" style="color: lightgreen; font-size: 17px;">
+              {{data.Wallet }}
+            </p>
+          </div>
+
+          <div class="mb-3 d-flex align-items-center">
+            <label class="me-2 mb-0" style="color: white; font-size: 17px;">Method:</label>
+            <p class="mb-0" style="color: lightgreen; font-size: 17px;">
+              {{data.Method }}
+            </p>
+          </div>
+
+            <div class="mb-3 d-flex align-items-center">
+            <label class="me-2 mb-0" style="color: white; font-size: 17px;">Details:</label>
+            <p class="mb-0" style="color: lightgreen; font-size: 17px;">
+              {{data.MethodDescription }} - {{maskedAccountNumber}} ({{data.CardAccountName}})
+            </p>
+          </div>
+
+
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3 d-flex align-items-center">
+            <label class="me-2 mb-0" style="color: white; font-size: 17px;">Requested Amount:</label>
+            <p class="mb-0" style="color: lightgreen; font-size: 17px;">
+              {{ requestedAmount }}
+            </p>
+          </div>
+
+          <div class="mb-3 d-flex align-items-center">
+            <label class="me-2 mb-0" style="color: white; font-size: 17px;">Withdrawal Count:</label>
+            <p class="mb-0" style="color: lightgreen; font-size: 17px;">
+              {{withdrawalCount }}
+            </p>
+          </div>
+          <div class="mb-3 d-flex align-items-center">
+            <label class="me-2 mb-0" style="color: white; font-size: 17px;">Fee:</label>
+            <p class="mb-0" style="color: lightgreen; font-size: 17px;">
+              {{transferFee }}
+            </p>
+          </div>
+           <div class="mb-3 d-flex align-items-center">
+            <label class="me-2 mb-0" style="color: white; font-size: 17px;">Amount w/ fee:</label>
+            <p class="mb-0" style="color: lightgreen; font-size: 17px;">
+              {{formattedTotalAmount }}
+            </p>
+          </div>
+
+
+        </div>
+      </div>
+
+      <form [formGroup]="remittanceForm">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- <app-input-text-field [formGroup]="remittanceForm" controlName="ConfirmationAmount" type="text"
+              appNumberFormat placeholder="Confirmation Amount" [readonly]="false"
+              [isInvalid]="remittanceForm.controls['ConfirmationAmount'].invalid && remittanceForm.controls['ConfirmationAmount'].touched"
+              errorMessage="This field is required"></app-input-text-field> -->
+
+
+            <app-input-text-field [formGroup]="remittanceForm" controlName="ReferenceNumber" type="text"
+              placeholder="Reference Number" [readonly]="false"
+              [isInvalid]="remittanceForm.controls['ReferenceNumber'].invalid && remittanceForm.controls['ReferenceNumber'].touched"
+              errorMessage="This field is required"></app-input-text-field>
+
+            <mat-form-field>
+              <mat-label>Select Source</mat-label>
+              <mat-select placeholder="Select Type" disableRipple formControlName="CardId">
+                <mat-option disabled>Select</mat-option>
+                <mat-option *ngFor="let card of cards" [value]="card.Id">{{card.AccountName}} -
+                  {{card.AccountNumber}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="input-group mb-3">
+              <input type="file" #fileInput accept="image/*" multiple (change)="onFilesSelected($event)"
+                style="display: none;">
+              <input type="text" class="form-control inputUpload" placeholder="Upload Deposit Slip"
+                aria-label="Recipient's username" aria-describedby="basic-addon2" [value]="fileNames" readonly>
+              <div class="input-group-append">
+                <button class="btn btnUpload" type="button" (click)="triggerFileInput()">Upload</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+
+    </ng-container>
+  </div>
+  <div mat-dialog-actions>
+    <button class="btn btn-light" type="button" [mat-dialog-close]="false">{{"cancel" | translate}}</button>
+    <div class="h-divider"></div>
+    <button class="btn modal-botton" (click)="onReleaseRemittance()" [disabled]="actionDisable"><span
+        class="fa fa-exchange"></span> {{"release" | translate}}</button>
+  </div>
+</form>

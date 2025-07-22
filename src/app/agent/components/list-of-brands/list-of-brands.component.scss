@@ -1,0 +1,86 @@
+@import "/src/sass/scrollbar";
+@import "/src/sass/modalbutton";
+
+.container-with-table {
+    max-height: 365px; /* Adjust height as needed */
+    overflow-x: auto;  /* Enable horizontal scrolling (if needed) */
+
+}
+.dynastyTable {
+    width: 100%;
+    table-layout: auto; /* Allows columns to adjust based on content */
+    border-collapse: collapse; /* Cleaner look */
+}
+
+/* Make the table header and cells responsive */
+.dynastyTable th, 
+.dynastyTable td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+@media screen and (max-width: 768px) {
+    .dynastyTable th, 
+    .dynastyTable td {
+        font-size: 12px; /* Adjust font size for smaller screens */
+        padding: 6px;
+    }
+}
+
+
+.mat-header-cell {
+    background-color: #f1f1f1; /* Optional: header background color */
+    font-weight: bold; /* Optional: make header text bold */
+}
+
+.col-md-9 {
+    width: 100%;
+}
+
+.mat-header-cell {
+    background-color: #f1f1f1; /* Header background color */
+}
+
+
+
+.mat-row {
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.card-wrapper {
+    margin-bottom: 0px;
+    width: 100%; /* Ensures the card wrapper takes the full width */
+    max-width: 100%; /* Prevents overflow beyond the container */
+}
+
+.row1 {
+    margin-bottom: 1px;
+    padding-bottom: 50px;
+}
+
+.card-header {
+    margin-bottom: 0px;
+    
+}
+
+.col-md-9,
+.row1,
+.card-wrapper,
+.card-header,
+.card-title,
+.card-actions,
+.card-body-table,
+.container-with-table,
+.dynastyTable,
+.mat-cell,
+.mat-header-cell {
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-theme-vert{
+    background-color: $color-text-yellow;
+}
+
+
+

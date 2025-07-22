@@ -1,0 +1,73 @@
+@import"/src/sass/variables";
+
+.card {
+    
+    border-radius: 1rem;
+    background: rgb(217,217,217);
+    background: linear-gradient(180deg, rgba(217,217,217,1) 0%, rgba(216,216,216,1) 49%, rgba(115,115,115,1) 100%);
+    margin: 0rem 0 1.25rem 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-body {
+    padding: 0rem 0rem 0rem 1rem;
+}
+
+.row {
+    padding: 10px 10px;
+}
+
+.label {
+    font-size: 25px;
+    font-family: 'Poppins', sans-serif;
+    padding: 10px 0px;
+    font-weight: bold;
+}
+
+.balance-container {
+    display: flex;
+    align-items: center; /* Centers the items vertically */
+    justify-content: space-between; /* Space between the items */
+    padding: 30px 0; /* Adjust padding as needed */
+}
+
+.balance {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.card-value {
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 30px
+}
+
+.TransferRow {
+    display: flex;
+    padding: 5px 13px; /* Adjust as needed */
+}
+
+// .btn {
+//     font-size: 15px;
+//     padding: 0px 0px;
+// }
+
+#btnadd {
+    background: #373737;
+    border: 1px solid #373737;
+}
+
+@media screen and (max-width: 900px) {
+    .card { 
+        width: 100%;
+    }
+}
+
+.btn {
+    background-color: #2b2b2b;
+    color: white;
+    
+
+}
+
+

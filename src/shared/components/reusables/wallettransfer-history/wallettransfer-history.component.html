@@ -1,0 +1,107 @@
+<!-- // Transfer Balance Request -->
+<div *ngIf="isTransferBalanceRequestVisible" class="card-wrapper">
+  <div class="card-header">
+      <div class="card-title p-3">{{"transferBalanceRequest" | translate}}</div>
+      <div class="card-actions">
+          <app-search (search)="onSearch($event)"></app-search>
+          <div class="h-divider"></div>
+          <form [formGroup]="TransferHistory">
+              <mat-form-field>
+                  <mat-label>StartDate - EndDate</mat-label>
+                  <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate placeholder="Start date" formControlName="StartDate">
+                      <input matEndDate placeholder="End date" formControlName="EndDate">
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+          </form>
+          <div class="h-divider"></div>
+      </div>
+  </div>
+  <div class="card-body-table">
+      <app-spinner *ngIf="isLoading"></app-spinner>
+      <div class="container-with-table" style="height: 295px;">
+          <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+              <!-- Table Columns Definition Here -->
+              <ng-container matColumnDef="timestamp">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Timestamp </th>
+                <td *matCellDef="let row" mat-cell> {{ row.CreatedDate }} </td>
+            </ng-container>
+            <ng-container matColumnDef="transactionId">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>Request id </th>
+                <td *matCellDef="let row" mat-cell> {{ row.TransactionNumber }} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                <td *matCellDef="let row" mat-cell >
+                    <span [ngStyle]="row.StatusDescription  | statusColor">{{ row.StatusDescription }}</span></td>
+            </ng-container>
+            <ng-container matColumnDef="clientname">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Client </th>
+                <td *matCellDef="let row" mat-cell> {{ row.ClientName }} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="channelname">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Destination </th>
+                <td *matCellDef="let row" mat-cell> {{ row.DestinationChannelName }} </td>
+            </ng-container>
+            <ng-container matColumnDef="transfertype">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Transfer Type </th>
+                <td *matCellDef="let row" mat-cell> {{ row.TransferTypeDescription }} </td>
+            </ng-container>
+            <ng-container matColumnDef="walletsource">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Source </th>
+                <td *matCellDef="let row" mat-cell> {{ row.SourceChannelName }} </td>
+            </ng-container>
+            <ng-container matColumnDef="amountInputted">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>Amount </th>
+                <td *matCellDef="let row" mat-cell> &#8369; {{ row.Amount | number:'1.2-2' }} </td>
+            </ng-container>
+            <ng-container matColumnDef="requestBy">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>Requestee </th>
+                <td *matCellDef="let row" mat-cell> {{ row.RequesteeName }} </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>Action</th>
+                <td *matCellDef="let row" mat-cell>
+                    <button class="btn-theme-vert" mat-mini-fab
+                    [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+                  <mat-menu #menu="matMenu" xPosition="before">
+                    <button mat-menu-item (click)="onApproveTransfer(row)">
+                      <mat-icon>check</mat-icon>
+                      <span>{{"approveTransfer" | translate}}</span>
+                    </button>
+                    <button mat-menu-item (click)="onDeclineTransfer(row)">
+                      <mat-icon>highlight_off</mat-icon>
+                      <span>{{"declineTransfer" | translate}}</span>
+                    </button>
+                  </mat-menu>
+                </td>
+              </ng-container>
+              
+
+              <tr *matHeaderRowDef="displayedColumnsPending; sticky:true" mat-header-row></tr>
+              <tr *matRowDef="let element; columns: displayedColumnsPending" mat-row></tr>
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="13" style="text-align: center;">No data matching the filter
+                  </td>
+              </tr>
+          </table>
+      </div>
+      <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+          (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+          (lastData)="onLastPage()" (itemsPerPageChange)="onItemsPerPageChanged($event)">
+      </app-pagination>
+  </div>
+</div>
+
+    <!-- <div class="row" style="margin-top: 20px;">
+        <app-wallet-transfer-completed
+        [isAdmin]="true"
+        [data] = "walletBalanceCompleted"
+        ></app-wallet-transfer-completed>
+    </div> -->
+
+

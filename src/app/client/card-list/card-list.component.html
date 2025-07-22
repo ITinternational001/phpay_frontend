@@ -1,0 +1,114 @@
+<app-maintenance-message>
+  <div class="row mb-3">
+    <div *ngFor="let data of topData" class="col-sm-3">
+      <app-card [isVisible]="false" [isVisiblebtn]="true" label="{{data.label | translate}}" icon="{{data.icon}}"
+        value="{{data.value}}"></app-card>
+    </div>
+  </div>
+
+  <section class="cardlist">
+    <div class="card-wrapper">
+      <div class="card-header">
+        <div class="card-title p-3">{{"registeredDestination" | translate}}</div>
+        <div class="card-actions">
+          <app-search (search)="onSearch($event)"></app-search>
+          <div class="h-divider"></div>
+            <!-- <app-button [text]="'New Card'" [icon]="'fa-plus'" [btnClass]="'btn-theme btn-lg'"
+          (click)="openForm()"></app-button> -->
+          <button [disabled]="!isReadAndWrite" class="btn btn-theme" [matMenuTriggerFor]="menu">
+            <span class="fas fa-plus"></span> {{"newCard" | translate}}
+          </button>
+          <mat-menu #menu="matMenu">
+            <button [disabled]="!isReadAndWrite" mat-menu-item *ngFor="let method of cardTypes" [value]="method.Id"
+              (click)="openForm(method.Id)">{{method.Name | translate}}</button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="card-body-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="container-with-table">
+        <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource1" matSort>
+
+          <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.Id }}</td>
+          </ng-container>
+          <ng-container matColumnDef="BinanceWalletAddress">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Binance ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.BinanceWalletAddress }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="CardName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Card Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.CardName }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="client">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Client Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.client }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="AccountName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.AccountName }}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="AccountNumber">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Number</th>
+            <td mat-cell *matCellDef="let row">{{ row.AccountNumber }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="CardType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Card Type</th>
+            <td mat-cell *matCellDef="let row">{{ row.CardType }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="NickName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nickname</th>
+            <td mat-cell *matCellDef="let row">{{ row.NickName }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions </th>
+            <td mat-cell *matCellDef="let row"> 
+              <button [disabled]="!isReadAndWrite" class="btn-theme-vert" mat-mini-fab
+                [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button [disabled]="!isReadAndWrite" mat-menu-item (click)="openEditForm(row)">
+                  <mat-icon>edit</mat-icon>
+                  <span>{{"edit" | translate}}</span>
+                </button>
+                <button [disabled]="!isReadAndWrite" mat-menu-item (click)="openTransactions(row)">
+                  <mat-icon>view_list</mat-icon>
+                  <span>{{"transactions" | translate}}</span>
+                </button>
+              </mat-menu>
+            
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1; sticky:true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="8" style="text-align: center;">
+              <app-nodata></app-nodata>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+      (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+      (lastData)="onLastPage()" (itemsPerPageChange)="onItemsPerPageChanged($event)">
+    </app-pagination>
+      </div>
+    </div>
+    <div class="card-footer"></div>
+
+  </section>
+
+  <section class="card-transactions">
+    <app-client-card-transaction [transactions]="transactions"></app-client-card-transaction>
+  </section>
+</app-maintenance-message>

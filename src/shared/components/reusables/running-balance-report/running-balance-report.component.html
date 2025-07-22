@@ -1,0 +1,27 @@
+<app-maintenance-message>
+    <div class="row">
+        <div *ngFor="let data of topData" class="col-sm">
+          <app-card [isVisible]="false" [isVisiblebtn]="true" label="{{data.label | translate}}" icon="{{data.icon}}"
+            value="{{data.value | number : '1.2-2' }}"></app-card>
+        </div>
+    </div>
+  
+    <div class="form-container">
+      <app-search (search)="onSearch($event)"></app-search>
+      <div class="h-divider"></div>
+      <form [formGroup]="EODReportForm">
+        <mat-form-field>
+          <mat-label>StartDate - EndDate</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate formControlName="StartDate" placeholder="Start date">
+              <input matEndDate formControlName="EndDate" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      </form>
+    </div>
+    
+    <app-table-and-graph [searchKeyword]="searchKeyword" [startDate]="startDate" [endDate]="endDate"></app-table-and-graph>
+  
+</app-maintenance-message>

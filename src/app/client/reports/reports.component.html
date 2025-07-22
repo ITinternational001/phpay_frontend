@@ -1,0 +1,29 @@
+<app-maintenance-message>
+ <section class="transactions">
+    <div class="card-wrapper">
+      <div class="card-header">
+        <div class="card-title p-3">
+          {{title | translate}}
+        </div>
+        <div class="card-actions">
+          <mat-form-field [style.width.vw]="15">
+            <mat-label>Select Report</mat-label>
+            <mat-select [(ngModel)]="selectedReport" (ngModelChange)="getReportType()">
+              <mat-option *ngFor="let report of reports" [value]="report.key">
+                {{ report.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="card-body">
+        <app-common-income-report *ngIf="isTotalIncome" [isAdmin]="false" [clientId]="clientId"></app-common-income-report>
+        <app-common-summary-report *ngIf="isSummary" [isAdmin]="false" [clientId]="clientId"></app-common-summary-report>
+        <app-common-remittance-report *ngIf="isRemittance" [isAdmin]="false" [clientId]="clientId"></app-common-remittance-report>
+        <!-- <app-client-income-report *ngIf="isTotalIncome"></app-client-income-report>
+        <app-client-summary-report *ngIf="isSummary"></app-client-summary-report>
+        <app-client-remittance-report *ngIf="isRemittance"></app-client-remittance-report> -->
+      </div>
+    </div>
+  </section>
+</app-maintenance-message>

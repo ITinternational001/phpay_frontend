@@ -1,0 +1,48 @@
+<form [formGroup]="CoWalletForm">
+  <div mat-dialog-title>
+    <div class="header">
+      <h1 class="header">CO Wallet Details</h1>
+    </div>
+  </div>
+  <div mat-dialog-content>
+    <div class="top-details">
+      <div class="details">
+        <div><span class="label-details">Client: </span>{{ data.clientName }} </div>
+        <div><span class="label-details">Total Fund:</span> &#8369;{{ data.totalCOFundBalance |  number:'1.2-2' }} </div>
+      </div>
+    </div>
+
+    <!-- Conditionally Render Sources -->
+    <div formArrayName="Sources" *ngIf="sources.controls.length > 0">
+      <div *ngFor="let source of sources.controls; let i = index" [formGroupName]="i">
+        <div class="row">
+          <div class="col-md-6 label-container">
+            <label class="label">{{ filteredVendors[i].VendorName }}</label>
+          </div>
+          <div class="col-md-6">
+            <div class="input-container">
+              <span class="peso-sign">₱</span>
+              <input
+                type="text"
+                [value]="filteredVendors[i].COFundsBalance | number: '1.2-2'"
+                formControlName="Amount"
+                appNumberFormat
+                class="form-control"
+                readonly="true"
+                [placeholder]="'Amount'"
+              />
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="action-buttons">
+    <div class="button-container">
+      <button class="btn close-button" type="button" [mat-dialog-close]="false">Close</button>
+    </div>
+    <div class="h-divider"></div>
+  </div>
+</form>

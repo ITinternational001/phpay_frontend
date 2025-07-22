@@ -1,0 +1,8 @@
+@import "/src/sass/modalbutton";/* To change the input caret color */
+::ng-deep .mat-input-element {
+    caret-color: purple !important;
+}
+/* To change the input placeholder color */
+::ng-deep .mat-input-element::placeholder {
+    color: red !important;
+}

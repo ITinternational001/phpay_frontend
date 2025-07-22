@@ -1,0 +1,12 @@
+
+@import"/src/sass/variables";
+
+
+#dateInput{
+    background-color: #373737;
+    border: transparent;
+    color: $color-text-white;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Invert the colors */
+}

@@ -1,0 +1,84 @@
+<div class="row1">
+    <div class="col-lg-12">
+        <div class="card-wrapper">
+            <div class="card-header">
+                <div class="card-title p-3">{{"listOfDownlinePrimeAgents" | translate}}</div>
+                <div class="card-actions">
+                    <app-search></app-search>
+                    <div class="h-divider"></div>
+                    <app-button *ngIf="isAdmin" [text]="'addNewAgent' | translate" [icon]="'fa-plus'" [btnClass]="'btn-theme btn-lg'"
+                        (click)="addClient()"></app-button>
+                </div>
+            </div>
+            <div class="card-body-table">
+                <app-spinner *ngIf="isLoading"></app-spinner>
+                <div class="container-with-table">
+                    <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                        <!-- Table Columns Definition Here -->
+                        <ng-container matColumnDef="agentId">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Agent ID</th>
+                            <td *matCellDef="let row" mat-cell> {{ row.AgentId }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="agentName">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Agent Name </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.AgentName }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="dateAdded">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Date Added </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.DateAdded }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="username">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Username </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.Username }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="client">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Client </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.Client }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="downlineAgent">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Downline Agent </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.DownlineAgent }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                            <td *matCellDef="let row" mat-cell>
+                                <span [ngStyle]="row.Status | statusColor">{{ row.Status }}</span>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Action</th>
+                            <td *matCellDef="let row" mat-cell>
+                                <ng-container>
+                        <button 
+                            class="btn-theme-vert" 
+                            mat-mini-fab 
+                            [matMenuTriggerFor]="menu" 
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                                    <mat-menu #menu="matMenu" xPosition="before">
+                                        <button mat-menu-item (click)="goToProfile(row)">
+                                            <span class="fas fa-eye"></span>
+                                            <span> {{"viewProfile" | translate}}</span>
+                                        </button>
+                                    </mat-menu>
+                                </ng-container>
+                            </td>
+                        </ng-container>
+                        <tr *matHeaderRowDef="displayedColumns; sticky:true" mat-header-row></tr>
+                        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="13" style="text-align: center;">No data matching the filter
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+                    (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+                    (lastData)="onLastPage()">
+                </app-pagination>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+<form>
+    <div mat-dialog-title>
+      <div class="header">
+        <h1 class ="header">{{"releaseRemittance" | translate}}</h1>
+      </div>
+  
+    </div>
+    <div mat-dialog-content>
+      <ng-container>
+        <form [formGroup]="agentremittanceForm">
+        <div class="row">
+          <div class="col-md-6">
+            <app-input-text-field
+              [formGroup]="agentremittanceForm"
+              controlName="DateRemitted"
+              type="text"
+              placeholder="Date Requested"
+              [readonly]="true"
+            ></app-input-text-field>
+  
+            <app-input-text-field
+              [formGroup]="agentremittanceForm"
+              controlName="TotalAmount"
+              type="text"
+              placeholder="Total Amount"
+              [readonly]="true"
+            ></app-input-text-field>
+  
+            <app-input-text-field
+              [formGroup]="agentremittanceForm"
+              controlName="WithdrawalCount"
+              type="text"
+              placeholder="Transfer Fee"
+              [readonly]="true"
+            ></app-input-text-field>
+  
+            <app-input-text-field
+              [formGroup]="agentremittanceForm"
+              controlName="ModeOfPayment"
+              type="text"
+              placeholder="Remittance Method"
+              [readonly]="true"
+            ></app-input-text-field>
+  
+            <div class="bank-details" *ngIf="cardDetails">
+              <div class="bank-name">Bank details: {{ cardDetails.agentBankName }}</div>
+              <div class="account-info">
+                <span>{{ cardDetails.agentAccountName }}</span> - <span>{{ cardDetails.agentAccountNumber }}</span>
+              </div>
+            </div>
+          
+          </div>
+          <div class="col-md-6">
+            <app-input-text-field
+              [formGroup]="agentremittanceForm"
+              controlName="ConfirmAmount"
+              type="text"
+              appNumberFormat
+              placeholder="Confirmation Amount"
+              [readonly]="false"
+              [isInvalid]="agentremittanceForm.controls['ConfirmAmount'].invalid && agentremittanceForm.controls['ConfirmAmount'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+  
+            <app-input-text-field
+              [formGroup]="agentremittanceForm"
+              controlName="TransferFee"
+              type="text"
+              appNumberFormat
+              placeholder="Withdrawal Count"
+              [readonly]="false"
+              [isInvalid]="agentremittanceForm.controls['TransferFee'].invalid && agentremittanceForm.controls['TransferFee'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+  
+            <app-input-text-field
+              [formGroup]="agentremittanceForm"
+              controlName="ReferenceNumber"
+              type="text"
+              placeholder="Reference Number"
+              [readonly]="false"
+              [isInvalid]="agentremittanceForm.controls['ReferenceNumber'].invalid && agentremittanceForm.controls['ReferenceNumber'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+  
+            <mat-form-field>
+              <mat-label>Select Source</mat-label>
+              <mat-select placeholder="Select Type" disableRipple formControlName="Source">
+                <mat-option disabled>Select</mat-option>
+                <!-- Iterate over cards fetched from getWalletCards for the dropdown -->
+                <mat-option *ngFor="let card of cards" [value]="card.Id">
+                  {{ card.AccountName }} - {{ card.AccountNumber }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+  
+            <div class="input-group mb-3">
+              <input type="file" #fileInput accept="image/*" multiple (change)="onFilesSelected($event)"
+                style="display: none;">
+              <input type="text" class="form-control inputUpload" placeholder="Upload Deposit Slip"
+                aria-label="Recipient's username" aria-describedby="basic-addon2" [value]="fileNames" readonly>
+              <div class="input-group-append">
+                <button class="btn btnUpload" type="button" (click)="triggerFileInput()">Upload</button>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+       </form>
+     
+      </ng-container>
+    </div>
+    <div mat-dialog-actions>
+      <button class="btn btn-light" type="button" [mat-dialog-close]="false">{{"cancel" | translate}}</button>
+      <div class="h-divider"></div>
+      <button class="btn modal-botton" type="button" (click)="onReleaseRemittance()" [disabled]="actionDisable">
+        <span class="fa fa-exchange"></span> {{"release" | translate}}
+      </button>
+   
+    </div>
+  </form>

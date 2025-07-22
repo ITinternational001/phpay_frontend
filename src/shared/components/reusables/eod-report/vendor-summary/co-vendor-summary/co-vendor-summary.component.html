@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="card-wrapper">
+        <div class="card-header">
+            <div class="card-title p-3">Cash-Out</div>
+            <div class="card-actions">
+                <app-search (search)="onSearch($event)"></app-search>
+                <div class="h-divider"></div>
+            </div>
+        </div>
+        <div class="card-body-table">
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <div class="container-with-table">
+                <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="COvendor">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Vendor </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.Vendor }} </td>
+                        <td mat-footer-cell *matFooterCellDef> Grand Total: </td>
+                        <td mat-footer-cell *matFooterCellDef> </td>
+                    </ng-container>
+                    <ng-container matColumnDef="COchannel">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Channel </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.Channel }} </td>
+                        <td mat-footer-cell *matFooterCellDef> </td>
+                    </ng-container>
+                    <ng-container matColumnDef="COgross">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Gross </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.Gross | number : '1.2-2' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ GrandTotalGross | number : '1.2-2' }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="COacFees">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> AC Fees </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.ACNet | number : '1.2-2' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ GrandTotalACNet | number : '1.2-2' }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="COcount">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Count </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.Count }} </td>
+                        <td mat-footer-cell *matFooterCellDef> </td> <!-- Empty footer cell for this column -->
+                    </ng-container>
+                    <ng-container matColumnDef="COnet">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Net Amount </th>
+                        <td *matCellDef="let row" mat-cell> {{ row.Net | number : '1.2-2' }} </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ GrandTotalNet | number : '1.2-2' }} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="6" style="text-align: center;">No data matching the filter</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div>

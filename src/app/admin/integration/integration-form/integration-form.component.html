@@ -1,0 +1,59 @@
+<div mat-dialog-title>
+    <h1>{{"integrationForm" | translate}}</h1>
+</div>
+<form [formGroup]="integrationForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div class="row">
+            <app-input-text-field
+                [formGroup]="integrationForm"
+                controlName="Name"
+                type="text"
+                placeholder="Platform Name"
+                [isInvalid]="integrationForm.controls['Name'].invalid && integrationForm.controls['Name'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+
+            <app-input-text-field
+                [formGroup]="integrationForm"
+                controlName="ServerIp"
+                type="text"
+                placeholder="Server IP"
+                [isInvalid]="integrationForm.controls['ServerIp'].invalid && integrationForm.controls['ServerIp'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+
+            <app-input-text-field
+                [formGroup]="integrationForm"
+                controlName="WhiteListedIp"
+                type="text"
+                placeholder="Whitelisted IP"
+                [isInvalid]="integrationForm.controls['WhiteListedIp'].invalid && integrationForm.controls['WhiteListedIp'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+
+            <app-input-text-field
+                [formGroup]="integrationForm"
+                controlName="CallbackUrl"
+                type="text"
+                placeholder="Callback URL"
+                [isInvalid]="integrationForm.controls['CallbackUrl'].invalid && integrationForm.controls['CallbackUrl'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+
+            <app-input-text-field
+                [formGroup]="integrationForm"
+                controlName="RedirectUrl"
+                type="text"
+                placeholder="Redirect URL"
+                [isInvalid]="integrationForm.controls['RedirectUrl'].invalid && integrationForm.controls['RedirectUrl'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+        </div>
+    </div>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type="button" [mat-dialog-close]="false">Cancel</button>
+        <div class="h-divider"></div>
+        <button class="btn btn modal-botton" type="submit" [disabled]="actionDisable"><span class="fa fa-save"></span> {{data ? 'Update Data' : 'Save Data'}}</button>
+    </div>
+</form>

@@ -1,0 +1,109 @@
+<div mat-dialog-title>
+    <h1>{{"vendorForm" | translate}}</h1>
+</div>
+<form [formGroup]="vendorForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div class="row">
+            <div class="col-md-6">
+                <app-input-text-field
+                    [formGroup]="vendorForm"
+                    controlName="Name"
+                    type="text"
+                    placeholder="Vendor"
+                    [isInvalid]="vendorForm.controls['Name'].invalid && vendorForm.controls['Name'].touched"
+                    errorMessage="This field is required"
+                ></app-input-text-field>
+            </div>
+            <div class="col-md-6" style="margin-top: -9px;">
+                <app-select-search 
+                    [options]="statusEnum" 
+                    placeholder="Select Status" 
+                    [showSearch]="false"
+                    [preselectedOption]="selectedStatus"
+                    (optionSelected)="onSelectStatus($event)">
+                </app-select-search>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <app-input-text-field
+                    [formGroup]="vendorForm"
+                    controlName="SecretKey"
+                    type="text"
+                    placeholder="Secret Key"
+                    [isInvalid]="vendorForm.controls['SecretKey'].invalid && vendorForm.controls['SecretKey'].touched"
+                    errorMessage="This field is required"
+                ></app-input-text-field>
+            </div>
+            <div class="col-md-6">
+                <app-input-text-field
+                    [formGroup]="vendorForm"
+                    controlName="ServerIp"
+                    type="text"
+                    placeholder="Server IP"
+                    [isInvalid]="vendorForm.controls['ServerIp'].invalid && vendorForm.controls['ServerIp'].touched"
+                    errorMessage="This field is required"
+                ></app-input-text-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <app-input-text-field
+                    [formGroup]="vendorForm"
+                    controlName="MinimumCI"
+                    type="text"
+                    placeholder="Minimum CI"
+                    appNumberFormat
+                    [isInvalid]="vendorForm.controls['MinimumCI'].invalid && vendorForm.controls['MinimumCI'].touched"
+                    errorMessage="This field is required"
+                ></app-input-text-field>
+            </div>
+            <div class="col-md-6">
+                <app-input-text-field
+                    [formGroup]="vendorForm"
+                    controlName="MaximumCI"
+                    type="text"
+                    placeholder="Maximum Cash in"
+                    appNumberFormat
+                    [isInvalid]="vendorForm.controls['MaximumCI'].invalid && vendorForm.controls['MaximumCI'].touched"
+                    errorMessage="This field is required"
+                ></app-input-text-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <app-input-text-field
+                    [formGroup]="vendorForm"
+                    controlName="MinimumCO"
+                    type="text"
+                    placeholder="Minimum CO"
+                    appNumberFormat
+                    [isInvalid]="vendorForm.controls['MinimumCO'].invalid && vendorForm.controls['MinimumCO'].touched"
+                    errorMessage="This field is required"
+                ></app-input-text-field>
+            </div>
+            <div class="col-md-6">
+                <app-input-text-field
+                    [formGroup]="vendorForm"
+                    controlName="MaximumCO"
+                    type="text"
+                    placeholder="Maximum Cash out"
+                    appNumberFormat
+                    [isInvalid]="vendorForm.controls['MaximumCO'].invalid && vendorForm.controls['MaximumCO'].touched"
+                    errorMessage="This field is required"
+                ></app-input-text-field>
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type="button" [mat-dialog-close]="false">
+            {{"cancel" | translate}}</button>
+        <div class="h-divider"></div>
+        <button *ngIf="!data.isViewOnly" class="btn btn modal-botton" type="submit" [disabled]="actionDisable">
+            <i class="fa-regular fa-floppy-disk"></i> {{ (data.item ? 'saveChanges' : 'saveVendor') | translate }}
+          </button>
+          
+    </div>
+</form>

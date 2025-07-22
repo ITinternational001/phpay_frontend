@@ -1,0 +1,70 @@
+@import"/src/sass/variables";
+  /* spinner.component.css */
+  ::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+  ::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+    stroke: $spinner !important;
+  }
+
+
+.spinnerContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+  .text{
+    font-size: 24px;
+    padding: 20px;
+    color: $color-text-white;
+  }
+
+
+.success-card {
+    background-color: #1e1e1e;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+}
+
+.title-head{
+    font-size: 2rem;
+    margin-top: 20px;
+}
+
+.check-circle {
+    background-color: #2ecc71;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7rem;
+    margin: auto;
+}
+
+.transaction-info {
+    font-size: 1rem;
+    padding-bottom: 10px;
+}
+
+.transaction-value {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.divider {
+    border-top: 1px solid #444;
+    margin: 1rem 0;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.text-green {
+    color: #2ecc71;
+}

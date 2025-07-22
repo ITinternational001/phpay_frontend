@@ -1,0 +1,159 @@
+<div mat-dialog-title>
+    <h1 class="head">{{"merchantForm" | translate}}</h1>
+</div>
+<form [formGroup]="merchantForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div formGroupName="Merchant">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="InputTextField">
+                        <input
+                        type="text"
+                        class="form-control"
+                        formControlName="Name"
+                        [readonly]="isReadonly"
+                        placeholder="Merchant Name">
+                    </div>
+                    <!-- <mat-form-field [style.width.px]=350>
+                        <mat-label>Merchant</mat-label>
+                        <input matInput formControlName="Name">
+                    </mat-form-field> -->
+                </div>
+                <div class="col-md-6">
+                    <!-- <mat-form-field [style.width.px]=350>
+                        <mat-label class="label">Payment Channel</mat-label>
+                        <mat-select formControlName="PaymentChannelId" placeholder="Select Payment Channel...">
+                            <mat-option *ngFor="let channel of paymentChannelList"
+                                [value]="channel.id">{{channel.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+                    <app-select-search 
+                        [options]="paymentChannelList" 
+                        placeholder="Select Channel" 
+                        [showSearch]="false"
+                        [readonly]="isReadonly"
+                        [preselectedOption]="selectedChannel"
+                        (optionSelected)="onPaymentChannelChange($event)">
+                    </app-select-search>
+                </div>
+                <div class="col-md-6">
+                    <!-- <mat-form-field [style.width.px]=350>
+                        <mat-label class="label">Client</mat-label>
+                        <mat-select formControlName="ClientId" placeholder="Select Client...">
+                            <mat-option *ngFor="let client of clientsList"
+                                [value]="client.id">{{client.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+                    <app-select-search 
+                        [options]="clientsList" 
+                        placeholder="Select Client" 
+                        [showSearch]="true"
+                        [readonly]="isReadonly"
+                        [preselectedOption]="selectedClient"
+                        (optionSelected)="onClientChange($event)">
+                    </app-select-search>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- <mat-form-field [style.width.px]=350>
+                        <mat-label class="label">Vendor</mat-label>
+                        <mat-select formControlName="VendorId">
+                            <mat-option *ngFor="let vendor of vendorsList"
+                                [value]="vendor.id">{{vendor.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+                    <app-select-search 
+                        [options]="vendorsList" 
+                        placeholder="Select Vendor" 
+                        [showSearch]="false"
+                        [readonly]="isReadonly"
+                        [preselectedOption]="selectedVendor"
+                        (optionSelected)="onVendorChange($event)">
+                    </app-select-search>
+                </div>
+                
+                 <!--Status From-->
+                <div class="col-md-6">
+                    <!-- <mat-form-field [style.width.px]=350>
+                        <mat-label class="label">Status</mat-label>
+                        <mat-select formControlName="Status">
+                            <mat-option *ngFor="let status of statusEnum"
+                                [value]="status.id">{{status.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+                    <app-select-search 
+                        [options]="statusEnum" 
+                        placeholder="Select Status" 
+                        [showSearch]="false"
+                        [preselectedOption]="selectedStatus"
+                        [readonly]="isReadonly"
+                        (optionSelected)="onSelectStatus($event)">
+                    </app-select-search>
+                </div>
+            </div>
+
+            <h2 class="header" style="color: #fff;">{{"configureTransactionFee" | translate}}</h2>
+            <div class="grid-container">
+                <div class="grid-item">Transaction Fee Name</div>
+                <div class="grid-item" style="margin-left: 30px;">% Fee (atCost)</div>
+                <div class="grid-item" style="margin-left: 15px;">Fixed Fee (atCost)</div>
+                <div class="grid-item"style="margin-top: 15px;">Cash in Fee</div>
+                <div class="grid-item" formGroupName="CashInFee">
+                    <div class="InputTextField">
+                        <input
+                          matInput
+                          type="number"
+                          class="form-control text-center"
+                          formControlName="FeeAtCostPercent" />
+                      </div>
+                </div>
+                <div class="grid-item" formGroupName="CashInFee">
+                    <div class="InputTextField">
+                        <input
+                          matInput
+                          type="number"
+                          class="form-control text-center"
+                          formControlName="FeeAtCostFixed" />
+                      </div>
+                </div>
+                <div class="grid-item" style="margin-top: 15px;">Cash Out Fee</div>
+                <div class="grid-item" formGroupName="CashOutFee">
+                    <div class="InputTextField">
+                        <input
+                          matInput
+                          type="number"
+                          class="form-control text-center"
+                          formControlName="FeeAtCostPercent" />
+                      </div>
+                </div>
+                <div class="grid-item" formGroupName="CashOutFee">
+                    <div class="InputTextField">
+                        <input
+                          matInput
+                          type="number"
+                          class="form-control text-center"
+                          formControlName="FeeAtCostFixed" />
+                      </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type="button" [mat-dialog-close]="false">{{"cancel" | translate}}</button>
+        <div class="h-divider"></div>
+        <button class="btn modal-botton" type="submit" [disabled]="actionDisable">
+            <span class="fa fa-save"></span> {{ (data ? 'updateMerchant' : 'saveMerchant') | translate }}
+          </button>
+          
+          
+    </div>
+</form>

@@ -1,0 +1,48 @@
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">Merchant Summary</div>
+        <div class="card-actions">
+            <app-search></app-search>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="PaymentChannel">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>P.Channel</th>
+                <td mat-cell *matCellDef="let row"> {{row.PaymentChannel}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Merchant">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Merchant</th>
+                <td mat-cell *matCellDef="let row"> {{row.Merchant}} </td>
+            </ng-container>
+            <ng-container matColumnDef="CIFee">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Cash In</th>
+                <td mat-cell *matCellDef="let row"> {{row.CIFee | number : '1.2-2'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="CIFeeFixed">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cash In Count</th>
+                <td mat-cell *matCellDef="let row"> {{row.CIFeeFixed }} </td>
+            </ng-container>
+            <ng-container matColumnDef="COFee">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Cash Out</th>
+                <td mat-cell *matCellDef="let row"> {{row.COFee | number : '1.2-2'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="COFeeFixed">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cash Out Count</th>
+                <td mat-cell *matCellDef="let row"> {{row.COFeeFixed}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                <td mat-cell *matCellDef="let row"> 
+                    <button class="btn btn-warning">View wallet</button>
+                     </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+    </div>
+</div>
+<div class="card-footer"></div>

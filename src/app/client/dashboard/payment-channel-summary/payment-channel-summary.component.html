@@ -1,0 +1,76 @@
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">{{"paymentChannelSummary" | translate}}</div>
+        <div class="card-actions">
+            <div class="h-divider"></div>
+            <form [formGroup]="paymentChannelForm">
+                <mat-form-field>
+                    <mat-label>StartDate - EndDate</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" formControlName="StartDate">
+                        <input matEndDate placeholder="End date" formControlName="EndDate">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </form>
+           
+        </div>
+    </div>
+    <div class="card-body-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="container-with-table">
+            <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="paymentChannel">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Payment Channel </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.PaymentChannelName }} </td>
+                </ng-container>
+                <ng-container matColumnDef="cashIn">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Cash In </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.TotalCashInAmountGross | number: '1.2-2'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="totalCI">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Total No. of CI </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.TotalCashInCount }} </td>
+                </ng-container>
+                <ng-container matColumnDef="cashOut">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Cash Out </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.TotalCashOutAmountGross | number: '1.2-2' }} </td>
+                </ng-container>
+                <ng-container matColumnDef="totalCO">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Total No. of CO </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.TotalCashOutCount }} </td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Action</th>
+                    <td *matCellDef="let row" mat-cell>
+                        <button [disabled]="!isReadAndWrite" mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon class="mat-icon-style">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" xPosition="before">
+                            <button [disabled]="!isReadAndWrite" mat-menu-item 
+                                (click)="onViewWallet(row)">
+                                <mat-icon>check</mat-icon>
+                                <span>{{"viewWallet" | translate}}</span>
+                            </button>     
+                        </mat-menu>
+                    </td>
+                </ng-container>
+        
+                <tr *matHeaderRowDef="displayedColumns; sticky:true" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="6" style="text-align: center;">No data matching the filter
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+            (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+            (lastData)="onLastPage()">
+        </app-pagination> -->
+    </div>
+</div>
+<div class="card-footer"></div>

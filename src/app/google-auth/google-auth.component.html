@@ -1,0 +1,26 @@
+<div class="login-body">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="login-container">
+          <div class="text-center">
+            <img src="../../assets/dpay_logo.png" alt="Logo" class="logo mb-3" />
+            <h2>Authenticator Bind</h2>
+            <p *ngIf="showQr">Please Scan the QR Code and Bind</p>
+          </div>
+          
+            <div class="qr" *ngIf="showQr">
+              <!-- <qrcode [qrdata]="QRCodeUrl" [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
+               <img src="{{QRCodeUrl}}" alt="Logo" class="logo mb-3" />
+            </div>
+          <form (ngSubmit)="onValidateOtp(pincode)" #OtpForm="ngForm">
+            <div class="form-group mb-3">
+              <input type="text" class="form-control box" id="pincode" name="pincode"  
+              [(ngModel)]="pincode" 
+              required placeholder="Enter the Verification Code" />
+            </div>
+            <button type="submit" class="btn  btn-block ">Submit Verification Code</button>
+          </form>
+         
+        </div>
+      </div>
+          <img src="assets/dpay_logo1.png" alt="Logo" class="logo-overlay" />
+    </div>

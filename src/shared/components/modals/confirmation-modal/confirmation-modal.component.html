@@ -1,0 +1,26 @@
+<div mat-dialog-title>
+    <h1 class="value">{{Action | translate}} </h1>
+</div>
+<div mat-dialog-content>
+    <ng-container>
+        <div class="mycontainer">
+            <div class="text">{{"confirmationMessage" | translate}} {{Action | translate}} {{details.Name | translate}}?</div>
+        </div>
+
+        <form *ngIf="showInputField" [formGroup]="confirmationModal">
+            <app-input-text-field
+                [formGroup]="confirmationModal"
+                controlName="Remarks"
+                type="text"
+                placeholder="Please input the reason"
+                [isInvalid]="confirmationModal.controls['Remarks'].invalid && confirmationModal.controls['Remarks'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+        </form>
+    </ng-container>
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-light" type="button" [mat-dialog-close]="false" (click)="cancel()">{{"cancel" | translate}}</button>
+    <div class="h-divider"></div>
+    <button class="btn btn-theme" (click)="onSubmit()" [disabled]="actionDisable"><span class="{{icon}}" ></span> {{Action | translate}}</button>
+</div>

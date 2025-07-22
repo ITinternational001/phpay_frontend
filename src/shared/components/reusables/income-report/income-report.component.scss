@@ -1,0 +1,80 @@
+@import"/src/sass/variables";
+@import "/src/sass/scrollbar";
+
+p{
+    font-size: 16px;
+    color: #FFF;
+    padding: 10px;
+}
+#report .row{
+    line-height: 0;
+}
+#mop{
+    font-weight: 500;
+    font-size: 18px;
+    color: #FFF ;
+}
+.paymentChannel{
+    padding: none;
+    font-size: 18px;
+    color: #FFF;
+    margin: auto;
+    width: 90%;
+}
+.form-container{
+    background-color: #373737;
+    margin-left: 0.2px;
+    margin-right: 0.2px;
+    padding-top: 20px;
+    border-radius: 10px;
+    height: 180px;
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+    label{
+        color:white;
+        font-size: 15px;
+        padding-bottom: 5px;
+    }
+}
+
+.item-calendar{
+    display:flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.total-section {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .title {
+        display: flex;
+        align-items: center; /* Align items vertically */
+        font-size: 19px;
+        color: #FFF;
+    }
+    
+    .value{
+        display: flex;
+        align-items: center; /* Align items vertically */
+        font-size: 20px;
+        color: #FFF;
+    }
+    
+    .image-section {
+        margin-right: 10px; /* Adjust margin as needed */
+    }
+}
+
+.actions{
+    display: flex;
+    flex-direction: row;
+	justify-content: flex-end;
+}
+
+

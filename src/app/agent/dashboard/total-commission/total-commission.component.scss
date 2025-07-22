@@ -1,0 +1,64 @@
+
+.card-body-table {
+    width: 100%; /* Ensure the body takes full width */
+}
+
+.CommsTable {
+    width: 100%; /* Full width for the table */
+    border-collapse: collapse; /* Remove spaces between table cells */
+}
+
+.Table, .TotaTable {
+    font-size: 15px;
+    color: white;
+}
+
+.table-padding {
+    padding: 15.5px;
+    padding-left: 30px;
+    text-align: left; /* Left align for titles */
+    
+}
+
+
+.TotaTable {
+    background-color: #4d4d4d;
+}
+
+.card-wrapper {
+    padding-bottom: 52px;
+}
+
+.dropdown-menu {
+    background-color: transparent;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: white; /* Adjust based on your theme */
+    background-color: #575757;
+}
+
+.calendar-icon {
+    margin-right: 5px; 
+}
+
+.fixed-form {
+    width: 180px; 
+    margin-top: -9px;
+    margin-bottom: 25px;
+}
+
+.fixed-select {
+    display: block;
+    width: 100%;
+    max-width: 300px; 
+    min-width: 300px; 
+    height: 40px; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+

@@ -1,0 +1,99 @@
+@import "/src/sass/variables";
+@import "/src/sass/upload";
+@import "/src/sass/input-text";
+
+.label-container {
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding-top: 18px;
+}
+
+.hint {
+  font-size: 14px;
+  color: $spinner;
+}
+
+.top-details {
+  margin-bottom: 20px;
+  color: white;
+  font-size: 15px;
+
+  .details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+}  
+.label-details{
+  color:$table-header
+}
+
+.btn-theme{
+  background-color: $color-text-yellow;
+  color:$color-text-white;
+  font-size: 18px;
+}
+
+
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.close-button {
+  background-color: #8d2090;
+  color: white;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  width: 150px;
+}
+
+form, 
+.header h1, 
+.top-details, 
+.details, 
+.label-details, 
+.label-container, 
+.label, 
+mat-form-field, 
+.example-full-width, 
+.button-container, 
+.btn, 
+.close-button {
+    font-family: 'Poppins', sans-serif;
+}
+
+.input-container {
+  position: relative;
+}
+
+.peso-sign {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white; /* Set the color to match the text */
+  opacity: 0.6;
+}
+
+.form-control {
+  padding-left: 1.5rem; 
+  margin-bottom: 10px;
+}
+
+
+
+

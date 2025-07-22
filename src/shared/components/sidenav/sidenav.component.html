@@ -1,0 +1,66 @@
+<div class="sidenav-container" [ngClass]="!collapsed ? 'sidenav-container-collapsed' : ''">
+    <div class="logo-container">
+        <button class="logo" (click)="toggleCollapsed()">
+            <img src="assets/dpay_logo.png" alt="logo" [ngClass]="!collapsed ? 'main-logo' : 'main-logo-collapsed'" />
+        </button>
+    </div>
+
+    <!-- First Sidenav: Displays filtered sidenavData -->
+    <ul class="sidenav-nav-menu">
+        <li class="sidenav-nav-item" *ngFor="let data of sidenavData">
+            <!-- Regular Menu Items -->
+            <ng-container *ngIf="!data.isToggle">
+                <a class="sidenav-nav-link" *ngIf="data.items && data.items.length > 0" (click)="handleClick(data)">
+                    <i class="sidenav-link-icon" [class]="data.icon"></i>
+                    <span class="sidenav-link-text" *ngIf="!collapsed">{{data.label | translate}}</span>
+                    <i *ngIf="data.items && !collapsed" class="menu-collapse-icon"
+                        [ngClass]="!data.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down'"></i>
+                </a>
+
+                <a class="sidenav-nav-link" *ngIf="!data.items || (data.items && data.items.length === 0)"
+                    [routerLink]="[data.routeLink]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <i class="sidenav-link-icon" [class]="data.icon"></i>
+                    <span class="sidenav-link-text" *ngIf="!collapsed">{{data.label | translate}}</span>
+                </a>
+
+                <div *ngIf="!collapsed && data.items && data.items.length > 0">
+                    <app-submenu [data]="data" [collapsed]="!collapsed" [multiple]="multiple"
+                        [expanded]="data.expanded"></app-submenu>
+                </div>
+            </ng-container>
+        </li>
+    </ul>
+
+   
+
+    <!-- Second Sidenav: Displays fixed sidenav data -->
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item">
+            <ng-container>
+                <div class="line"></div>
+                <div class="spacing"></div>
+                <div class="leftspacing">
+                    <div class="toggle-button" (click)="toggleLanguage()">
+                        <div [ngClass]="{ active: isEnglish }" class="option english">ENGLISH</div>
+                        <div [ngClass]="{ active: !isEnglish }" class="option chinese">中文</div>
+                    </div>
+                </div>
+                <div class="spacing"></div>
+            </ng-container>
+        </li>
+        <li class="sidenav-nav-item" *ngFor="let data of fixSidenavData">
+            <ng-container>
+                <a class="sidenav-nav-link"
+                    [routerLink]="[data.routeLink]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <i class="sidenav-link-icon" [class]="data.icon"></i>
+                    <span class="sidenav-link-text" *ngIf="!collapsed">{{data.label | translate}}</span>
+                </a>
+
+                <div *ngIf="!collapsed && data.items && data.items.length > 0">
+                    <app-submenu [data]="data" [collapsed]="!collapsed" [multiple]="multiple"
+                        [expanded]="data.expanded"></app-submenu>
+                </div>
+            </ng-container>
+        </li>
+    </ul>
+</div>

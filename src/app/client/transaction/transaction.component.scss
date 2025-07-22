@@ -1,0 +1,58 @@
+@import"../../../sass/variables";
+.topcards{
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+     .card-actions{
+            justify-content: flex-end;
+            display: flex;
+            flex-direction: row;        
+        }
+}
+
+p{
+    font-size: 16px;
+    color: #FFF;
+    padding: 10px;
+}
+#report .row{
+    line-height: 0;
+}
+#mop{
+    font-weight: 500;
+    font-size: 18px;
+    color: #FFF ;
+}
+.paymentChannel{
+    padding: none;
+    font-size: 18px;
+    color: #FFF;
+    margin: auto;
+    width: 90%;
+}
+
+.dropdown-toggle{
+    background-color: #313131;
+    color: white;
+    border: none;
+}
+
+.view-receipt{
+    cursor: pointer;
+    background-color: $color-text-yellow;
+    color:#313131;
+    padding-top: 5px;
+    border-radius: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* spinner.component.css */
+::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: $spinner !important;
+}

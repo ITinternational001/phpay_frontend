@@ -1,0 +1,141 @@
+trigger:
+  branches:
+    exclude:
+      - '*'
+  paths:
+    exclude:
+      - '*'
+
+pr: none  # This disables pull request validation
+
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    pool: 
+      vmImage: 'windows-latest'
+
+    steps: 
+    - script: echo "Skipping Pull Request validation"
+      condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'), eq(variables['System.PullRequest.TargetBranch'], 'refs/heads/devops-development-branch'))
+
+    - script: |
+        npm install
+      displayName: 'Install dependencies'
+
+    - script: |
+        npm run build-prod
+      displayName: 'Build production'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: 'dist'
+        ArtifactName: 'production_build'
+    
+    - script: |
+        set BOT_TOKEN=7184853678:AAFWREOg_088eK0w68WTTSCPwNCwdyYhDhA
+        set CHAT_ID=-1002235424134
+        set BUILD_STATUS=success
+        if "%BUILD_REASON%"=="PullRequest" (
+          set BUILD_STATUS=failed
+        )
+        set MESSAGE=Build $(Build.BuildNumber) completed FrontEnd Build with status %BUILD_STATUS%
+        curl -s -X POST https://api.telegram.org/bot%BOT_TOKEN%/sendMessage -d chat_id=%CHAT_ID% -d text="%MESSAGE%"
+      displayName: 'Send Telegram Notification'
+
+- stage: DeployWebsite_1
+  displayName: 'Deploy Server 111'
+  jobs:
+    - deployment: DeployWebsite_Development_server_92
+      displayName: 'Deploy website to server 92'
+      environment: 'Windows 2022 server development.DynastyGatewayP'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - checkout: none
+
+              - download: current
+                displayName: 'Download Build Artifacts'
+                artifact: 'production_build'
+
+              - task: CopyFiles@2
+                displayName: 'Copy Files to Deployment Directory'
+                inputs:
+                  SourceFolder: '$(Pipeline.Workspace)/production_build/dynastypay-frontend'
+                  Contents: '**'
+                  TargetFolder: 'C:\Deployment\DynastyPay_Test'
+                  Overwrite: true
+
+              - task: IISWebAppManagementOnMachineGroup@0
+                name: 'StopIIS'
+                displayName: 'Stop IIS Website'
+                inputs:
+                  IISDeploymentType: 'IISWebsite'
+                  ActionIISWebsite: 'StopWebsite'
+                  StartStopWebsiteName: 'DynastyPay_Test'
+
+              - task: IISWebAppManagementOnMachineGroup@0
+                name: 'StartIIS'
+                displayName: 'Start IIS Website'
+                inputs:
+                  IISDeploymentType: 'IISWebsite'
+                  ActionIISWebsite: 'StartWebsite'
+                  StartStopWebsiteName: 'DynastyPay_Test'
+
+              - script: |
+                  set BOT_TOKEN=7184853678:AAFWREOg_088eK0w68WTTSCPwNCwdyYhDhA
+                  set CHAT_ID=-1002235424134
+                  set DEPLOY_STATUS=success
+                  set MESSAGE=Deploy to Server 92 FrontEnd completed with status %DEPLOY_STATUS%
+                  curl -s -X POST https://api.telegram.org/bot%BOT_TOKEN%/sendMessage -d chat_id=%CHAT_ID% -d text="%MESSAGE%"
+                displayName: 'Send Deployment Notification'
+
+- stage: DeployWebsite_2
+  displayName: 'Deploy Server 92'
+  jobs:
+    - deployment: DeployWebsite_Development_server_111
+      displayName: 'Deploy website to server 111'
+      environment: 'Windows 2022 server.DynastyGatewayP'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - checkout: none
+
+              - download: current
+                displayName: 'Download Build Artifacts'
+                artifact: 'production_build'
+
+              - task: CopyFiles@2
+                displayName: 'Copy Files to Deployment Directory'
+                inputs:
+                  SourceFolder: '$(Pipeline.Workspace)/production_build/dynastypay-frontend'
+                  Contents: '**'
+                  TargetFolder: 'C:\Deployment\DynastyPay_Test'
+                  Overwrite: true
+
+              - task: IISWebAppManagementOnMachineGroup@0
+                name: 'StopIIS'
+                displayName: 'Stop IIS Website'
+                inputs:
+                  IISDeploymentType: 'IISWebsite'
+                  ActionIISWebsite: 'StopWebsite'
+                  StartStopWebsiteName: 'DynastyPay_Test'
+
+              - task: IISWebAppManagementOnMachineGroup@0
+                name: 'StartIIS'
+                displayName: 'Start IIS Website'
+                inputs:
+                  IISDeploymentType: 'IISWebsite'
+                  ActionIISWebsite: 'StartWebsite'
+                  StartStopWebsiteName: 'DynastyPay_Test'
+
+              - script: |
+                  set BOT_TOKEN=7184853678:AAFWREOg_088eK0w68WTTSCPwNCwdyYhDhA
+                  set CHAT_ID=-1002235424134
+                  set DEPLOY_STATUS=success
+                  set MESSAGE=Deploy to Server 111 FrontEnd completed with status %DEPLOY_STATUS%
+                  curl -s -X POST https://api.telegram.org/bot%BOT_TOKEN%/sendMessage -d chat_id=%CHAT_ID% -d text="%MESSAGE%"
+                displayName: 'Send Deployment Notification'

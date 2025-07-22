@@ -1,0 +1,159 @@
+
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <div class="card-wrapper">
+            <div class="card-header">
+                <div class="co-card-title p-3">
+                    <ng-container *ngFor="let item of headerTop">
+                        <div (click)="changeActiveHeader(item)"
+                            [ngClass]="item.isActive ? 'header-active' : 'header-inactive'">{{item.label | translate}}</div>
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <div class="max-height">
+                    <ng-container *ngIf="isManualTopUp">
+                        <form [formGroup]="requestForm" (ngSubmit)="onSubmitManualTopUp()">
+                            <!-- <mat-form-field class="example-full-width">
+                                <mat-label>Select Client</mat-label>
+                                <mat-select formControlName="merchantId">
+                                    <mat-option [disabled]="!isReadAndWrite" *ngFor="let client of clientsDropdown"
+                                        [value]="client.id">{{client.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+
+                            <div class = "row" style="margin-bottom: 5px;" *ngIf="isAdmin">
+                                <app-select-search 
+                                  [options]="clientsDropdown" 
+                                  placeholder="Select Client" 
+                                  [showSearch]="true"
+                                  [resetFormTrigger]="resetDropdown"
+                                  (optionSelected)="onClientTopUp($event)">
+                                </app-select-search>
+                              </div>
+                            <!-- <mat-form-field class="example-full-width">
+                                <mat-label>Select Bank</mat-label>
+                                <mat-select formControlName="modeOfPayment">
+                                    <mat-option [disabled]="!isReadAndWrite" *ngFor="let bank of Banks"
+                                        [value]="bank.Code">{{bank.Name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+                            <div class = "row" style="margin-bottom: 15px;">
+                                <app-select-search 
+                                  [options]="Banks" 
+                                  placeholder="Select Bank" 
+                                  [showSearch]="false"
+                                  [resetFormTrigger]="resetDropdown"
+                                  (optionSelected)="onBanks($event)">
+                                </app-select-search>
+                              </div>
+
+                            <app-input-text-field
+                                [formGroup]="requestForm"
+                                controlName="referenceNumber"
+                                type="text"
+                                placeholder="Reference No."
+                                [isInvalid]="requestForm.controls['referenceNumber'].invalid && requestForm.controls['referenceNumber'].touched"
+                                errorMessage="This field is required"
+                            ></app-input-text-field>
+
+                            <app-input-text-field
+                                [formGroup]="requestForm"
+                                controlName="amount"
+                                type="text"
+                                placeholder="Amount"
+                                appNumberFormat
+                                [isInvalid]="requestForm.controls['amount'].invalid && requestForm.controls['amount'].touched"
+                                errorMessage="This field is required"
+                            ></app-input-text-field>
+
+                            <div class="input-group mb-3">
+                                <input type="file" #fileInput accept="image/*" multiple (change)="onFilesSelected($event)" style="display: none;">
+                                <input type="text" class="form-control inputUpload" placeholder="Upload Deposit Slip"
+                                    aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                    [value]="fileNames" readonly formControlName="depositSlips">
+                                <div class="input-group-append">
+                                    <button class="btn btn btnUpload" type="button" [disabled]="!isReadAndWrite"
+                                        (click)="triggerFileInput()">Upload</button>
+                                </div>
+                            </div>
+                            
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Date of Deposit</mat-label>
+                                <input type="date" matInput formControlName="dateOfDepositSlip">
+                            </mat-form-field>
+                            <div class="row" style="margin-top: -5px;">
+                            <app-input-text-field
+                                [formGroup]="requestForm"
+                                controlName="remarks"
+                                type="text"
+                                placeholder="Remarks"
+                                [isInvalid]="requestForm.controls['remarks'].invalid && requestForm.controls['remarks'].touched"
+                                errorMessage="This field is required"
+                            ></app-input-text-field>
+                        </div>
+                            <div class="form-box mb-5 d-flex justify-content-center align-items-center ">
+                                <button class="btn btn-primary btnreq" type="submit" [disabled]="!isReadAndWrite" [disabled]="actionDisable">{{"submitTopUp" | translate}}</button>
+                            </div>
+                        </form>
+                    </ng-container>
+
+                    <ng-container *ngIf="!isManualTopUp">
+                        <!-- <form [formGroup]="balanceTransferForm" (ngSubmit)="onSubmitBalanceTransfer()">
+                            <div class="row" style="margin-bottom: 5px;" *ngIf="isAdmin">
+                                <app-select-search 
+                                  [options]="clientsDropdown" 
+                                  placeholder="Select Client" 
+                                  [showSearch]="true"
+                                  [resetFormTrigger]="resetDropdown"
+                                  (optionSelected)="onClientChange($event)">
+                                </app-select-search>
+                              </div>
+                              
+                            <app-input-text-field
+                            [formGroup]="balanceTransferForm"
+                            controlName="Amount"
+                            type="text"
+                            placeholder="Amount"
+                            appNumberFormat
+                            [isInvalid]="balanceTransferForm.controls['Amount'].invalid && balanceTransferForm.controls['Amount'].touched"
+                            errorMessage="This field is required"
+                          ></app-input-text-field>
+
+                          <app-input-text-field
+                            [formGroup]="balanceTransferForm"
+                            controlName="Remarks"
+                            type="text"
+                            placeholder="Remarks"
+                        ></app-input-text-field>
+
+                            <div class="form-box mb-5 d-flex justify-content-center align-items-center ">
+                                <button class="btn btn-primary btnreq" type="submit" [disabled]="!isReadAndWrite" [disabled]="actionDisable">{{"submitTransfer" | translate}}</button>
+                            </div>
+                        </form> -->
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9 col-sm-6">
+        <div *ngFor="let data of topData" style="margin-top: -20px;" class="col-md-4">
+            <app-card [isVisible]="false" id="wallets" style="background-color: transparent;" 
+                label="{{data.label | translate}}" icon="fa fa-wallet" value="{{data.value}}" [data]="isTopUpChanged">
+            </app-card>
+        </div>
+        <ng-container *ngIf="isAdmin; else clientView">
+            <app-co-wallets></app-co-wallets>
+        </ng-container>
+        <ng-template #clientView>
+            <app-manual-topup-table [data]="isTopUpChanged" [isAdmin]="isAdmin"></app-manual-topup-table>
+        </ng-template>
+    </div>
+
+    <!-- Common Table Section -->
+    <div class="col-md-12 col-sm-6" *ngIf="isAdmin">
+        <app-manual-topup-table [data]="isTopUpChanged" [isAdmin]="isAdmin"></app-manual-topup-table>
+    </div>
+</div>

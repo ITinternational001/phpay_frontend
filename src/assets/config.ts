@@ -1,0 +1,8 @@
+export const configurations = {
+    ENV:"PROD",
+    DEBUG:true,
+    //API: "https://uat-api.dynastypay.net/api/admin",
+    API: "http://20.27.186.92",
+    x_csrf: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJleUoxYzJWeWJtRnRaU0k2SW5OMWNHVnlZV1J0YVc0aUxDSnliMnhsWDJsa0lqb3hmUT09IiwiZXhwIjoxNjk2MjM0MDIzLCJpYXQiOjE2OTQ0MzQwMjN9.TZ2DnMeMyP61laZJWbGAqL_bIezLxn55tZYGuhLEFgox-csrfeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJleUoxYzJWeWJtRnRaU0k2SW5OMWNHVnlZV1J0YVc0aUxDSnliMnhsWDJsa0lqb3hmUT09IiwiZXhwIjoxNjk2MjM0MDIzLCJpYXQiOjE2OTQ0MzQwMjN9.TZ2DnMeMyP61laZJWbGAqL_bIezLxn55tZYGuhLEFgo",
+    x_dynasty_admin_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJleUoxYzJWeWJtRnRaU0k2SW5OMWNHVnlZV1J0YVc0aUxDSnliMnhsWDJsa0lqb3hmUT09IiwiZXhwIjoxNjk2MjM0MDIzLCJpYXQiOjE2OTQ0MzQwMjN9.TZ2DnMeMyP61laZJWbGAqL_bIezLxn55tZYGuhLEFgox-csrfeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJleUoxYzJWeWJtRnRaU0k2SW5OMWNHVnlZV1J0YVc0aUxDSnliMnhsWDJsa0lqb3hmUT09IiwiZXhwIjoxNjk2MjM0MDIzLCJpYXQiOjE2OTQ0MzQwMjN9.TZ2DnMeMyP61laZJWbGAqL_bIezLxn55tZYGuhLEFgo"
+}

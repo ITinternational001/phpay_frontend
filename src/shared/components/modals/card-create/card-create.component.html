@@ -1,0 +1,46 @@
+<div mat-dialog-title>
+    <h1>{{"cardForm" | translate}}</h1>
+    <h3 style="color:white">{{"credentialsInfo" | translate}}</h3>
+</div>
+<form [formGroup]="cardForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div style="margin-bottom: 7px;">
+                    <app-select-search *ngIf="isBank" [options]="BankList" placeholder="Select Bank"
+                        [showSearch]="true" (optionSelected)="onSelectBank($event)">
+                        </app-select-search>
+                </div>
+
+                
+                <app-input-text-field *ngIf="!isBank" [formGroup]="cardForm" controlName="BinanceWalletAddress"
+                    type="text" placeholder="Binance address"
+                    [isInvalid]="cardForm.controls['BinanceWalletAddress'].invalid && cardForm.controls['BinanceWalletAddress'].touched"
+                    errorMessage="This field is required"></app-input-text-field>
+
+
+
+                <app-input-text-field *ngIf="isBank" [formGroup]="cardForm" controlName="AccountNumber" type="text"
+                    placeholder="Account Number"
+                    [isInvalid]="cardForm.controls['AccountNumber'].invalid && cardForm.controls['AccountNumber'].touched"
+                    errorMessage="This field is required"></app-input-text-field>
+
+                <app-input-text-field [formGroup]="cardForm" controlName="AccountName" type="text"
+                    placeholder="Account Name"
+                    [isInvalid]="cardForm.controls['AccountName'].invalid && cardForm.controls['AccountName'].touched"
+                    errorMessage="This field is required"></app-input-text-field>
+
+                <app-input-text-field [formGroup]="cardForm" controlName="NickName" type="text"
+                    placeholder="Nickname"></app-input-text-field>
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type="button" [mat-dialog-close]="false">{{"cancel" | translate}}</button>
+        <div class="h-divider"></div>
+        <button class="btn modal-botton" type="submit" [disabled]="actionDisable"><span class="fa fa-save"></span>
+            {{"save" | translate}}</button>
+    </div>
+</form>

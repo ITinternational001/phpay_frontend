@@ -1,0 +1,110 @@
+@import "../../../../sass/dropdown";
+/* Table container with fixed height */
+
+.card-wrapper {
+    width: 100%; /* Ensures the card wrapper takes the full width */
+    max-width: 1600px; /* Set max width to 1000px */
+    margin: 0 auto; /* Center the card wrapper */
+    padding-bottom: 30px;
+}
+
+.card-header, .card-body-list {
+    width: 100%; /* Both sections will take the full width */
+    box-sizing: border-box; /* Ensures padding is included in the element's total width and height */
+}
+
+.card-body-list {
+    padding: 15px; /* Add padding for spacing */
+    width: 100%; /* Matches the width of card-header */
+}
+
+/* For responsive view, adjust width */
+@media screen and (max-width: 768px) {
+    .card-header, .card-body-list {
+        width: 100%; /* Ensures it remains full-width on smaller screens */
+    }
+}
+
+.container-with-table {
+    display: flex;
+    flex-direction: column;
+    height: 380px; /* Fixed height */
+    overflow-y: auto; /* Scrollable if content exceeds 400px */
+}
+
+/* Ensure the table is responsive and fits the container */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Horizontal scroll on smaller screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.dynastyTable {
+    width: 100%;
+    table-layout: auto; /* Allows columns to adjust based on content */
+    border-collapse: collapse; /* Cleaner look */
+}
+
+/* Make the table header and cells responsive */
+.dynastyTable th, 
+.dynastyTable td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    font-size: 18px; /* Adjust for better readability */
+}
+
+@media screen and (max-width: 1000px) {
+    .dynastyTable th, 
+    .dynastyTable td {
+        font-size: 12px; /* Adjust font size for smaller screens */
+        padding: 6px;
+    }
+}
+
+/* Add additional styles for small screens */
+@media screen and (max-width: 576px) {
+    .col-md-9 {
+        width: 100%;
+    }
+    .card-title {
+        font-size: 16px; /* Adjust title font size on smaller devices */
+    }
+}
+
+.btn {
+    background-color: #c7c7c7;
+    border-radius: 0.5rem;
+}
+
+.status-active {
+    color: green;
+  }
+  
+  .status-inactive {
+    color: red;
+  }
+  
+  .status-default {
+    color: gray;
+  }
+  .total-wallet-balance {
+    font-size: 17px;
+    text-align: center;
+    padding: 20px 0px 0px 0px;
+    color: white;
+  }
+.row {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.total-footer-cell {
+    background-color: #1d1d1d; 
+}
+  
+  
+
+  

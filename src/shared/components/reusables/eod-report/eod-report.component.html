@@ -1,0 +1,129 @@
+<app-maintenance-message>
+    <div class="form-container">
+    </div>
+    <div class="row">
+        <div *ngFor="let data of topData" class="col-sm">
+          <app-card [isVisible]="false" [isVisiblebtn]="true" label="{{data.label}}" icon="{{data.icon}}"
+            value="{{data.value | number : '1.2-2' }}"></app-card>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card-wrapper">
+            <div class="card-header">
+                <div class="card-title p-3">DPay Transaction Summary</div>
+                <div class="card-actions">
+                    <form [formGroup]="EODReportForm">
+                        <mat-form-field>
+                            <mat-label>Date Filter</mat-label>
+                            <input matInput [matDatepicker]="picker" placeholder="Select date" formControlName="SelectDate">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          
+                    </form>
+                    <div class="h-divider"></div>
+                    <app-search (search)="onSearch($event)"></app-search>
+                    <div class="h-divider"></div>
+
+            
+                </div>
+            </div>
+            <div class="card-body-table">
+                <app-spinner *ngIf="isLoading"></app-spinner>
+                <div class="container-with-table">
+                    <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                        <!-- Vendor Column -->
+                        <ng-container matColumnDef="vendor">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Vendor </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.Vendor }} </td>
+                            <td mat-footer-cell *matFooterCellDef> Grand Total: </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+                
+                        <!-- Type Column -->
+                        <ng-container matColumnDef="type">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.TypeLabel }} </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+                
+                        <!-- Channel Column -->
+                        <ng-container matColumnDef="channel">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Channel </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.Channel }} </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+                
+                        <!-- Gross Column -->
+                        <ng-container matColumnDef="gross">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gross </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.Gross | number : '1.2-2' }} </td>
+                            <td mat-footer-cell *matFooterCellDef> {{ grandTotalGross | number : '1.2-2' }} </td>
+                        </ng-container>
+                
+                        <!-- Transaction Fees Column -->
+                        <ng-container matColumnDef="transactionFees">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Fees </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.ACNet | number : '1.2-2' }} </td>
+                            <td mat-footer-cell *matFooterCellDef> {{ grandTotalACNet | number : '1.2-2' }} </td>
+                        </ng-container>
+                
+                        <!-- Net Column -->
+                        <ng-container matColumnDef="net">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Net Amount (Total Fees) </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.Net | number : '1.2-2' }} </td>
+                            <td mat-footer-cell *matFooterCellDef> {{ grandTotalNet | number : '1.2-2' }} </td>
+                        </ng-container>
+                
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="6" style="text-align: center;">No data matching the filter</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+                    (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+                    (lastData)="onLastPage()">
+                </app-pagination> -->
+            </div>
+        </div>
+        <div class="card-footer"></div>
+        
+        
+        
+    </div>
+    <div class="Header">Vendor Summary</div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <app-vendor-summary [startDate]="startDate"></app-vendor-summary>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <app-co-vendor-summary [startDate]="startDate"></app-co-vendor-summary>
+            </div>
+        </div>
+
+    <div class="Header">Transaction Summary</div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <app-transaction-summary-table [startDate]="startDate"></app-transaction-summary-table>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <app-co-transaction-summary [startDate]="startDate"></app-co-transaction-summary>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <app-cof-table [startDate]="startDate"></app-cof-table>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <app-agent-comms-table [startDate]="startDate"></app-agent-comms-table>
+        </div>
+    </div>
+    
+
+</app-maintenance-message>

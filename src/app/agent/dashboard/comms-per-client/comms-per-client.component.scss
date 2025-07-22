@@ -1,0 +1,16 @@
+@import "/src/sass/scrollbar";
+
+.container-with-table {
+    max-height: 320px;
+    height: auto;
+    overflow: auto;
+    }
+
+.dynastyTable {
+    width: 100%;
+
+}
+
+.card-wrapper {
+    padding-bottom: 50px;
+}

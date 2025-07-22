@@ -1,0 +1,86 @@
+<div class="card-wrapper">
+	<div class="card-header">
+	  <div class="card-title p-3">{{'successRate' | translate}}</div>
+	  
+	  <div class="card-actions">
+		<form [formGroup]="successRateForm">
+		  <mat-form-field>
+			<mat-label>StartDate - EndDate</mat-label>
+			<mat-date-range-input [rangePicker]="picker">
+			  <input matStartDate placeholder="Start date" formControlName="StartDate">
+			  <input matEndDate placeholder="End date" formControlName="EndDate">
+			</mat-date-range-input>
+			<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-date-range-picker #picker></mat-date-range-picker>
+		  </mat-form-field>
+		</form>
+	  </div>
+	</div>
+  
+	<!-- Displaying total success rate -->
+	<div class="title">
+	  <span><span class="successTitle">Total Success %:</span>  {{overAlltotalSuccessRate | number: '1.0-2' }}% </span>
+	</div>
+  
+	<!-- Show loading spinner -->
+	<app-spinner *ngIf="isloading"></app-spinner>
+  
+	<!-- Table content conditionally shown based on loading state -->
+	<div class="table-container">
+	  <div class="table-wrapper">
+		<table *ngIf="!isloading && clients.length > 0;" class="dynastyTable">
+		  <thead>
+			<tr>
+			  <th>Client</th>
+			  <th>Trans. Count</th>
+			  <th>Success Count</th>
+			  <th>Success %</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<ng-container *ngFor="let client of clients; let i = index">
+			  <tr class="accordion-toggle" (click)="toggle(i)">
+				<td class="styled-td">{{ client.ClientName }}</td>
+				<td class="styled-td">{{ client.TotalTransactionCICO | number: '1.0-2' }}</td>
+				<td class="styled-td">{{ client.TotalSuccessCountCICO | number: '1.0-2' }}</td>
+				<td class="styled-td">{{ client.AverageSuccessRateCICO | number: '1.0-2' }}%</td>
+			  </tr>
+			  <tr *ngIf="isOpen(i)">
+				<td colspan="4">
+				  <table class="dynastyTable">
+					<thead>
+					  <tr>
+						<th>Type</th>
+						<th>Trans. Count</th>
+						<th>Success</th>
+						<th>Pending</th>
+						<!-- <th>Rejected</th>
+						<th>Cancel</th>
+						<th>Closed</th> -->
+						<th>Success %</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <ng-container *ngFor="let transaction of client.Transactions">
+						<tr>
+						  <td class="style-td-2">{{ transaction.type }}</td>
+						  <td class="style-td-2">{{ transaction.transCount | number: '1.0-2' }}</td>
+						  <td class="style-td-2">{{ transaction.successCount | number: '1.0-2' }}</td>
+						  <td class="style-td-2">{{ transaction.pendingCount | number: '1.0-2' }}</td>
+						  <!-- <td class="style-td-2">{{ transaction.rejectedCount | number: '1.0-2' }}</td>
+						  <td class="style-td-2">{{ transaction.cancelCount | number: '1.0-2' }}</td>
+						  <td class="style-td-2">{{ transaction.closedCount | number: '1.0-2' }}</td> -->
+						  <td class="style-td-2">{{ transaction.successPercentage | number: '1.0-2' }}%</td>
+						</tr>
+					  </ng-container>
+					</tbody>
+				  </table>
+				</td>
+			  </tr>
+			</ng-container>
+		  </tbody>
+		</table>
+	  </div>
+	</div>
+  </div>
+  

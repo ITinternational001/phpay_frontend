@@ -1,0 +1,68 @@
+<form [formGroup]="COPForm">
+    <!-- Header Section -->
+    <div mat-dialog-title class="header-container">
+      <h1 class="header">{{"cashPickUpDetails" | translate}}</h1>
+      <div class="h-divider"></div>
+  
+    <!-- Input Fields Section -->
+    <div class="input-fields-container">
+      <app-input-text-field
+        [formGroup]="COPForm"
+        controlName="IDType"
+        type="text"
+        placeholder="ID Type"
+        [readonly]="true"
+      ></app-input-text-field>
+  
+      <app-input-text-field
+        [formGroup]="COPForm"
+        controlName="IdNumber"
+        type="text"
+        placeholder="ID Number"
+        [readonly]="true"
+      ></app-input-text-field>
+  
+      <app-input-text-field
+        [formGroup]="COPForm"
+        controlName="FullNameIdHolder"
+        type="text"
+        placeholder="Full Name of ID Holder"
+        [readonly]="true"
+      ></app-input-text-field>
+
+      <div class="input-group mb-3">
+        <input type="file" #fileInputId accept="image/*" multiple
+          (change)="onFilesSelectedId($event)" style="display: none;">
+        <input type="text" class="form-control inputUpload" [value]="fileNamesId.join(', ')" readonly>
+        <div class="input-group-append">
+          <button class="btn btnUpload" type="button" (click)="triggerDownload('IDsURLs')">Download File</button>
+        </div>
+      </div>
+      
+      <div class="input-group mb-3">
+        <input type="file" #fileInputLetter accept="image/*" multiple
+          (change)="onFilesSelectedLetter($event)" style="display: none;">
+        <input type="text" class="form-control inputUpload" [value]="fileNamesLetter.join(', ')" readonly>
+        <div class="input-group-append">
+          <button class="btn btnUpload" type="button" (click)="triggerDownload('LettersURLs')">Download File</button>
+        </div>
+      </div>
+  
+      <app-input-text-field
+        [formGroup]="COPForm"
+        controlName="MethodDescription"
+        type="text"
+        placeholder="Method Description"
+        [readonly]="true"
+      ></app-input-text-field>
+    </div>
+</div>
+  
+    <div mat-dialog-actions class="action-buttons">
+      <div class="button-container">
+        <button class="btn close-button" type="button" [mat-dialog-close]="false">{{"done" | translate}}</button>
+      </div>
+      <div class="h-divider"></div>
+    </div>
+  </form>
+  

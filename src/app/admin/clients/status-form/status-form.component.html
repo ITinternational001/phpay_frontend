@@ -1,0 +1,22 @@
+<div mat-dialog-title>
+    <h1>{{"updateClientStatus" | translate}}</h1>
+</div>
+<form [formGroup]="statusForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div class="row">
+            <app-select-search 
+                [options]="statusEnum" 
+                placeholder="Select Status" 
+                [showSearch]="false"
+                [preselectedOption]="selectedStatus"
+                (optionSelected)="onSelectStatus($event)">
+            </app-select-search>
+        </div>
+    </div>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type ="button" [mat-dialog-close]="false">{{"cancel" | translate}}</button>
+        <div class="h-divider"></div>
+        <button class="btn btn modal-botton" type="submit" [disabled]="actionDisable">{{"updateStatus" | translate}}</button>
+    </div>
+</form>

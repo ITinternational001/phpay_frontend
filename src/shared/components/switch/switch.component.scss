@@ -1,0 +1,9 @@
+.mat-slide-toggle {
+  /* Add your styles here */
+  color: red; /* Example: change text color to red */
+}
+
+/* Optional: Handle the checked and unchecked state separately */
+.mat-slide-toggle.mat-checked {
+  background-color: green; /* Example: change background color when checked */
+}

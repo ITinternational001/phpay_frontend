@@ -1,0 +1,30 @@
+<div [formGroup]="formGroup" class="InputTextField">
+  <input
+    *ngIf="type === 'number'; else textInput"
+    [type]="type"
+    [placeholder]="placeholder"
+    formControlName="{{ controlName }}"
+    class="form-control"
+    appNumberFormat
+    [ngClass]="{ 'is-invalid': isInvalid }"
+    [readonly]="readonly" 
+    (focus)="isFocused = true"
+    (blur)="isFocused = false"
+  />
+  <ng-template #textInput>
+    <input
+      [type]="type"
+      [placeholder]="placeholder"
+      formControlName="{{ controlName }}"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': isInvalid }"
+      [readonly]="readonly"  
+      (focus)="isFocused = true"
+      (blur)="isFocused = false"
+    />
+  </ng-template>
+
+  <div *ngIf="isInvalid" class="invalid-feedback">
+    {{ errorMessage }}
+  </div>
+</div>

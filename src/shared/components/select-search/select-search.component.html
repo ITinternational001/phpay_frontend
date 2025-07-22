@@ -1,0 +1,37 @@
+<div class="top-label">{{ toplabel }}</div>
+<div class="select-search" #selectSearchTrigger> 
+  <!-- Dropdown trigger -->
+  <div class="select-box" (click)="toggleDropdown()" [class.disabled]="disabled || readonly">
+    <span *ngIf="!selectedOption">{{ placeholder }}</span>
+    <span *ngIf="selectedOption">{{ selectedOption.name}} <ng-container *ngIf="selectedOption.balance !== null"> {{ selectedOption.balance | currency:'PHP':'symbol':'1.2-2' }} </ng-container></span>
+    <span class="arrow-down">&#9662;</span>
+  </div>
+
+  <!-- Dropdown content only visible when dropdown is open -->
+  <ng-template #dropdownOverlay>
+    <div *ngIf="isDropdownOpen" class="dropdown-content">
+      <div *ngIf="showSearch" class="search-container">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="text"
+          placeholder="Search"
+          [formControl]="searchControl"
+          class="search-input"
+          [readonly]="readonly"
+        />
+      </div>
+      <ul *ngIf="filteredOptions.length > 0" class="options-list">
+        <li
+          *ngFor="let option of filteredOptions"
+          (click)="onSelect(option)"
+          class="option-item">
+          {{ option.name }} <ng-container *ngIf="option.balance!== null">  {{ option.balance | currency:'PHP':'symbol':'1.2-2' }} </ng-container>
+        </li>
+      </ul>
+      <p *ngIf="filteredOptions.length === 0" class="no-results">No results found</p>
+    </div>
+  </ng-template>
+</div>
+<p *ngIf="showErrorMessage && options.length === 0" class="error-message">
+  No data available
+</p>

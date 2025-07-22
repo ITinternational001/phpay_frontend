@@ -1,0 +1,19 @@
+@import "/src/sass/variables";
+@import "/src/sass/upload";
+@import "/src/sass/modalbutton";
+
+.bank-details{
+    background-color: #424242;
+    width: 100%;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+
+    border-radius: 0.5rem;
+}
+
+.account-info span {
+    margin-right: 5px;
+}
+

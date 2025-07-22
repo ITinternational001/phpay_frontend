@@ -1,0 +1,20 @@
+@import "/src/sass/variables";
+@import "/src/sass/modalbutton";
+
+
+.dropdown-toggle{
+    background-color: #313131;
+    color: white;
+    border: none;
+}
+
+
+.btn-theme{
+    background-color: $color-text-yellow;
+    height: 56px;
+    color: white;
+}
+
+.btn-theme-vert{
+    background-color: $color-text-yellow;
+}

@@ -1,0 +1,181 @@
+
+@import "/src/sass/upload";
+
+.example-full-width {
+    width: 100%;
+}
+
+#wallets {
+    background-color: rgba(99, 110, 114, 0.5);
+}
+
+p {
+    font-size: 16px;
+    color: #8E8E8E;
+    font-weight: lighter;
+}
+
+#Amounttxt {
+    text-align: right;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+// input[type=number] {
+//     -moz-appearance: textfield;
+//     /* Firefox */
+// }
+
+.content,
+.amount {
+    position: relative;
+
+}
+
+.amountspan {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8c8c8c;
+    padding-left: 5px;
+}
+
+span {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-text-white;
+    padding-right: 10px;
+    background: transparent;
+    border: none;
+}
+
+.btnreq {
+    background-color: $color-text-yellow;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    width: 70%;
+    color: $color-text-white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.img {
+    width: 100%;
+    max-height: 100%;
+    display: block;
+    /* remove extra space below image */
+
+}
+
+
+.image-size {
+    width: 100px;
+    /* Set your desired width */
+    height: 40px;
+    /* Set your desired height */
+    /* You can also use other units like 'em' or '%' based on your design requirements */
+}
+
+.topcards {
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+
+    .card-actions {
+        justify-content: flex-end;
+        display: flex;
+        flex-direction: row;
+
+    }
+}
+
+p {
+    font-size: 16px;
+    color: $color-text-white;
+    padding: 10px;
+}
+
+#report .row {
+    line-height: 0;
+}
+
+#mop {
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-text-white;
+}
+
+.paymentChannel {
+    padding: none;
+    font-size: 18px;
+    color: $color-text-white;
+    margin: auto;
+    width: 90%;
+}
+
+.dropdown-toggle {
+    background-color: #313131;
+    color: $color-text-white;
+    border: none;
+}
+
+.hint{
+    font-size: 14px;
+    color: $spinner;
+}
+
+.co-card-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    font-size: 20px;
+
+
+    .header-active {
+        color: $spinner;
+        padding: 10px;
+        border-bottom: 2px solid $spinner;
+        cursor: pointer;
+    }
+
+    .header-inactive {
+        color: $color-text-white;
+        cursor: pointer;
+    }
+}
+.max-height{
+    height: 665px;
+}
+
+.container-table{
+     height: 525px; 
+     overflow-y: 'auto';
+}
+
+.col-md-9 {
+    margin-top: 20px;
+}
+
+
+.header-active,
+.header-inactive {
+    font-size: 17.50px;
+}
+
+.col-md-12 {
+    font-size: 14px;
+    color: $spinner; 
+}

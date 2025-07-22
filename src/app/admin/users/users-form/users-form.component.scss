@@ -1,0 +1,31 @@
+@import "/src/sass/modalbutton";
+
+
+.mdc-dialog__content inputs{
+ color: #fff !important;
+}
+
+.label{
+    color: #fff;
+    font-size: 18px;
+}
+
+.permissionTable{
+    width: 100%;
+    //border-collapse: collapse;
+    //border-radius: 10px !important;
+    color: white;
+    font-size: 18px;
+    overflow-x: auto;
+    background-color: transparent !important;
+    td {
+        vertical-align: middle;
+      }
+
+}
+
+
+
+// ::ng-deep .mat-primary .mat-mdc-select-arrow{
+//     color:#fff !important;
+// }

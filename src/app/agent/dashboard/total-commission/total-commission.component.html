@@ -1,0 +1,61 @@
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">{{"totalCommission" | translate}}</div>
+        <div class="card-actions">
+            <div class="h-divider"></div>
+            <form [formGroup]="agentTotalCommission" class="fixed-form">
+                <!-- <mat-form-field class="Selection">
+                    <mat-label>Select Date</mat-label>
+                    <mat-select formControlName="dateSelect" (selectionChange)="onSelectChange($event)">
+                        <mat-option *ngFor="let agent of dateDropdown" [value]="agent.id">
+                            {{ agent.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+
+                <app-select-search 
+                    [options]="dateDropdown" 
+                    placeholder="Select Date" 
+                    [showSearch]="false"
+                    (optionSelected)="onSelectChange($event)">
+                </app-select-search>
+            </form>
+            <div class="h-divider"></div>
+        </div>
+    </div>
+    <div class="card-body-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <table *ngIf="!isLoading" class="dynastyTable">
+            <thead>
+                <tr>
+                    <th class="TableHeader">Commission Type</th>
+                    <th class="TableHeader">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="TotaTable">
+                    <td class="table-padding">Total Cash In Amount (Gross)</td>
+                    <td> ₱ {{ data.TotalCashinAmountGross | number:'1.2-2' }}</td>
+                </tr>
+                <tr class="Table">
+                    <td class="table-padding">Total Cash In Comms.</td>
+                    <td> ₱ {{ data.TotalCashinComms | number:'1.2-2' }}</td>
+                </tr>
+                <tr class="TotaTable">
+                    <td class="table-padding">Total Cash Out Amount (Gross)</td>
+                    <td> ₱ {{ data.TotalCashoutAmountGross | number:'1.2-2' }}</td>
+                </tr>
+                <tr class="Table">
+                    <td class="table-padding">Total Cash Out Comms</td>
+                    <td> ₱ {{ data.TotalCashoutComms | number:'1.2-2' }}</td>
+                </tr>
+                <tr class="Table">
+                    <td class="table-padding">Total Commission</td>
+                    <td> ₱ {{ data.TotalCommission | number:'1.2-2' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!data && !isLoading" style="text-align: center;">No data available</div>
+    </div>
+</div>
+

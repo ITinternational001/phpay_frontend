@@ -1,0 +1,100 @@
+.select-search {
+  position: relative;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font to the entire select-search */
+  background: #3e3e3e;
+  border-radius: 4px;
+}
+
+.select-box {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: #3e3e3e;
+  justify-content: space-between;
+  height: 55px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 16px;
+  border-radius: 4px;
+  color: white;
+  opacity: 0.6; /* Ensure full opacity */
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font to the select box */
+}
+
+.search-input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid rgb(154, 154, 154);
+  padding: 10px;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font to the input field */
+  padding-left: 30px; /* Make space for the icon */
+  width: 100%; /* Ensure the input field fills the container */
+}
+
+.dropdown-content {
+  max-height: 200px; /* Limit dropdown height */
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  z-index: 1000; /* Ensure it appears above other content */
+  width: 100%;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font to the dropdown content */
+}
+
+.options-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font to the options list */
+}
+
+.option-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font to each option */
+}
+
+.option-item:hover {
+  background-color: #f0f0f0;
+}
+
+.no-results {
+  padding: 8px 12px;
+  color: #888;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font to the no results message */
+}
+
+.top-label {
+  color: white;
+  padding-bottom: 10px;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font to the label */
+}
+
+input::placeholder {
+  color: #999;
+  opacity: 1; /* Ensure it’s visible */
+}
+
+
+.search-container {
+  position: relative;
+  max-width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888; /* Adjust the icon color as needed */
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+

@@ -1,0 +1,283 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="card-wrapper">
+            <div class="card-header">
+                <div class="co-card-title p-3">
+                    <!-- Header Top -->
+                    <ng-container *ngFor="let item of headerTop">
+                        <div 
+                            (click)="changeActiveHeader(item, 'top')"
+                            [ngClass]="item.isActive ? 'header-active' : 'header-inactive'">
+                            {{ item.label | translate }}
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <p class="formDescription">
+                <i>{{"yourRequestedMessage" | translate}}</i> 
+               </p>
+            <div class="co-card-header" *ngIf="isRemittance">
+                <!-- Remittance Header -->
+                <div class="co-card-title">
+                    <ng-container *ngFor="let item of RemittanceHeader">
+                        <div 
+                            (click)="changeActiveHeader(item, 'remittance')"
+                            [ngClass]="item.isActive ? 'header-active' : 'header-inactive'">
+                            {{ item.label | translate}}
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="max-height">
+                    <!-- Balance Transfer Form -->
+                    <ng-container *ngIf="isBalanceTransfer">
+                        <form [formGroup]="balanceTransferForm" (ngSubmit)="onSubmitBalanceTransfer()">
+
+                            <div class="example-full-width" style="margin-bottom: 15px" *ngIf="isAdmin">
+                                <app-select-search 
+                                    [options]="adminAgentDropdown" 
+                                    placeholder="Select Agent" 
+                                    [resetFormTrigger]="resetFormTrigger"
+                                    [disabled]="!isReadAndWrite"
+                                    [showSearch]="true"
+                                    (optionSelected)="onSelectAgent($event)">
+                                </app-select-search>
+                            </div>
+                            
+
+                            <div class="example-full-width" style="margin-bottom: 15px">
+                                <app-select-search 
+                                    [options]="clientsDropdown" 
+                                    placeholder="Select Client" 
+                                    [resetFormTrigger]="resetFormTrigger"
+                                    [disabled]="!isReadAndWrite"
+                                    [showSearch]="true"
+                                    (optionSelected)="onClientChange($event)">
+                                </app-select-search>
+                            </div>
+
+                            <app-input-text-field
+                                [formGroup]="balanceTransferForm"
+                                controlName="Amount"
+                                type="text"
+                                placeholder="Amount"
+                                appNumberFormat
+                                [isInvalid]="balanceTransferForm.controls['Amount'].invalid && balanceTransferForm.controls['Amount'].touched"
+                                errorMessage="This field is required"
+                            ></app-input-text-field>
+
+                            <app-input-text-field
+                                [formGroup]="balanceTransferForm"
+                                controlName="Remarks"
+                                type="text"
+                                placeholder="Remarks"
+                                [isInvalid]="balanceTransferForm.controls['Remarks'].invalid && balanceTransferForm.controls['Remarks'].touched"
+                                errorMessage="This field is required"
+                            ></app-input-text-field>
+
+
+                            <div class="form-box mb-5 d-flex justify-content-center align-items-center ">
+                                <button class="btn btn-primary btnreq" type="submit" [disabled]="!isReadAndWrite" [disabled]="actionDisable"> {{"submitTransfer" | translate}} </button>
+                            </div>
+                        </form>
+
+                    </ng-container>
+
+                    <!-- Remittance Form -->
+<ng-container *ngIf="isRemittance && isTransfer">
+    <form [formGroup]="remittanceForm" (ngSubmit)="onSubmitRemittance()">
+        <div class="scrollable-container">
+            <div class="example-full-width" style="margin-bottom: 15px" *ngIf="isAdmin">
+                <app-select-search 
+                    [options]="adminAgentDropdown" 
+                    placeholder="Select Agent" 
+                    [resetFormTrigger]="resetFormTrigger"
+                    [disabled]="!isReadAndWrite"
+                    [showSearch]="true"
+                    (optionSelected)="onSelectAgent($event)">
+                </app-select-search>
+            </div>
+            <div class="example-full-width" style="margin-bottom: -10px">
+                
+                <app-input-text-field
+                    [formGroup]="remittanceForm"
+                    controlName="Amount"
+                    type="text"
+                    placeholder="Amount"
+                    [isInvalid]="remittanceForm.controls['Amount'].invalid && remittanceForm.controls['Amount'].touched"
+                    errorMessage="This field is required"
+                    appNumberFormat
+                ></app-input-text-field>
+            </div>
+
+            <div class="example-full-width" style="margin-bottom: 5px">
+                <app-select-search 
+                    [options]="transferMethod" 
+                    placeholder="Select Method" 
+                    [disabled]="!isReadAndWrite"
+                    [resetFormTrigger]="resetFormTrigger"
+                    [showSearch]="false"
+                    (optionSelected)="onSelectChange($event)">
+                </app-select-search>
+            </div>
+
+            <div class="example-full-width" style="margin-bottom: 15px">
+                <app-select-search 
+                    [options]="listOfDestination" 
+                    placeholder="Select Card" 
+                    [showErrorMessage]="true"
+                    [disabled]="!isReadAndWrite"
+                    [resetFormTrigger]="resetFormTrigger"
+                    [showSearch]="false"
+                    (optionSelected)="onSelectCard($event)">
+                </app-select-search>
+            </div>
+            
+            <app-input-text-field
+                [formGroup]="remittanceForm"
+                controlName="TransferWithdrawalFee"
+                type="text"
+                placeholder="Remittance Fee"
+                appNumberFormat
+                [isInvalid]="remittanceForm.controls['TransferWithdrawalFee'].invalid && remittanceForm.controls['TransferWithdrawalFee'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+            
+            <!-- <app-input-text-field
+                [formGroup]="remittanceForm"
+                appNumberFormat
+                controlName="NetAmount"
+                type="text"
+                placeholder="Total Amount"
+                [readonly]="true"
+            ></app-input-text-field> -->
+            
+            <app-input-text-field
+                [formGroup]="remittanceForm"
+                controlName="Remarks"
+                type="text"
+                placeholder="Remarks"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+        </div>
+        <div class="form-box mb-5 d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary btnreq" type="submit" [disabled]="!isReadAndWrite" [disabled]="actionDisable">{{"remittanceRequest" | translate}}</button>
+        </div>e
+    </form>
+</ng-container>
+
+                    
+
+                    <!-- Cash Pickup Form -->
+                    <ng-container *ngIf="isRemittance && isPickUp">
+                        <form [formGroup]="cashPickUpForm" (ngSubmit)="onSubmitcashPickup()">
+                            <div class="scrollable-container">
+                                <div class="example-full-width" style="margin-bottom: 15px" *ngIf="isAdmin">
+                                    <app-select-search 
+                                        [options]="adminAgentDropdown" 
+                                        placeholder="Select Agent" 
+                                        [disabled]="!isReadAndWrite"
+                                        [showSearch]="true"
+                                        [resetFormTrigger]="resetFormTrigger"
+                                        (optionSelected)="onSelectAgent($event)">
+                                    </app-select-search>
+                                </div>
+                                <div class="example-full-width" style="margin-bottom: 5px">
+                                    <app-select-search 
+                                      [options]="cashPickupMethod" 
+                                      placeholder="Select Method" 
+                                      [disabled]="!isReadAndWrite"
+                                      [showSearch]="false"
+                                      [resetFormTrigger]="resetFormTrigger"
+                                      [readonly]="isReadonly"
+                                      [preselectedOption]="selectedCashPickUpMethod">
+                                  </app-select-search>
+                              </div>
+                                <div class="example-full-width" style="margin-bottom: 16px">
+									<app-select-search 
+										[options]="cardPhilIds" 
+										placeholder="Select Card" 
+                                        [resetFormTrigger]="resetFormTrigger"
+										[disabled]="!isReadAndWrite"
+										[showSearch]="false"
+										(optionSelected)="onClientPhilId($event)">
+									</app-select-search>
+								</div>
+	
+								<app-input-text-field
+									[formGroup]="cashPickUpForm"
+									controlName="AuthorizedPerson"
+									type="text"
+									placeholder="Name of Authorized Person"
+									[isInvalid]="cashPickUpForm.controls['AuthorizedPerson'].invalid && cashPickUpForm.controls['AuthorizedPerson'].touched"
+									errorMessage="This field is required">
+								</app-input-text-field>
+	
+								<div class="input-group mb-3">
+									<input type="file" #fileInputId accept="image/*" multiple
+									  (change)="onFilesSelectedId($event)" style="display: none;">
+									<input type="text" class="form-control inputUpload" placeholder="Upload ID"
+									  [value]="fileNamesId.join(', ')" readonly>
+									<div class="input-group-append">
+									  <button [disabled]="!isReadAndWrite" class="btn btnUpload" type="button" (click)="triggerUploadId()">Upload</button>
+									</div>
+								  </div>
+								  
+								  <app-input-text-field
+									[formGroup]="cashPickUpForm"
+									controlName="IdNumber"
+									type="text"
+									placeholder="ID Number"
+									[isInvalid]="cashPickUpForm.controls['IdNumber'].invalid && cashPickUpForm.controls['IdNumber'].touched"
+									errorMessage="This field is required">
+								  </app-input-text-field>
+								  
+								  <div class="input-group mb-3">
+									<input type="file" #fileInputLetter accept="image/*" multiple
+									  (change)="onFilesSelectedLetter($event)" style="display: none;">
+									<input type="text" class="form-control inputUpload" placeholder="Upload Authorization Letter"
+									  [value]="fileNamesLetter.join(', ')" readonly>
+									<div class="input-group-append">
+									  <button [disabled]="!isReadAndWrite" class="btn btnUpload" type="button" (click)="triggerUploadLetter()">Upload</button>
+									</div>
+								  </div>
+								  
+	
+								<app-input-text-field
+								[formGroup]="cashPickUpForm"
+								controlName="Amount"
+								type="text"
+								placeholder="Amount"
+								appNumberFormat
+								[isInvalid]="cashPickUpForm.controls['Amount'].invalid && cashPickUpForm.controls['Amount'].touched"
+								errorMessage="This field is required">
+							</app-input-text-field>
+	
+							<app-input-text-field
+								[formGroup]="cashPickUpForm"
+								controlName="COPWithdrawalFee"
+								type="text"
+								placeholder="Remittance Fee per transaction"
+								[readonly]="true"
+								appNumberFormat>
+							</app-input-text-field>
+	
+								<app-input-text-field
+									[formGroup]="cashPickUpForm"
+									controlName="Remarks"
+									type="text"
+									placeholder="Remarks">
+								</app-input-text-field>
+                                </div>
+								<div class="form-box mb-5 d-flex justify-content-center align-items-center">
+									<button class="btn btn-primary btnreq" type="submit" [disabled]="!isReadAndWrite" [disabled]="actionDisable"> {{"remittanceRequest" | translate}} </button>
+								</div>
+							</form>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

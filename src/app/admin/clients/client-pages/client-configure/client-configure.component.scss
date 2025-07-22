@@ -1,0 +1,88 @@
+@import "/src/sass/modalbutton";
+
+
+@import "/src/sass/variables";
+.row {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.c-val {
+    text-align: center;
+}
+
+.config-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .config-container {
+        width: 49.5%;
+        background-color: rgba(45, 52, 54, 0.5);
+        margin-bottom: 20px;
+    }
+}
+
+
+.center-text {
+    text-align: center;
+}
+
+.mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
+    --mdc-tab-indicator-active-indicator-color:rgb(228, 50, 234)!important;
+    --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38) !important;
+    --mat-tab-header-pagination-icon-color: #000;
+    --mat-tab-header-inactive-label-text-color: rgb(255, 255, 255) !important;
+    --mat-tab-header-active-label-text-color: rgb(228, 50, 234) !important;
+    --mat-tab-header-active-ripple-color: #3f51b5 !important;
+    --mat-tab-header-inactive-ripple-color: #3f51b5 !important;
+    --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6) !important;
+    --mat-tab-header-inactive-hover-label-text-color:rgb(228, 50, 234) !important;
+    --mat-tab-header-active-focus-label-text-color: rgb(228, 50, 234) !important;
+    --mat-tab-header-active-hover-label-text-color: rgb(228, 50, 234) !important;
+    --mat-tab-header-active-focus-indicator-color: rgb(228, 50, 234) !important;
+    --mat-tab-header-active-hover-indicator-color:rgb(255, 255, 255) !important;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #ccc;
+    /* You can adjust the color and thickness of the outline */
+    background-color: rgba(52, 152, 219, 0);
+    width: 3vw;
+    height: 1.5vw;
+    text-align: center;
+    caret-color: #fff;
+    color: #fff;
+}
+
+.btn-add-method {
+    color: rgb(228, 50, 234);
+    cursor: pointer;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* spinner.component.css */
+::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: $spinner !important;
+}

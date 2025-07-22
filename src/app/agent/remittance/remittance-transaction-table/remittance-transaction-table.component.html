@@ -1,0 +1,174 @@
+<div class="row1">
+    <div class="col-lg-12">
+        <div class="card-wrapper">
+            <div class="card-header">
+                <div class="card-title p-3"> {{title | translate}}</div>
+                <div class="card-actions">
+                  <app-search (search)="onSearch($event)"></app-search>
+                  <div class="h-divider"></div>
+                    <form [formGroup]="agentRemittanceTransaction">
+                        <mat-form-field>
+                            <mat-label>StartDate - EndDate</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate placeholder="Start date" formControlName="StartDate">
+                                <input matEndDate placeholder="End date" formControlName="EndDate">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>
+                    </form>
+                    <div class="h-divider"></div>
+                    <app-button [disabled]="!isReadAndWrite" [text]="'download' | translate" [icon]="'fa-download'" [btnClass]="'btn-theme btn-lg'" (click)="exportToExcel()"></app-button>
+                </div>
+            </div>
+            <div class="card-body-table">
+                <app-spinner *ngIf="isLoading"></app-spinner>
+                <div class="container-with-table">
+                    <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                        <ng-container matColumnDef="transactionId">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Transaction ID</th>
+                            <td *matCellDef="let row" mat-cell> {{ row.TransactionId }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="timestamp">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> TimeStamp</th>
+                            <td *matCellDef="let row" mat-cell> {{ row.TimeStamp }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="remittanceId">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Remittance ID </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.RemittanceId }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="agent">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Agent </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.Agentname }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="totalRequestedAmount">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Requested Amount </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.RequestedAmount | number: '1.2-2'}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="totalAmount">
+                          <th *matHeaderCellDef mat-header-cell mat-sort-header> Total Net </th>
+                          <td *matCellDef="let row" mat-cell>
+                            {{ row.TotalAmount | number: '1.2-2' }}</td>
+                      </ng-container>
+                        <!-- <ng-container matColumnDef="totalApprove">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Total Amount </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.TotalApprove | number: '1.2-2'}} </td>
+                        </ng-container> -->
+                        <ng-container matColumnDef="dateRemitted">
+                          <th *matHeaderCellDef mat-header-cell mat-sort-header> Date Remitted </th>
+                          <td *matCellDef="let row" mat-cell> {{ row.DateRemitted }} </td>
+                      </ng-container>
+                        <ng-container matColumnDef="fees">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Fees </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.TransacationFees | number: '1.2-2'}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="agentMOP">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Agent MOP </th>
+                            <td *matCellDef="let row" mat-cell> {{row.MOPBankName}}-{{ row.MOP }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="source">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Source </th>
+                            <td *matCellDef="let row" mat-cell> {{row.SourceName}}-{{ row.SourceId }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="receipt">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Receipt </th>
+                            <td *matCellDef="let row" mat-cell>
+                              <div class="view-receipts" [matMenuTriggerFor]="receipts" (click)="getReceipts(row.ReceiptUris)">
+                                <span class="fas fa-eye"></span> view
+                              </div>
+                              <mat-menu #receipts="matMenu" xPosition="before">
+                                <ng-container *ngFor="let uri of receiptUrls; let i = index">
+                                  <button mat-menu-item (click)="openReceipt(uri)">
+                                    <mat-icon>receipt</mat-icon>
+                                    <span>Receipt {{ i + 1 }}</span>
+                                  </button>
+                                </ng-container>
+                              </mat-menu>
+                            </td>
+                          </ng-container>
+                          
+                          
+                        <ng-container matColumnDef="referenceNo">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Reference No. </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.ReferenceNo }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="requestee">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Requestee </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.Requestee }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="approvedBy">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Approved By </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.ApprovedByName }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="remarks">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header> Remarks </th>
+                            <td *matCellDef="let row" mat-cell> {{ row.Remarks }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                            <td *matCellDef="let row" mat-cell >
+                                <span [ngStyle]="row.Status | statusColor">{{ row.Status }}</span></td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Action</th>
+                            <td *matCellDef="let row" mat-cell>
+                              <!-- Hide the button and icon for Completed, Declined, or Disapproved statuses -->
+                              <ng-container *ngIf="row.Status !== 'Completed' && row.Status !== 'Decline' && row.Status !== 'Disapprove'">
+                                <button class="btn-theme-vert" mat-mini-fab
+                                [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon>
+                              </button>
+                                <mat-menu #menu="matMenu" xPosition="before">
+                                  <!-- Show Processing and Decline only if Status is 'Pending' -->
+                                  <ng-container *ngIf="row.Status === 'Pending'">
+                                    <button mat-menu-item (click)="onProcessing(row)">
+                                      <mat-icon>check</mat-icon>
+                                      <span>{{"processing" | translate}}</span>
+                                    </button>
+                                    <button mat-menu-item (click)="onDeclineRemittance(row)">
+                                      <mat-icon>highlight_off</mat-icon>
+                                      <span>{{"decline" | translate}}</span>
+                                    </button>
+                                  </ng-container>
+                                  <!-- Show Release and Decline only if Status is 'Processing' -->
+                                  <ng-container *ngIf="row.Status === 'Processing'">
+                                    <button mat-menu-item (click)="onApproved(row)">
+                                      <mat-icon>check</mat-icon>
+                                      <span>{{"release" | translate}}</span>
+                                    </button>
+                                    <button mat-menu-item (click)="onDeclineRemittance(row)">
+                                      <mat-icon>highlight_off</mat-icon>
+                                      <span>{{"decline" | translate}}</span>
+                                    </button>
+                                  </ng-container>
+                                </mat-menu>
+                              </ng-container>
+                            </td>
+                          </ng-container>
+                          
+                        
+                        <tr *matHeaderRowDef="displayedColumns; sticky:true" mat-header-row></tr>
+                        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="14" style="text-align: center;">No data matching the filter
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <app-pagination 
+            [totalItems]="this.totalItems" 
+            [itemsPerPage]="itemsPerPage" 
+            [currentPage]="currentPage"
+            (firstData)="onFirstPage()" 
+            (nextData)="onNextPage()" 
+            (previousData)="onPreviousPage()"
+            (lastData)="onLastPage()"
+            (itemsPerPageChange)="onItemsPerPageChanged($event)">
+            </app-pagination>
+        </div>
+        
+    </div>
+</div>

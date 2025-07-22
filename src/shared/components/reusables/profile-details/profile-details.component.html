@@ -1,0 +1,40 @@
+<div class="div user-details-container">
+    <div class="details-container">
+        <div class="details">
+            <div class="label">{{"agentNumber" | translate}}:</div>
+            <div class="value">{{agent?.AgentId}}</div>
+        </div>
+        <div class="details">
+            <div class="label">{{"agentName" | translate}}:</div>
+            <div class="value">{{agent?.AgentName}}</div>
+        </div>
+        <div class="details">
+            <div class="label">{{"email" | translate}}:</div>
+            <div class="value">{{agent?.Email}}</div>
+        </div>
+        
+        <div class="details">
+            <div class="label">{{"lastLogin" | translate}}: </div>
+            <div class="value">{{agent?.LastLogin}}</div>
+        </div>
+    </div>
+    <div class="details-container">
+        <div class="details">
+            <div class="label">{{"agentType" | translate}}: </div>
+            <div class="value">{{agentType}}</div>
+        </div>
+        <div class="details">
+            <div class="label">{{"username" | translate}}: </div>
+            <div class="value">{{agent?.Username}}</div>
+        </div>
+        
+        <div class="details">
+            <div class="label">{{"noOfClients" | translate}}: </div>
+            <div class="value">{{agent?.ClientCount}}</div>
+        </div>
+        <div class="details">
+            <div class="label">{{"dateCreated" | translate}}:</div>
+            <div class="value">{{agent?.DateCreated}}</div>
+        </div>
+    </div>
+</div>

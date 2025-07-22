@@ -1,0 +1,47 @@
+.table-container {
+    width: 100%;
+    margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  button {
+    margin-right: 3px;
+    color: white; /* Updated Text color to white */
+    background-color: #575757; /* Background color */
+    border-top-left-radius: 0.5rem; /* Rounded top-left corner */
+    border-top-right-radius: 0.5rem; /* Rounded top-right corner */
+    padding: 10px 40px; /* Padding to make the button look better */
+    font-size: 13px; /* Font size */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    border: none; /* Removing any default border */
+
+  }
+  
+  button:hover {
+    background-color: #a0a0a0; /* Slightly darker gray on hover */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th:hover {
+    background-color: #1565c0; /* Slightly darker blue on hover */
+  }
+  
+  .mat-elevation-z8 {
+    background-color: #424242; /* Dark theme */
+    color: white;
+  }
+  
+  .title{
+    color: white !important;
+    opacity: 0.4;
+
+
+  }
+
+  .row-container{
+    margin-top: 30px;
+  }

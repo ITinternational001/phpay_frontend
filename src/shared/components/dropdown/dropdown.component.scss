@@ -1,0 +1,21 @@
+
+@import"/src/sass/variables";
+
+.my-dropdown {
+  
+  color: $color-text-white;
+  width: 10vw;
+
+  label {
+    color: $color-text-white;
+    width: 100%;
+    font-weight: 500;
+  }
+  select {
+    background-color: #313131;
+    color: $color-text-white;
+    border: none; 
+  }
+}
+
+

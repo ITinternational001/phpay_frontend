@@ -1,0 +1,85 @@
+@import"/src/sass/variables";
+
+
+.ng-container {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+  }
+  
+  .col-12 {
+    padding: 5px; 
+  }
+
+  .row{
+    padding-left: 10px;
+    padding-right: 10px;
+    max-height: 525px;
+    overflow-y: auto;
+  }
+
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    background: linear-gradient(0deg, rgba(151, 151, 151, 0.945) 0%, rgba(216, 216, 216, 0.692) 26%, rgb(216, 216, 216) 100%);
+  }
+  
+  .title {
+    padding: 5px 0;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .balanceContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    width: 100%; 
+    margin: 10px 0;
+  
+    .value {
+      font-size: 25px;
+      font-weight: bold;
+      padding-bottom: 5px;
+    }
+  
+    .label {
+      font-size: 18px;
+      color: #555;
+    }
+  }
+  
+  .actionContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+    cursor: pointer;
+    
+    .action {
+      font-size: 14px;
+      color: black;
+      cursor: pointer;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
+    .actionIcon {
+      font-size: 18px;
+      color: #555;
+    }
+  }
+  
+
+@media screen and (max-width: 900px) {
+    .card { 
+        width: 100%;
+    }
+}

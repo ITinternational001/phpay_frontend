@@ -1,0 +1,121 @@
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-title>
+    <div class="header">
+      <h1 class="header">{{"transferFunds" | translate}}</h1>
+    </div>
+  </div>
+  <div mat-dialog-content>
+    <ng-container>
+      <div class="row main-details-container">
+        <div class="col-md-7">
+          <div class="details-container">
+            <div>
+              <span class="sub-label">Amount Requested: </span>
+              <span class="value">{{details.Amount | number: '1.2-2'}}</span>
+            </div>
+            <div>
+              <span class="sub-label">TransactionNo.: </span>
+              <span class="value">{{details.TransactionNo}}</span>
+            </div>
+            <div>
+              <span class="sub-label">Client Name: </span>
+              <span class="value">{{details.ClientName}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="details-container">
+            <div>
+              <span class="sub-label">Request By: </span>
+              <span class="value">{{details.RequesteeName}}</span>
+            </div>
+            <div>
+              <span class="sub-label">Status.: </span>
+              <span class="value">{{details.Status}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="source-label">
+            <h3 class="accordion-title">Sources</h3>
+            <button class="btn-theme-vert" mat-mini-fab aria-label="Example icon-button with a menu" (click)="addSource()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div formArrayName="Sources">
+            <div *ngFor="let source of sources.controls; let i = index" [formGroupName]="i">
+              <ng-container class="form-transfer">
+                <mat-form-field>
+                  <mat-label>Select vendor...</mat-label>
+                  <mat-select placeholder="Select Vendor..." (selectionChange)="onSourceSelect($event, i)" formControlName="VendorId">
+                    <mat-option value="n/a" disabled>Select vendor</mat-option>
+                    <mat-option *ngFor="let vendor of sourceVendors" [value]="vendor.Id">{{vendor.Name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Select channel...</mat-label>
+                  <mat-select placeholder="Select Channel..." (selectionChange)="onChannelSelect($event, i)" formControlName="ChannelId">
+                    <mat-option value="n/a" disabled>Select channel</mat-option>
+                    <mat-option *ngFor="let channel of getChannels(i)" [value]="channel.Id">{{ channel.Name }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+    
+                <div class="InputTextField input-container">
+                  <span class="peso-sign">₱</span>
+                  <input type="text" placeholder="Enter amount" class="form-control" formControlName="Amount" appNumberFormat />
+                  <mat-hint>
+                    <span class="hint">Wallet Balance: {{ getTotalBalance(i) | number:'1.0-2' }}</span>
+                  </mat-hint>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+    
+
+        </div>
+        <div class="col-md-6">
+          <h3 class="accordion-title">Destinations</h3>
+          <div formArrayName="Destinations">
+            <div *ngFor="let source of destinations.controls; let i = index" [formGroupName]="i">
+              <ng-container class="form-transfer">
+                <mat-form-field>
+                  <mat-label>Select vendor...</mat-label>
+                  <mat-select placeholder="Select Vendor..." (selectionChange)="onDestinationSelect($event, i)" formControlName="VendorId">
+                    <mat-option value="n/a" disabled>Select vendor</mat-option>
+                    <mat-option *ngFor="let vendor of destinationVendors" [value]="vendor.Id">{{vendor.Name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Select channel...</mat-label>
+                  <mat-select placeholder="Select Channel..." (selectionChange)="onChannelDestiSelect($event, i)" formControlName="ChannelId">
+                    <mat-option value="n/a" disabled>Select channel</mat-option>
+                    <mat-option *ngFor="let vendor of getDestiChannels(i)" [value]="vendor.Id">{{vendor.Name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+    
+                <div class="InputTextField input-container">
+                  <span class="peso-sign">₱</span>
+                  <input type="text" placeholder="Enter amount" class="form-control" appNumberFormat formControlName="Amount" />
+                  <mat-hint>
+                    <span class="hint">Wallet Balance: {{ getTotalDestiBalance(i) | number:'1.0-2' }}</span>
+                  </mat-hint>
+                </div>
+              </ng-container>
+           </div>
+          </div>
+         
+         
+        </div>
+      </div>
+    </ng-container>
+    
+  </div>
+  <div mat-dialog-actions>
+    <button class="btn btn-light" type="button" [mat-dialog-close]="false">{{"cancel" | translate}}</button>
+    <div class="h-divider"></div>
+    <button type="submit" class="btn btn-theme" [disabled]="actionDisable"><span class="fa fa-exchange"></span> {{"completeTransfer" | translate}}</button>
+  </div>
+</form>

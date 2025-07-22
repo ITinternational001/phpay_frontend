@@ -1,0 +1,19 @@
+@import '/src/sass/modalbutton';
+@import "/src/sass/scrollbar";
+
+.view-receipts{
+    border-radius: 5px;
+    padding-top: 5px; 
+    padding-bottom: 5px; 
+    width: 100px;
+    display: 'inline-block'; 
+    text-align: center;
+    color: white;
+    background-color: transparent;
+    border: 1px solid grey;
+    cursor: pointer;
+  }
+
+  .btn-theme-vert{
+    background-color: $color-text-yellow;
+}

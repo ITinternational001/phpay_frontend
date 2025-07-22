@@ -1,0 +1,14 @@
+<!-- <div ngbDropdown class="my-dropdown">
+  <select class="form-select" id="dropdownBasic1" (change)="onDropdownChange($event)"> 
+    <option  class="py-2" value="" selected disabled>{{filterPlaceholder}}</option>
+    <option class="py-2" *ngFor="let menu of filterOptions" [value]="menu.Id">{{menu.Name}}</option>
+  </select>
+</div> -->
+<mat-form-field>
+  <mat-label>Select {{selectLabel}}</mat-label>
+  <mat-select id="dropdownBasic1" (selectionChange)="onDropdownChange($event)">
+    <mat-option *ngFor="let menu of filterOptions" [value]="menu.Id">{{menu.Name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+ 

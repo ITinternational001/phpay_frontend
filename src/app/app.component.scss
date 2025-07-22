@@ -1,0 +1,108 @@
+
+@import "../../src/sass/variables";
+
+
+.login-body {
+    background:
+    url('../assets/dpay_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo-overlay {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 25%;
+    height: auto;
+    background-size: contain;
+    margin: 0;
+    padding: 0;
+    opacity: 0.8;
+}
+
+.login-container {
+
+    padding: 20px;
+    text-align: center;
+    width: 40%;
+}
+
+.logo {
+    margin-bottom: 50px;
+    width: 70%;
+}
+
+h2 {
+    font-size: 26px;
+    color: $color-text-white;
+
+}
+
+p {
+    font-size: 0.9rem;
+    color: rgba(196, 196, 196, 1);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+
+.box {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: rgba(217, 217, 217, 0.70);
+
+}
+
+button {
+    color: $color-text-white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: $color-text-yellow;
+    width: 100%;
+}
+
+button:hover {
+    color: $color-text-white;
+    background: $color-text-yellow
+}
+
+ #pincode {
+     text-align: center;
+ }
+
+
+
+.captcha-input-group {
+    display: flex;
+    align-items: center;
+}
+
+.captcha-input-group input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.captcha-button {
+    border-radius: 0 5px 5px 0;
+    padding: 11px;
+    width: 20%;
+}

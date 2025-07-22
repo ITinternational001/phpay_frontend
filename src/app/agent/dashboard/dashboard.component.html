@@ -1,0 +1,43 @@
+<app-maintenance-message>
+<div class="row">
+    <div *ngFor="let data of topData" class="col-sm-3">
+        <app-card 
+            [isVisible]="false"
+            [isVisiblebtn]="true"
+            [label]="data.label | translate"
+            icon="{{data.icon}}"
+            [value]="data.value">
+            appNumberFormat
+        </app-card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <app-total-commission [isAdmin]="isAdmin"></app-total-commission>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <app-comms-per-client [data]="commsPerClientData" [isLoading]="isLoading" (agentTopCard)="onAgentTopCard($event)" (search)="onSearch($event)"></app-comms-per-client>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-9 custom-margin-bottom">
+        <app-list-of-clients 
+        [isAdmin]="isAdmin"
+        [data]="clientData"
+        [totalItems]="totalItems"
+        [itemsPerPage]="itemsPerPage"
+        [currentPage]="currentPage"
+        (firstPage)="onFirstPage()"
+        (previousPage)="onPreviousPage()"
+        (nextPage)="onNextPage()"
+        (lastPage)="onLastPage()"
+        (itemsPerPageChange)="onItemsPerPageChanged($event)"
+        (search)="onSearch($event)"
+        (agentTopCard)="onAgentTopCard($event)">
+      </app-list-of-clients>      
+    </div>
+</div>
+</app-maintenance-message>
+

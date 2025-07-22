@@ -1,0 +1,89 @@
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">{{"transferBalanceRequest" | translate}}</div>
+        <div class="card-actions">
+            <app-search (search)="onSearch($event)"></app-search>
+            <div class="h-divider"></div>
+            <form [formGroup]="AgentRequestForm">
+                <mat-form-field>
+                    <mat-label>StartDate - EndDate</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" formControlName="StartDate">
+                        <input matEndDate placeholder="End date" formControlName="EndDate">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </form>
+            <div class="h-divider"></div>
+        </div>
+    </div>
+    <div class="card-body-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="container-with-table">
+            <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="timestamp">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Timestamp </th>
+                    <td mat-cell *matCellDef="let item">{{ item.TimeStamp }}</td>
+                </ng-container>
+                <ng-container matColumnDef="transactionId">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Request ID</th>
+                    <td mat-cell *matCellDef="let item">{{ item.RequestID }}</td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                    <td *matCellDef="let row" mat-cell>
+                        <span [ngStyle]="row.Status | statusColor">{{ row.Status }}</span></td>
+                </ng-container>
+                <ng-container matColumnDef="clientName">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Client</th>
+                    <td mat-cell *matCellDef="let item">{{ item.ClientName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Total Amount</th>
+                    <td mat-cell *matCellDef="let item">₱ {{ item.TotalAmount | number:'1.2-2' }}</td>
+                </ng-container>
+                <ng-container matColumnDef="requestBy">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Requestee</th>
+                    <td mat-cell *matCellDef="let item">{{ item.Requestee }}</td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Action</th>
+                    <td *matCellDef="let row" mat-cell>
+                        <button class="btn-theme-vert" mat-mini-fab
+                        [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon>
+                        </button>
+                      <mat-menu #menu="matMenu" xPosition="before">
+                        <button mat-menu-item (click)="onAgentTransfer(row)">
+                          <mat-icon>check</mat-icon>
+                          <span>{{"approveTransfer" | translate}}</span>
+                        </button>
+                        <button mat-menu-item (click)="onDeclineTransfer(row)">
+                          <mat-icon>highlight_off</mat-icon>
+                          <span>{{"declineTransfer" | translate}}</span>
+                        </button>
+                      </mat-menu>
+                    </td>
+                  </ng-container>
+
+                <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="7" style="text-align: center;">No data matching the filter</td>
+                </tr>
+            </table>
+        </div>
+        <app-pagination 
+            [totalItems]="this.totalItems"
+            [itemsPerPage]="itemsPerPage" 
+            [currentPage]="currentPage"
+            (firstData)="onFirstPage()" 
+            (nextData)="onNextPage()" 
+            (previousData)="onPreviousPage()"
+            (lastData)="onLastPage()"
+            (itemsPerPageChange)="onItemsPerPageChanged($event)">
+        </app-pagination>
+    </div>
+</div>
+
+

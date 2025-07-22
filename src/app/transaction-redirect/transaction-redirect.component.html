@@ -1,0 +1,42 @@
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="success-card text-center shadow-lg">
+        <div class="logo mb-2">
+            <img src="/assets/dpay_logo.png" alt="DPay Logo" class="me-2">
+
+        </div>
+        <ng-container *ngIf="isProcessing">
+            <div class="spinnerContainer">
+                <mat-spinner></mat-spinner>
+                <span class="text">Processing please wait...</span>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!isProcessing">
+            <h6 class="text-green title-head">Congratulations</h6>
+            <h4 class="text-white">Transaction Success</h4>
+            <small class="text-white">{{currentDate}}</small>
+            <div class="my-4 check-circle text-white">
+                ✓
+            </div>
+            <div class="transaction-info text-start text-white">
+                <div class="d-flex justify-content-between transaction-value">
+                    <span>Amount</span>
+                    <span>₱ {{amount}}</span>
+                </div>
+                <div class="d-flex justify-content-between transaction-value">
+                    <span>Status</span>
+                    <span>{{paymentStatus}}</span>
+                </div>
+                <div class="d-flex justify-content-between transaction-value">
+                    <span>Transaction No.</span>
+                    <span>{{referenceNo}}</span>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <p class="text-white small">
+                Thank you for using DPay. Your transaction has been successfully processed. We appreciate your trust in
+                our
+                platform.
+            </p>
+        </ng-container>
+    </div>
+</div>

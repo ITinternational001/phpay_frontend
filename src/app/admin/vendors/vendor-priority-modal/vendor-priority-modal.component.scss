@@ -1,0 +1,34 @@
+@import "/src/sass/modalbutton";
+
+.container-with-table {
+    max-height: 575px;
+    max-width: 100%;
+  }
+  
+  .dynastyTable {
+    width: 100%;
+
+  }
+  
+//   .mat-table {
+//     max-height: 575px;
+//     overflow-y: auto;
+//     display: block;
+//   }
+  .card-body-table {
+    background-color: #303030;
+  }
+  .card-header {
+    background-color: #303030;
+  }
+
+  .mat-dialog-actions {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .mat-mdc-dialog-container mat-mdc-dialog-container {
+    background-color: none;
+    box-shadow: none;
+
+  }

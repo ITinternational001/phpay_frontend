@@ -1,0 +1,30 @@
+<ul *ngIf="collapsed && data.items && data.items.length > 0" class="submenu-nav"
+    [@submenu] ="expanded ? 
+            {value: 'visible', 
+            params:{transitionParams: '400ms cubic-bezier(0.86, 0, 0.07,1)', height: '*'}}
+                              : {value:'hidden',
+                                params:{transitionParams: '400ms cubic-bezier(0.86, 0, 0.07,1)', height: '0'}}">
+      
+      <li *ngFor="let item of data.items" class="submenu-nav-item">
+        <a class="submenu-nav-link" *ngIf="item.items && item.items.length > 0" (click)=handleClick(item)>
+          <i class="submenu-link-icon  fa-fa-circle"></i>
+          <span class="submenu-link-text" *ngIf = "collapsed">{{item.label | translate}}</span>
+          <i class="menu-collapse-icon" *ngIf="item.items && collapsed" 
+          [ngClass]="!item.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down'"]></i>
+        </a>
+        <a class="submenu-nav-link" *ngIf="!item.items || (item.items && item.items.length === 0)"
+          [routerLink]="[item.routeLink]"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">
+          
+          <span class="submenu-link-text" *ngIf = "collapsed">{{item.label | translate}}</span>
+        </a>
+      <div *ngIf="item.items && item.items.length > 0">
+        <app-submenu
+          [collapsed]="collapsed"
+          [multiple]="multiple"
+          [expanded] ="item.expanded"
+        ></app-submenu>
+      </div>
+      </li>
+    </ul>

@@ -1,0 +1,76 @@
+@import "../../../sass/variables";
+@import"/src/sass/variables";
+
+.card{
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    background-color: $color-bg-inactive;
+    margin: 0 0 1.25rem 0;
+    border-bottom: 5px solid $color-text-yellow;
+    .card-head{
+        padding: 1rem 0 0 1rem;
+        font-size: 1.3rem;
+        color: $color-text-white;
+    }
+
+    .card-body{
+        .card-content{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+           
+            .card-icon{
+                font-size:20px;
+                color: $color-text-white;
+                margin-right: 0.5rem;
+            }
+            .card-value{
+                font-size: 20px;
+                font-weight: 400;
+                color: $color-text-white;
+            }
+        }
+        .card-sub-content{
+            display: flex;
+            flex-direction: row;
+            border-radius: 0.5rem;
+            align-items: center;
+            width: 150px;
+            min-width: 150px;
+            card-sub-icon{
+                 font-size:18px;
+                 color: $color-text-white;
+             }
+             .card-sub-value{
+                 font-size: 18px;
+                 color: $color-text-white;
+             }
+        }
+    }
+}
+#btnadd{
+    background: #373737;
+    border: 1px solid #373737;
+}
+
+@media screen and (max-width:900px) {
+    .card { 
+        width: 100%;
+     }
+}
+
+.card-wrapper {
+    border: 1px solid;
+    border-radius: 0.5rem;
+    overflow: hidden; /* Ensures rounded corners are applied to contents */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-padding {
+    padding: 10px; /* Apply 10px padding on all sides */
+    padding-bottom: 0px;
+}
+.card-content {
+    padding-bottom: 15px;
+}

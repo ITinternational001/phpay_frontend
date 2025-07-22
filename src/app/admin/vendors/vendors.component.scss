@@ -1,0 +1,34 @@
+@import "/src/sass/modalbutton";
+@import "/src/sass/scrollbar";
+
+.scrollable-container {
+    //mmax-height: 400px; /* Set a maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  /* Adjust padding for the action column to avoid it being scrolled */
+  .scrollable-container mat-cell:last-child {
+    padding-right: 48px; /* Adjust based on your actual icon button width */
+  }
+
+  .btn-theme-vert{
+    background-color: $color-text-yellow;
+    font-size: 15px;
+    color: white;
+    border-color: none;
+    height: 40px;
+    width: 120px;
+    border-radius: 0.5rem;
+    box-shadow: none !important; 
+    border: none !important; 
+    color: inherit !important; 
+  }
+
+
+  
+  ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    border-radius: 0.5rem;
+  }
+  

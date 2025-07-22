@@ -1,0 +1,61 @@
+<div mat-dialog-title>
+    <h1>{{"clientForm" | translate}}</h1>
+</div>
+<form [formGroup]="clientsForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div class="row">
+
+            <app-input-text-field
+              [formGroup]="clientsForm"
+              controlName="Name"
+              type="text"
+              placeholder="Client Name"
+              [isInvalid]="clientsForm.controls['Name'].invalid && clientsForm.controls['Name'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+
+            <!-- <mat-form-field>
+                <mat-label>Provider</mat-label>
+                <mat-select formControlName="ProviderId">
+                    <mat-option *ngFor="let provider of providerList"
+                        [value]="provider.id">{{provider.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>    -->
+
+            <app-select-search 
+                [options]="providerList" 
+                placeholder="Select Provider" 
+                [showSearch]="true"
+                [preselectedOption]="selectedProviderName"
+                (optionSelected)="onSelectProvider($event)"
+                style="margin-top: -10px; margin-bottom: 15px;">
+            </app-select-search>
+
+
+            <app-input-text-field
+                [formGroup]="clientsForm"
+                controlName="CallbackUrl"
+                type="text"
+                placeholder="Callback URL"
+                [isInvalid]="clientsForm.controls['CallbackUrl'].invalid && clientsForm.controls['CallbackUrl'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+
+            <app-input-text-field
+                [formGroup]="clientsForm"
+                controlName="RedirectUrl"
+                type="text"
+                placeholder="Redirect URL"
+                [isInvalid]="clientsForm.controls['RedirectUrl'].invalid && clientsForm.controls['RedirectUrl'].touched"
+                errorMessage="This field is required"
+            ></app-input-text-field>
+
+        </div>
+    </div>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type="button" [mat-dialog-close]="false">Cancel</button>
+        <div class="h-divider"></div>
+        <button class="btn btn modal-botton" type="submit" [disabled]="actionDisable">{{data ? 'Save Changes' : 'Save Client'}}</button>
+    </div>
+</form>

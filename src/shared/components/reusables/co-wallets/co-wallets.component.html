@@ -1,0 +1,29 @@
+<div class="card-wrapper">
+  <div class="card-header">
+    <div class="card-title p-3">{{"listOfCoWallet" | translate}}</div> <!-- Displayed only once -->
+    <div class="card-actions"></div>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <ng-container *ngFor="let client of clients">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4"> <!-- Ensures 3 cards per row -->
+          <div class="card">
+            <div class="title">{{ client.Name }}</div>
+            <div class="balanceContainer">
+              <div class="value">&#8369; {{ client.AvailableBalance | number:'1.2-2' }}</div>
+              <div class="label">{{'availableBalance' | translate}}</div>
+            </div>
+            <div class="actionContainer" (click)="onViewWalletDetails(client)">
+              <div class="action">View Details</div>
+              <!-- <div class="actionIcon"><i class="fa fa-arrow-right"></i></div> -->
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+ 
+
+  <div class="card-footer"></div>
+</div>

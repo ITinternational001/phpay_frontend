@@ -1,0 +1,13 @@
+<app-maintenance-message>
+<app-agent-transfer-balance-request-table 
+  [isAdmin]="true"
+  [refresh]="refreshTrigger">
+</app-agent-transfer-balance-request-table>
+
+<ng-container>
+  <div class="row">
+    <app-agent-transfer-balance-histroy-table [isAdmin]="true" [title]="'transferHistory' | translate">
+    </app-agent-transfer-balance-histroy-table>
+  </div>
+</ng-container>
+</app-maintenance-message>

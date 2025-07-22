@@ -1,0 +1,50 @@
+<div mat-dialog-title>
+    <h1>Add new withdrawal method</h1>
+</div>
+<form [formGroup] ="withdrawalForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div class="row">
+            <mat-form-field>
+              <mat-label>Withdrawal Method</mat-label>
+                <mat-select formControlName="Method">
+                    <mat-option *ngFor="let method of TransferMethod"
+                        [value]="method.Id">{{method.Name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+           <div class="col-md-12">
+            <table class="dynastyTable">
+                <tr style="align-items: center;">
+                  <td colspan="2" style="text-align: center;">Fee At Cost</td>
+                  <td colspan="2" style="text-align: center;">Fee On Top</td>
+                </tr>
+                <tr>
+                  <td class="c-val">W. Fee %</td>
+                  <td class="c-val">W. Fee Fixed</td>
+                  <td class="c-val">W. Fee %</td>
+                  <td class="c-val">W. Fee Fixed</td>
+                </tr>
+                <tr>
+                  <td class="c-val">
+                    <input type="number" placeholder="0%" required formControlName = "FeeAtCostPercent"/>
+                  </td>
+                  <td class="c-val">
+                    <input type="number" placeholder="0" required formControlName = "FeeAtCostFixed"/>
+                  </td>
+                  <td class="c-val">
+                    <input type="number" placeholder="0%"required formControlName = "FeeOnTopPercent" />
+                  </td>
+                  <td class="c-val">
+                    <input type="number" placeholder="0" required formControlName = "FeeOnTopFixed"/>
+                  </td>
+                </tr> 
+              </table>
+           </div> 
+        </div>
+    </div>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type ="button" [mat-dialog-close]="false">Cancel</button>
+        <div class="h-divider"></div>
+        <button class="btn btn modal-botton" type="submit"><span class="fa fa-save"></span> Save method</button>
+    </div>
+</form>

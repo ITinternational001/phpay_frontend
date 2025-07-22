@@ -1,0 +1,21 @@
+@import "/src/sass/scrollbar";
+.reference-number {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 200px; /* Adjust this width as needed */
+  }
+  
+
+
+  .view-receipts{
+    border-radius: 5px;
+    padding-top: 5px; 
+    padding-bottom: 5px; 
+    width: 100px;
+    display: 'inline-block'; 
+    text-align: center;
+    color: white;
+    background-color: transparent;
+    border: 1px solid grey;
+    cursor: pointer;
+  }

@@ -1,0 +1,59 @@
+<app-maintenance-message>
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">{{"listOfClient" | translate}}</div>
+        <div class="card-actions">
+            <app-search (search)="onSearch(clientId, $event, agentName)"></app-search>
+            <div class="h-divider"></div>
+        </div>
+    </div>
+    <div class="card-body-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="container-with-table">
+            <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="clientName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                    <td mat-cell *matCellDef="let row"> {{ row.ClientName }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="eliteAgent">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ELITE Agent </th>
+                    <td mat-cell *matCellDef="let row"> {{ row.eliteAgent }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="coreAgent">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CORE Agent </th>
+                    <td mat-cell *matCellDef="let row"> {{ row.coreAgent }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="primeAgent">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PRIME Agent </th>
+                    <td mat-cell *matCellDef="let row"> {{ row.primeAgent }} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button [disabled]="!isReadAndWrite" class="btn-theme-vert" mat-mini-fab
+                            [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" xPosition="before">
+                            <button mat-menu-item (click)="onViewAgent(row)">
+                                <mat-icon>support_agent</mat-icon>
+                                <span>{{"viewAgent" | translate}}</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+  
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsViewAgent; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsViewAgent"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="5" style="text-align: center;">No data matching the filter</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+  </div>
+</app-maintenance-message>
+  

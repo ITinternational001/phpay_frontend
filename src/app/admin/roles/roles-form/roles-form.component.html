@@ -1,0 +1,75 @@
+<div mat-dialog-title>
+    <h1 *ngIf='data.formType !=="assign"'>{{"addNew" | translate}} {{data.formType | translate}}</h1>
+    <h1 *ngIf='data.formType =="assign"'>{{"assingPageAccess" | translate}} {{roleToAssign}}</h1>
+</div>
+<form [formGroup]="rolesForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content>
+        <div class="row">
+            
+            <ng-container *ngIf="data.formType == 'permission' || data.formType == 'role';  else assignContainer">
+                <ng-container *ngIf="data.formType == 'permission'">
+                <mat-form-field>
+                    <mat-label>Page Access</mat-label>
+                    <mat-select formControlName="permission">
+                        <mat-option value="n/a" disabled>Select page access...</mat-option>
+                        <mat-option *ngFor="let navItem of navigationValues" [value]="navItem">{{ navItem }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+               
+                </ng-container>
+                <ng-container *ngIf="data.formType == 'role'">
+                    <app-input-text-field
+                        [formGroup]="rolesForm"
+                        controlName="role"
+                        type="text"
+                        placeholder="Role"
+                        [isInvalid]="rolesForm.controls['role'].invalid && rolesForm.controls['role'].touched"
+                        errorMessage="This field is required"
+                    ></app-input-text-field>
+                    <app-input-text-field
+                        [formGroup]="rolesForm"
+                        controlName="description"
+                        type="text"
+                        placeholder="Description"
+                        [isInvalid]="rolesForm.controls['description'].invalid && rolesForm.controls['description'].touched"
+                        errorMessage="This field is required"
+                    ></app-input-text-field>
+                </ng-container>
+
+                <mat-form-field>
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="n/a" disabled>Status</mat-option>
+                        <mat-option [value]="status.Id" *ngFor="let status of statusEnum">{{status.Type}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+               
+            </ng-container>
+            <ng-template #assignContainer>     
+                <div class="container-assign">
+                    <div *ngFor="let item of permissionList" class="item">
+                        <mat-slide-toggle class="example-margin" (change)="togglePermission(item)"
+                        [checked]="item.Enabled">
+                        <span class="label">{{item.PermissionName}}</span>
+                    </mat-slide-toggle>
+                    </div>
+                  </div>
+            </ng-template>
+
+        </div>
+    </div>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type="button" [mat-dialog-close]="false">Cancel</button>
+        <div class="h-divider"></div>
+        <button class="btn btn modal-botton" type="submit" [disabled]="actionDisable">
+            <span *ngIf='data.formType =="assign"'>Save Assigned Role</span>
+            <span *ngIf='data.formType !=="assign"'>Save {{data.formType}}</span>
+        </button>
+    </div>
+</form>
+
+<!-- <button class="btn btn-warning" (click)="updatePermissions()">
+    <span>Update Permission</span>
+  </button> -->

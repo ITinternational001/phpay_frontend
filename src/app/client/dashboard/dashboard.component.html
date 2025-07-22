@@ -1,0 +1,36 @@
+<app-maintenance-message>
+	<div class="row">
+		<div *ngFor="let data of topData"
+			class="col-sm">
+			<app-card [isVisible]="true"
+				[isVisiblebtn]="true"
+				label="{{data.label | translate}}"
+				icon="{{data.icon}}"
+				value="{{data.value}}"></app-card>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+			<app-income-statement></app-income-statement>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+			<app-daily-transaction></app-daily-transaction>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<!-- <app-merchant-summary></app-merchant-summary> -->
+		</div>
+		<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<app-transactions></app-transactions>
+		</div> -->
+	</div>
+
+	<div class = "row">
+		<app-payment-channel-summary></app-payment-channel-summary>
+	</div>
+
+
+
+</app-maintenance-message>

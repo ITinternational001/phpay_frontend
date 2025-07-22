@@ -1,0 +1,135 @@
+.styled-td {
+    background-color: #373737; 
+    color: #ffffff; 
+    text-align: center;
+    font-size: 20px;
+    
+  
+}
+
+.card-wrapper {
+    width: 100%;
+    max-width: 1600px; 
+    margin: auto; 
+    margin-bottom: 100px;
+    padding-bottom: 30px;
+   
+}
+
+.card-header, .card-body-list {
+    width: 100%; 
+    box-sizing: border-box; 
+    padding-bottom: 0.5px;
+}
+
+@media screen and (max-width: 768px) {
+    .card-header, .card-body-list {
+        width: 100%;
+    }
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto; 
+}
+.dynastyTable {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse; 
+}
+.dynastyTable td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 16px;
+    font-size: 18px; 
+    border-color: black;    
+    
+}
+
+@media screen and (max-width: 1000px) {
+    .dynastyTable th, 
+    .dynastyTable td {
+        font-size: 12px; 
+        padding: 8px;
+    }
+}
+.dynastyTable thead th {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    font-size: 18px; 
+    padding-bottom: 17px;
+    
+}
+
+@media screen and (max-width: 576px) {
+    .col-md-9 {
+        width: 100%;
+    }
+    .card-title {
+        font-size: 16px; 
+    }
+}
+.style-td-2 {
+    background-color: #1d1d1d; 
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    height: 365px; /* Fixed height */
+    overflow-y: auto; /* Scrollable if content exceeds 400px */
+  }
+
+
+  
+  .dynastyTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .dynastyTable thead th {
+    position: sticky;
+    top: 0;
+    background: #fff; /* Set your desired background color */
+    z-index: 1; /* Ensure it is above the table body */
+  }
+  
+  .styled-td,
+  .style-td-2 {
+    
+    border-bottom: 1px solid #ddd; /* Adjust as needed */
+  }
+  
+  /* Optional: Add styles for hover effect */
+  .accordion-toggle {
+    cursor: pointer; /* Changes the cursor to a hand */
+}
+
+.accordion-toggle:hover {
+    background-color: #f1f1f1; /* Optional: keep hover effect for better user experience */
+}
+
+.total-success {
+    font-size: 16px;
+    font-weight: bold;
+   
+}
+.title {
+
+    font-size: 18px;
+    color: white;
+    padding-left: 28px;
+    padding-bottom: 6px;
+   
+}
+.successTitle{
+    color: #9d9d9d;
+    font-size: 15px;
+}
+
+  
+
+  
+

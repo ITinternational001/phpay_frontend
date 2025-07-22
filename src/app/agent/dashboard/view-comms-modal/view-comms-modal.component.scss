@@ -1,0 +1,37 @@
+.container-with-table {
+    max-height: 350px;
+    height: auto;
+    overflow: auto;
+    }
+
+.dynastyTable {
+    width: 100%;
+
+}
+
+.card-wrapper {
+    padding-bottom: 50px;
+}
+
+
+:host {
+    display: block;
+    background-color: #2d2d2d;
+    color: white;
+    padding: 16px;
+  }
+
+  .grand-total-row {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    td {
+      border-top: 2px solid #ccc;
+    }
+  }
+  
+
+  .card-title {
+    font-size: 25px;
+    padding-top: 5px;
+    margin-bottom: 25px;
+  }

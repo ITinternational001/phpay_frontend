@@ -1,0 +1,49 @@
+<div mat-dialog-title>
+    <h1>{{"addIPWhitelist" | translate}}</h1>
+</div>
+<form [formGroup]="whitelistForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="dialog-container">
+        <div class="row">
+            <div class="col-md-6">
+                <app-select-search 
+                
+                toplabel = "Client"
+                [options]="clientsList" placeholder="Select client..."
+                (optionSelected)="onSelectChange($event)"></app-select-search>
+            </div>
+            <div class="col-md-6">
+                <app-select-search 
+                toplabel = "User"
+                [options]="usersOptions" placeholder="Select user..."
+                (optionSelected)="onUserChange($event)"></app-select-search>
+                  
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <app-input-text-field
+              [formGroup]="whitelistForm"
+              controlName="Ip"
+              type="text"
+              placeholder="Public IP Address"
+              [isInvalid]="whitelistForm.controls['Ip'].invalid && whitelistForm.controls['Ip'].touched"
+              errorMessage="This field is required"
+            ></app-input-text-field>
+                <mat-error *ngIf="Ip?.invalid && (Ip?.dirty || Ip?.touched)">
+                    <span *ngIf="Ip?.errors?.['pattern']">
+                        Please enter a valid IPv4 address.
+                    </span>
+                </mat-error>
+
+            </div>
+        </div>
+      
+
+    </div>
+    <div mat-dialog-actions>
+        <button class="btn btn-light" type="button" [mat-dialog-close]="false">{{"cancel" | translate}}</button>
+        <div class="h-divider"></div>
+        <button class="btn btn modal-botton" type="submit" [disabled]="actionDisable"><span class="fa fa-save"></span> {{"save" | translate}}</button>
+    </div>
+</form>

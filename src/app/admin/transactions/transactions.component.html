@@ -1,0 +1,191 @@
+<app-maintenance-message>
+    <div class="row">
+        <div class="col-md-8 text-white align-self-end">
+            <app-income-report [data]="transactionList"></app-income-report>
+        </div>
+            <div class="col-md-4 text-white">
+                <app-transaction-summary [data]="transactionList"></app-transaction-summary>
+            </div>
+    </div>
+        <div class ="row">
+            <div class="col-sm-11">
+                <div class="wrapper d-flex justify-content-between">
+                <div *ngFor="let data of topData" class="col-lg-3"> 
+                    <app-card
+                    [isVisible]="false"
+                    [isVisiblebtn]="true"
+                    [label]="data.label | translate"
+                    [value]="(data.value | number: '1.2-2') || ''">
+                    </app-card>
+                </div>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="card-wrapper">
+                <div class="card-header">
+                    <div class="card-title p-3">{{"transactions" | translate}}
+                    </div>
+                    <div class="card-actions">
+                        <app-search (search)="onSearch($event)"></app-search> 
+                        <div class="h-divider"></div>
+                        <form [formGroup]="DateRangeForm">
+                            <mat-form-field>
+                                <mat-label>StartDate - EndDate</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                    <input matStartDate placeholder="Start date" formControlName="startDate">
+                                    <input matEndDate placeholder="End date" formControlName="endDate">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                            </mat-form-field>
+                        </form>
+                        <div class="h-divider"></div>
+                        <form [formGroup]="DateRangeForm" class="dropdown">
+                            <app-select-search [style.width.px]="130"
+                                [options]="statusEnum" 
+                                placeholder="Select Status" 
+                                [showSearch]="false"
+                                (optionSelected)="onSelectStatus($event)">
+                            </app-select-search>
+                        </form>
+                        <div class="h-divider"></div>
+
+                        <form [formGroup]="DateRangeForm" class="additionaldropdown">
+                            <app-select-search [style.width.px]="130"
+                                [options]="clientsList" 
+                                placeholder="Select Client" 
+                                [showSearch]="true"
+                                (optionSelected)="onClientChange($event)">
+                            </app-select-search>
+                        </form>
+                        <div class="h-divider"></div>
+                        <form [formGroup]="DateRangeForm" class="dropdown">
+                            <app-select-search [style.width.px]="130" 
+                                [options]="transactionType" 
+                                placeholder="Select Type" 
+                                [showSearch]="false"
+                                (optionSelected)="onTransactionTypeChange($event)">
+                            </app-select-search>
+                        </form>
+                        <div class="h-divider"></div>
+                        <app-button [disabled]="!isReadAndWrite" [text]="'download' | translate" [icon]="'fa-download'" [btnClass]="'btn-theme btn-lg'"
+                            (click)="exportToExcel()"></app-button>
+
+                    </div>
+                </div>
+                <div class="card-body-table">
+                    <app-spinner *ngIf="isLoading"></app-spinner>
+                    <div class="container-with-table">
+                        <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+
+                            <ng-container matColumnDef="createdDate">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Date}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="completedDate">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Completed Date </th>
+                                <td mat-cell *matCellDef="let row"> {{row.VendorResponseTime}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="TransactionNo">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction No. </th>
+                                <td mat-cell *matCellDef="let row"> {{row.TransactionNo}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="OrderNo">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Order No. </th>
+                                <td mat-cell *matCellDef="let row"> {{row.OrderNumber}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ReferenceNo">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Reference No </th>
+                                <td mat-cell *matCellDef="let row"> {{row.ReferenceNo}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="ReferenceUserId">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> User Id </th>
+                                <td mat-cell *matCellDef="let row"> {{row.ReferenceUserId}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Client">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Client}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Type">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Type}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Method">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Method </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Method}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Merchant">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Merchant </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Merchant}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Gross">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Gross </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Gross | number : '1.2-2'}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="TranFee">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tran. Fee </th>
+                                <td mat-cell *matCellDef="let row"> {{row.TranFee | number : '1.2-2'}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Net">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Net Amounts </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Net | number : '1.2-2'}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="Status">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Status}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Receipt">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Receipt </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <!-- <span class="view-receipt" (click)="viewReceipt(row)">view</span>
+                                    <span class="view-receipt" (click)="onResendWebhook(row.TransactionNo)">Resend Webhook</span> -->
+                                    <button class="btn-theme-vert" mat-mini-fab
+                                    [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+                                    <mat-menu #menu="matMenu" xPosition="before">
+                                      <button mat-menu-item (click)="viewReceipt(row)" [disabled]="!isReadAndWrite">
+                                        <mat-icon>visibility</mat-icon>
+                                        <span> {{"viewReceipt" | translate}}</span>
+                                      </button>
+                                      <button mat-menu-item (click)="onResendWebhook(row.TransactionNo, row.Type)" [disabled]="!isReadAndWrite">
+                                        <mat-icon>autorenew</mat-icon>
+                                        <span> {{"resendWebhook" | translate}}</span>
+                                      </button>
+                                    </mat-menu>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="14" style="text-align: center;">
+                                    <app-nodata></app-nodata>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+
+                        <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+                            (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+                            (lastData)="onLastPage()" (itemsPerPageChange)="onItemsPerPageChanged($event)">
+                        </app-pagination>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+</app-maintenance-message>
+

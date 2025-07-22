@@ -1,0 +1,24 @@
+@import"/src/sass/variables";
+
+.body{
+    width: calc(100% - $sidenav-width-collapsed);
+    //height: 100vh;
+    //margin-top: 1rem;
+    margin-left: $sidenav-width-collapsed;
+    z-index: 0;
+    position:relative;
+    top: 0;
+    transition: all .5s ease;
+    background: transparent;
+    padding:0px 50px 0px 50px;
+}
+
+.body-trimmed{
+    width: calc(100% - $sidenav-width-default);
+    margin-left: $sidenav-width-default;
+}
+
+.body-md-screen{
+    width: calc(100% - $sidenav-width-default);
+    margin-left: $sidenav-width-default;
+}

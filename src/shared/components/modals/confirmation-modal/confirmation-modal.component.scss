@@ -1,0 +1,109 @@
+@import"/src/sass/variables";
+
+
+.mycontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    padding:20px;
+    color: $color-text-yellow;
+    font-size: 30px;
+    font-weight: 100px;
+}
+
+.close-icon{
+    color:$color-text-white;
+    font-size: 30px;
+}
+
+.text {
+    color:$color-text-white;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.tpass {
+    color: $color-text-white;
+    font-size: 25px;
+    padding-left: 10px;
+}
+
+.email {
+    color: whitesmoke;
+    font-weight: 500px;
+}
+
+.temporarypass-container {
+    color: $color-text-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.withbg {
+    background-color: rgb(69, 68, 68);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn-location{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copy-button{
+    cursor: pointer;
+    color: $color-text-yellow;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: $color-text-white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .btn-theme{
+    background-color: $color-text-yellow;
+    color:$color-text-white;
+    font-size: 18px;
+}

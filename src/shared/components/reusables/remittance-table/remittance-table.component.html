@@ -1,0 +1,158 @@
+<div class="card-wrapper">
+    <div class="card-header">
+        <div class="card-title p-3">{{title | translate}}</div>
+        <div class="card-actions">
+         
+            <app-search (search)="onSearch($event)"></app-search>
+
+            <div class="h-divider"></div>
+            
+            <div class="class="col-md-12 style="width: 150px; margin-top: -10px;">
+                <app-select-search 
+                    [options]="statusType" 
+                    placeholder="Select Type"
+                    [disabled]="!isReadAndWrite" 
+                    [showSearch]="false"
+                    (optionSelected)="onStatusType($event)">
+                </app-select-search>
+            </div>
+            <div class="h-divider"></div>
+            
+            <form [formGroup]="RemittanceForm">
+                <mat-form-field>
+                    <mat-label>StartDate - EndDate</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" formControlName="StartDate">
+                        <input matEndDate placeholder="End date" formControlName="EndDate">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </form>
+
+            <div class="h-divider"></div>
+            <!-- <app-button [text]="'Download'" [icon]="'fa-download'" [btnClass]="'btn-theme btn-lg'"></app-button> -->
+
+        </div>
+    </div>
+    <div class="card-body-table">
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="container-with-table">
+            <table *ngIf="!isLoading" class="dynastyTable" mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="timestamp">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> TimeStamp </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.TimeStamp }} </td>
+                </ng-container>
+                <ng-container matColumnDef="remittanceid">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Remittance Id </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.RemittanceId }} </td>
+                </ng-container>
+                <ng-container matColumnDef="requestedamount">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Requested Amount </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.RequestedAmount | number : '1.2-2'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="transactionFee">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Fee </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.TransactionFee}} </td>
+                </ng-container>
+                <ng-container matColumnDef="totalamount">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Total Amount </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.TotalAmount | number : '1.2-2' }} </td>
+                </ng-container>
+                <ng-container matColumnDef="MOP">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> MOP </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.CardAccountName }} - {{row.CardAccountNumber}}</td>
+                </ng-container>
+                <ng-container matColumnDef="methodDescription">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Type </th>
+                    <td *matCellDef="let row" mat-cell>{{row.MethodDescription}} </td>
+                </ng-container>
+                <ng-container matColumnDef="dateremitted">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Date Remitted </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.DateRemitted }} </td>
+                </ng-container>
+                <ng-container matColumnDef="referenceNo">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Reference No </th>
+                    <td *matCellDef="let row" mat-cell> {{ row.ReferenceNumber }} </td>
+                </ng-container>
+                <ng-container matColumnDef="requestee">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Requestee</th>
+                    <td *matCellDef="let row" mat-cell>{{ row.Requestee }}</td>
+                </ng-container>
+                <ng-container matColumnDef="approver">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Approver</th>
+                    <td *matCellDef="let row" mat-cell>{{ row.Approver }}</td>
+                </ng-container>
+                <ng-container matColumnDef="wallet">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Wallet</th>
+                    <td *matCellDef="let row" mat-cell>{{ row.Wallet }}</td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                    <td *matCellDef="let row" mat-cell>
+                        <span [ngStyle]="row.Status | statusColor">{{ row.Status }}</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                    <td mat-cell *matCellDef="let row">
+                      <button [disabled]="!isReadAndWrite" class="btn-theme-vert" mat-mini-fab [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu" xPosition="before">
+                        <!-- Admin Actions -->
+                        <ng-container *ngIf="isAdmin; else clientActions">
+                          <button  mat-menu-item (click)="onApproved(row)" *ngIf="row.Status === 'Processing'">
+                            <mat-icon>check</mat-icon>
+                            <span>{{"release" | translate}}</span>
+                          </button>
+                          <button mat-menu-item (click)="onProcessing(row)" *ngIf="row.Status !== 'Processing'">
+                            <mat-icon>check</mat-icon>
+                            <span>{{"processing" | translate}}</span>
+                          </button>
+                          <button mat-menu-item (click)="onDecline(row)">
+                            <mat-icon>highlight_off</mat-icon>
+                            <span>{{"decline" | translate}}</span>
+                          </button>
+                          <button mat-menu-item (click)="onCashPickup(row)" *ngIf="row.MethodDescription === 'CASH_PICK_UP'">
+                            <mat-icon>remove_red_eye</mat-icon>
+                            <span>{{"cashPickUpDetails" | translate}}</span>
+                          </button>
+                        </ng-container>
+                        
+                        <!-- Client Actions -->
+                        <ng-template #clientActions>
+                          <button mat-menu-item (click)="onCashPickup(row)" *ngIf="row.MethodDescription === 'CASH_PICK_UP'">
+                            <mat-icon>remove_red_eye</mat-icon>
+                            <span>{{"cashPickUpDetails" | translate}}</span>
+                          </button>
+                        </ng-template>
+                      </mat-menu>
+                    </td>
+                  </ng-container>
+                  
+                  
+                  
+                  
+
+                <tr *matHeaderRowDef="displayedColumns; sticky:true" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="14" style="text-align: center;">No data matching the filter
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+            (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+            (lastData)="onLastPage()" (itemsPerPageChange)="onItemsPerPageChanged($event)">
+        </app-pagination>
+    </div>
+</div>
+<div class="card-footer"></div>
+
+<ng-container>
+    <app-remittance-completed [isAdmin] = "isAdmin"  [data] = "isCompletedChanged"></app-remittance-completed>
+</ng-container>

@@ -1,0 +1,92 @@
+@import "../../../../sass/dropdown";
+
+/* General styles for the card container */
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  /* Adjust header layout */
+  .card-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .card-title {
+    // flex: 1 1 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    padding-left: 10px
+  }
+  
+  .card-actions {
+    // flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Adjust form for smaller screens */
+  mat-form-field {
+    width: 100%;
+  }
+  
+  /* Responsive chart container */
+  .card-body {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  canvas {
+    width: 100% !important; /* Make sure the canvas takes full width */
+    height: auto; /* Adjust height based on content */
+  }
+  
+  /* Legend container adjustments */
+  .card-footer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .legend-item {
+    margin: 5px;
+    text-align: center;
+  }
+  
+  /* Media queries for better responsiveness */
+  @media (max-width: 768px) {
+    .card-header {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .card-title {
+      text-align: center;
+    }
+  
+    .card-actions {
+      justify-content: center;
+    }
+  
+    .legend-item {
+      width: 100%; /* Make legend items take full width on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card-header {
+      padding: 10px;
+    }
+  
+    .card-actions {
+      padding: 5px;
+    }
+    
+    .legend-item {
+      font-size: 12px; /* Adjust legend font size for smaller screens */
+    }
+  }
+  

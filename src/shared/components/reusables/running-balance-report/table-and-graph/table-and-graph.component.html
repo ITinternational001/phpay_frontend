@@ -1,0 +1,68 @@
+<div class="chart-wrapper">
+  <canvas baseChart
+    class="chart-canvas"
+    [type]="'bar'"
+    [data]="barChartData"
+    [options]="barChartOptions"
+    [legend]="false">
+  </canvas>
+</div>
+
+
+  
+<!-- <mat-toolbar color="primary">Dynamic Mat-Table</mat-toolbar> -->
+
+
+<div class="table-container">
+  <div class="container-with-table">
+    <button class="title btn btn-primary" mat-button [ngClass]="{'active-tab': selectedTab === 'Deposit'}" (click)="onTabSelect('Deposit')">{{"deposit" | translate}}</button>
+    <button class="title btn btn-primary" mat-button [ngClass]="{'active-tab': selectedTab === 'Withdrawal'}" (click)="onTabSelect('Withdrawal')">{{"withdrawal" | translate}}</button>
+    <button class="title btn btn-primary" mat-button [ngClass]="{'active-tab': selectedTab === 'Vendor'}" (click)="onTabSelect('Vendor')">{{"vendor" | translate}}</button>
+    <button class="title btn btn-primary" mat-button [ngClass]="{'active-tab': selectedTab === 'AgentComms'}" (click)="onTabSelect('AgentComms')">{{"agentComms" | translate}}</button>
+  </div>
+
+
+  <!-- Mat Table inside a responsive container -->
+  <div class="table-responsive">
+    <table mat-table [dataSource]="tableData" class="dynastyTable" matSort>
+
+      <!-- Table Columns dynamically generated based on selected title -->
+      <ng-container *ngFor="let column of displayedColumns">
+        <ng-container [matColumnDef]="column">
+          <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="isNumberColumn(column)">
+              {{ element[column] | number: '1.2-2' }}
+            </span>
+            <span *ngIf="!isNumberColumn(column)">
+              {{ element[column] }}
+            </span>
+          </td>
+          <td mat-footer-cell *matFooterCellDef>
+            <ng-container *ngIf="isNumberColumn(column)">
+              {{ getColumnTotal(column) | number: '1.2-2' }}
+            </ng-container>
+            <ng-container *ngIf="!isNumberColumn(column)">
+              {{ column === displayedColumns[0] ? 'Total' : '' }}
+            </ng-container>
+          </td>
+        </ng-container>
+      </ng-container>
+
+      <!-- Header & Row Rendering -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Footer Row Rendering with conditional check to prevent errors when no data is available -->
+      <!-- <ng-container *ngIf="tableData && tableData.length > 0">
+        <tr mat-footer-row *matFooterRowDef="displayedColumns" class="grand-total-row"></tr>
+      </ng-container> -->
+    </table>
+  </div>
+          <app-pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+            (firstData)="onFirstPage()" (nextData)="onNextPage()" (previousData)="onPreviousPage()"
+            (lastData)="onLastPage()" (itemsPerPageChange)="onItemsPerPageChanged($event)">
+        </app-pagination>
+</div>
+
+

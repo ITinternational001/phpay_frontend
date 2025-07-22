@@ -1,0 +1,14 @@
+
+@import"/src/sass/variables";
+
+button{
+    background-color: #373737;
+    border: 1px solid #373737;
+    border: none;
+    color: $color-text-white;
+}
+.mat-mdc-unelevated-button.mat-primary {
+    --mdc-filled-button-container-color: #373737;
+    --mdc-filled-button-label-text-color: $color-text-white;
+
+}

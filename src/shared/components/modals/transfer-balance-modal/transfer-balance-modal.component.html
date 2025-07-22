@@ -1,0 +1,47 @@
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-title>
+    <div class="header">
+      <h1 class="header">{{"transferBalanceRequest" | translate}}</h1>
+    </div>
+  </div>
+  <div mat-dialog-content>
+    <div class="top-details">
+      <div class="details">
+        <div>
+          <span class="label-details">Client: </span>
+          <span class="value">{{ clientName }}</span>
+        </div>
+         <div>
+          <span class="label-details">Requested: </span>
+          <span class="value">{{ requestedAmount }}</span>
+        </div>
+      </div>
+      <div class="details">
+         <div>
+          <span class="label-details">Transaction Number: </span>
+          <span class="value">{{ transactionNumber}}</span>
+        </div>
+       
+      </div>
+      <div class="details">
+        <div *ngIf="data.showMerchant">
+          <span class="label-details">Transfer Type: </span>
+          <span class="value">{{ transferType }}</span>
+        </div>
+      </div>
+    </div>
+
+    <app-input-text-field [formGroup]="transferForm" controlName="Remarks" type="text"
+      placeholder="Add remarks upon approving"
+      [isInvalid]="transferForm.controls['Remarks'].invalid && transferForm.controls['Remarks'].touched"
+      errorMessage="This field is required"></app-input-text-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button class="btn btn-light" type="button" [mat-dialog-close]="false">{{"cancel" | translate}}</button>
+    <div class="h-divider"></div>
+    <button type="submit" class="btn btn-theme" [disabled]="actionDisable">
+      <span class="fa fa-exchange"></span> {{"confirm" | translate}}
+    </button>
+  </div>
+</form>
