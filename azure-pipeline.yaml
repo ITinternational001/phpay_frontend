@@ -13,12 +13,14 @@ stages:
   displayName: 'Build Stage'
   jobs:
   - job: BuildJob
-    pool: 
+    pool:
       vmImage: 'windows-latest'
-
-    steps: 
+    steps:
     - script: echo "Skipping Pull Request validation"
-      condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'), eq(variables['System.PullRequest.TargetBranch'], 'refs/heads/devops-development-branch'))
+      condition: and(
+        succeeded(),
+        eq(variables['Build.Reason'], 'PullRequest'),
+        eq(variables['System.PullRequest.TargetBranch'], 'refs/heads/devops-development-branch'))
 
     - script: |
         npm install
@@ -30,8 +32,8 @@ stages:
 
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: 'dist'
-        ArtifactName: 'production_build'
+        pathToPublish: 'dist'
+        artifactName: 'production_build'
     
     - script: |
         set BOT_TOKEN=7184853678:AAFWREOg_088eK0w68WTTSCPwNCwdyYhDhA
@@ -45,97 +47,101 @@ stages:
       displayName: 'Send Telegram Notification'
 
 - stage: DeployWebsite_1
-  displayName: 'Deploy Server 111'
+  displayName: 'Deploy DEV FE Server'
   jobs:
-    - deployment: DeployWebsite_Development_server_92
-      displayName: 'Deploy website to server 92'
-      environment: 'Windows 2022 server development.DynastyGatewayP'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - checkout: none
+  - deployment: DeployWebsite_Development_server_FE
+    displayName: 'Deploy website to DEV FE Server'
+    environment: 'PHPAY FE DEV Server.BNSPAY'
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: none
 
-              - download: current
-                displayName: 'Download Build Artifacts'
-                artifact: 'production_build'
+          - download: current
+            displayName: 'Download Build Artifacts'
+            artifact: 'production_build'
 
-              - task: CopyFiles@2
-                displayName: 'Copy Files to Deployment Directory'
-                inputs:
-                  SourceFolder: '$(Pipeline.Workspace)/production_build/dynastypay-frontend'
-                  Contents: '**'
-                  TargetFolder: 'C:\Deployment\DynastyPay_Test'
-                  Overwrite: true
+          - task: CopyFiles@2
+            displayName: 'Copy Files to Deployment Directory'
+            inputs:
+              SourceFolder: '$(Pipeline.Workspace)/production_build/phpay-frontend'
+              Contents: '**'
+              TargetFolder: 'C:\Deployment\DynastyPay_Test'
+              Overwrite: true
 
-              - task: IISWebAppManagementOnMachineGroup@0
-                name: 'StopIIS'
-                displayName: 'Stop IIS Website'
-                inputs:
-                  IISDeploymentType: 'IISWebsite'
-                  ActionIISWebsite: 'StopWebsite'
-                  StartStopWebsiteName: 'DynastyPay_Test'
+          - task: IISWebAppManagementOnMachineGroup@0
+            name: 'StopIIS'
+            displayName: 'Stop IIS Website'
+            inputs:
+              IISDeploymentType: 'IISWebsite'
+              ActionIISWebsite: 'StopWebsite'
+              StartStopWebsiteName: 'bnspay_test'
 
-              - task: IISWebAppManagementOnMachineGroup@0
-                name: 'StartIIS'
-                displayName: 'Start IIS Website'
-                inputs:
-                  IISDeploymentType: 'IISWebsite'
-                  ActionIISWebsite: 'StartWebsite'
-                  StartStopWebsiteName: 'DynastyPay_Test'
+          - task: IISWebAppManagementOnMachineGroup@0
+            name: 'StartIIS'
+            displayName: 'Start IIS Website'
+            inputs:
+              IISDeploymentType: 'IISWebsite'
+              ActionIISWebsite: 'StartWebsite'
+              StartStopWebsiteName: 'bnspay_test'
 
-              - script: |
-                  set BOT_TOKEN=7184853678:AAFWREOg_088eK0w68WTTSCPwNCwdyYhDhA
-                  set CHAT_ID=-1002235424134
-                  set DEPLOY_STATUS=success
-                  set MESSAGE=Deploy to Server 92 FrontEnd completed with status %DEPLOY_STATUS%
-                  curl -s -X POST https://api.telegram.org/bot%BOT_TOKEN%/sendMessage -d chat_id=%CHAT_ID% -d text="%MESSAGE%"
-                displayName: 'Send Deployment Notification'
+          - script: |
+              set BOT_TOKEN=7184853678:AAFWREOg_088eK0w68WTTSCPwNCwdyYhDhA
+              set CHAT_ID=-1002235424134
+              set DEPLOY_STATUS=success
+              set MESSAGE=Deploy to PHPay Server FrontEnd completed with status %DEPLOY_STATUS%
+              curl -s -X POST https://api.telegram.org/bot%BOT_TOKEN%/sendMessage -d chat_id=%CHAT_ID% -d text="%MESSAGE%"
+            displayName: 'Send Deployment Notification'
 
 - stage: DeployWebsite_2
-  displayName: 'Deploy Server 92'
+  displayName: 'Deploy DEV BE Server'
   jobs:
-    - deployment: DeployWebsite_Development_server_111
-      displayName: 'Deploy website to server 111'
-      environment: 'Windows 2022 server.DynastyGatewayP'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - checkout: none
+  - deployment: DeployWebsite_Development_server_BE_FE
+    displayName: 'Deploy FE website to BE Server'
+    environment: 'PHPay Dev Backend server.bnspay'
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: none
 
-              - download: current
-                displayName: 'Download Build Artifacts'
-                artifact: 'production_build'
+          - download: current
+            displayName: 'Download Build Artifacts'
+            artifact: 'production_build'
 
-              - task: CopyFiles@2
-                displayName: 'Copy Files to Deployment Directory'
-                inputs:
-                  SourceFolder: '$(Pipeline.Workspace)/production_build/dynastypay-frontend'
-                  Contents: '**'
-                  TargetFolder: 'C:\Deployment\DynastyPay_Test'
-                  Overwrite: true
+          - task: CopyFiles@2
+            displayName: 'Copy Files to Deployment Directory'
+            inputs:
+              SourceFolder: '$(Pipeline.Workspace)/production_build/phpay-frontend'
+              Contents: '**'
+              TargetFolder: 'C:\Deployment\DynastyPay_Test'
+              Overwrite: true
 
-              - task: IISWebAppManagementOnMachineGroup@0
-                name: 'StopIIS'
-                displayName: 'Stop IIS Website'
-                inputs:
-                  IISDeploymentType: 'IISWebsite'
-                  ActionIISWebsite: 'StopWebsite'
-                  StartStopWebsiteName: 'DynastyPay_Test'
+          - task: IISWebAppManagementOnMachineGroup@0
+            name: 'StopIIS'
+            displayName: 'Stop IIS Website'
+            inputs:
+              IISDeploymentType: 'IISWebsite'
+              ActionIISWebsite: 'StopWebsite'
+              StartStopWebsiteName: 'bnspay_test'
 
-              - task: IISWebAppManagementOnMachineGroup@0
-                name: 'StartIIS'
-                displayName: 'Start IIS Website'
-                inputs:
-                  IISDeploymentType: 'IISWebsite'
-                  ActionIISWebsite: 'StartWebsite'
-                  StartStopWebsiteName: 'DynastyPay_Test'
+          - task: IISWebAppManagementOnMachineGroup@0
+            name: 'StartIIS'
+            displayName: 'Start IIS Website'
+            inputs:
+              IISDeploymentType: 'IISWebsite'
+              ActionIISWebsite: 'StartWebsite'
+              StartStopWebsiteName: 'bnspay_test'
 
-              - script: |
-                  set BOT_TOKEN=7184853678:AAFWREOg_088eK0w68WTTSCPwNCwdyYhDhA
-                  set CHAT_ID=-1002235424134
-                  set DEPLOY_STATUS=success
-                  set MESSAGE=Deploy to Server 111 FrontEnd completed with status %DEPLOY_STATUS%
-                  curl -s -X POST https://api.telegram.org/bot%BOT_TOKEN%/sendMessage -d chat_id=%CHAT_ID% -d text="%MESSAGE%"
-                displayName: 'Send Deployment Notification'
+          - script: |
+              set BOT_TOKEN=7184853678:AAFWREOg_088eK0w68WTTSCPwNCwdyYhDhA
+              set CHAT_ID=-1002235424134
+              set DEPLOY_STATUS=success
+              set MESSAGE=Deploy BE Server for FE completed with status %DEPLOY_STATUS%
+              curl -s -X POST https://api.telegram.org/bot%BOT_TOKEN%/sendMessage -d chat_id=%CHAT_ID% -d text="%MESSAGE%"
+            displayName: 'Send Deployment Notification'
