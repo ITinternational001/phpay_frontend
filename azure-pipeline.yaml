@@ -18,7 +18,7 @@ stages:
 
     steps: 
     - script: echo "Skipping Pull Request validation"
-      condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'), eq(variables['System.PullRequest.TargetBranch'], 'refs/heads/devops-development-branch'))
+      condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'), eq(variables['System.PullRequest.TargetBranch'], 'refs/heads/devops-main-branch'))
 
     - script: |
         npm install
