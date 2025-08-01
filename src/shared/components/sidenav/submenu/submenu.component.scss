@@ -37,17 +37,17 @@
 
     .submenu-nav-item:hover{
         .submenu-link-text{
-        color: rgb(228, 50, 234);
+        color: $color-text-violet;
         }
         .submenu-link-icon{
-        color: rgb(228, 50, 234);
+        color: $color-text-violet;
         }
 
         .submenu-nav-link:hover{
-        color: rgb(228, 50, 234);
+        color: $color-text-violet;
 
             .menu-collapse-icon{
-            color: rgb(228, 50, 234);
+            color: $color-text-violet;
             }
         }
     }
@@ -55,7 +55,7 @@
 
 .active{
     .submenu-link-text{
-    color: rgb(228, 50, 234);
+    color: $color-text-violet;
     }
 }
 

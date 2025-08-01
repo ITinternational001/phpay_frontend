@@ -2,7 +2,7 @@
 @import "/src/sass/input-text";
 
 .btn-theme-vert{
-    background-color: $color-text-yellow;
+    background-color: $color-text-violet;
 }
 
 .title{
@@ -10,7 +10,7 @@
     text-align: center;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 2px solid $color-text-yellow;
+    border-bottom: 2px solid $color-text-violet;
     color: $color-text-white;
 }
 
@@ -48,7 +48,7 @@
     }
 
     .value {
-        color: $color-text-yellow
+        color: $color-text-violet
     }
 }
 
@@ -188,7 +188,7 @@ input::-webkit-inner-spin-button {
 .btn-confirm {
     width: 50%;
     padding: 15px;
-    background-color: $color-text-yellow;
+    background-color: $color-text-violet;
     border: none;
     border-radius: 0.5rem;
     color: #000;
@@ -288,7 +288,7 @@ form label {
 }
 
 .btn-theme{
-    background-color: $color-text-yellow;
+    background-color: $color-text-violet;
     color:$color-text-white;
     font-size: 18px;
 }

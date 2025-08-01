@@ -22,7 +22,7 @@ const routes: Routes = [
         data: { headerLabel: 'dashboard', routeName:"Dashboard" }
       },
       {
-        path: "dpayclients/list",
+        path: "phpayclients/list",
         loadChildren: () => import('./clients/clients.module').then(mod => mod.ClientsModule),
         data: { headerLabel: 'clientsList',  routeName:"Client List"},
         canActivate:[roleGuard]
@@ -80,22 +80,22 @@ const routes: Routes = [
       },
     
       {
-        path: 'dpayclients/configure',
+        path: 'phpayclients/configure',
         loadChildren: () => import('./clients/client-pages/client-configure/client-configure.module').then(mod => mod.ClientConfigureModule),
         data: { headerLabel: 'Configure Client', routeName: "Configure Client" }
       },
       {
-        path: 'dpayclients/cashoutfunds',
+        path: 'phpayclients/cashoutfunds',
         loadChildren: () => import('./clients/client-pages/client-funds/client-funds.module').then(mod => mod.ClientFundsModule),
         data: { headerLabel: 'availableBalance', routeName: "CashOut Funds" }
       },
       {
-        path: 'dpayclients/transfers',
+        path: 'phpayclients/transfers',
         loadChildren: () => import('./clients/client-pages/client-transfers/client-transfers.module').then(mod => mod.ClientTransfersModule),
         data: { headerLabel: 'transferBalance', routeName: "Balance Transfer" }
       },
       {
-        path: 'dpayclients/remittances',
+        path: 'phpayclients/remittances',
         loadChildren: () => import('./clients/client-pages/client-remittances/client-remittances.module').then(mod => mod.ClientRemittancesModule),
         data: { headerLabel: 'clientRemittances', routeName: "Remittances" }
       },
