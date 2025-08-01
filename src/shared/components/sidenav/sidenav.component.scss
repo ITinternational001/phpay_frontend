@@ -103,14 +103,14 @@
 
             .sidenav-link-text,
             .sidenav-link-icon {
-                color: rgb(228, 50, 234);
+                color: $color-text-violet;
             }
 
             .sidenav-nav-link:hover {
-                color: rgb(228, 50, 234);
+                color: $color-text-violet;
 
                 .menu-collapse-icon {
-                    color: rgb(228, 50, 234);
+                    color: $color-text-violet;
                 }
             }
         }
@@ -125,7 +125,7 @@
     .sidenav-link-text,
     .submenu-link-text,
     .sidenav-link-icon {
-        color: rgb(228, 50, 234);
+        color: $color-text-violet;
     }
 }
 
@@ -171,11 +171,11 @@
 }
 
 .english.active {
-    background: linear-gradient(45deg, #ff007a, #873cff);
+    background: linear-gradient(45deg, #4b0e2c, $color-text-violet);
 }
 
 .chinese.active {
-    background: linear-gradient(45deg, #ff007a, #873cff);
+    background: linear-gradient(45deg, #4b0e2c, $color-text-violet);
 }
 
 .line {
@@ -238,14 +238,14 @@
 
             .sidenav-link-text,
             .sidenav-link-icon {
-                color: rgb(228, 50, 234);
+                color: $color-text-violet;
             }
 
             .sidenav-nav-link:hover {
-                color: rgb(228, 50, 234);
+                color: $color-text-violet;
 
                 .menu-collapse-icon {
-                    color: rgb(228, 50, 234);
+                    color: $color-text-violet;
                 }
             }
         }

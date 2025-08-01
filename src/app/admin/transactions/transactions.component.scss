@@ -19,7 +19,7 @@
   
   .view-receipt{
     cursor: pointer;
-    background-color: $color-text-yellow;
+    background-color: $color-text-violet;
     color:$color-text-white;
     padding-top: 5px;
     border-radius: 5px;
@@ -57,7 +57,7 @@
   }
 
   .btn-theme-vert{
-    background-color: $color-text-yellow;
+    background-color: $color-text-violet;
 }
 
 
@@ -73,7 +73,7 @@
   }
   
   .pagination a.active {
-    background-color: $color-text-yellow;
+    background-color: $color-text-violet;
     color: $color-bg-sidenav;
     border-radius: 5px;
   }

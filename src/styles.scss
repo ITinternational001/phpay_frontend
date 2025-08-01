@@ -53,7 +53,7 @@ body {
 }
 
 .btn-warning {
-background-color: $color-text-yellow;
+background-color: $color-text-violet;
 
 }
 
@@ -97,7 +97,7 @@ body {
 
 .section-title {
   font-size: 24px;
-  color: $color-text-yellow;
+  color: $color-text-violet;
   font-weight: 700;
   align-items: center;
 }
@@ -212,7 +212,7 @@ body {
 }
 
 .mat-mdc-unelevated-button.mat-primary {
-  --mdc-filled-button-container-color: $color-text-yellow;
+  --mdc-filled-button-container-color: $color-text-violet;
   --mdc-filled-button-label-text-color: #fff;
 }
 
@@ -409,7 +409,7 @@ body {
 /* spinner.component.css */
 ::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
 ::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
-  stroke: $color-text-yellow !important;
+  stroke: $color-text-violet !important;
 }
 
 ::-webkit-scrollbar {

@@ -132,7 +132,7 @@ p {
 
 .hint{
     font-size: 14px;
-    color: $color-text-yellow;
+    color: $color-text-violet;
 }
 
 .co-card-title {
@@ -145,9 +145,9 @@ p {
 
 
     .header-active {
-        color: $color-text-yellow;
+        color: $color-text-violet;
         padding: 10px;
-        border-bottom: 2px solid $color-text-yellow;
+        border-bottom: 2px solid $color-text-violet;
         cursor: pointer;
     }
 
