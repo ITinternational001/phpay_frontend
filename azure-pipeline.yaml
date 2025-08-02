@@ -67,7 +67,7 @@ stages:
           - task: CopyFiles@2
             displayName: 'Copy Files to Deployment Directory'
             inputs:
-              SourceFolder: '$(Pipeline.Workspace)/production_build/phpay-frontend'
+              SourceFolder: '$(Pipeline.Workspace)/production_build'
               Contents: '**'
               TargetFolder: 'C:\Deployment\DynastyPay_Test'
               Overwrite: true
@@ -117,7 +117,7 @@ stages:
           - task: CopyFiles@2
             displayName: 'Copy Files to Deployment Directory'
             inputs:
-              SourceFolder: '$(Pipeline.Workspace)/production_build/phpay-frontend'
+              SourceFolder: '$(Pipeline.Workspace)/production_build'
               Contents: '**'
               TargetFolder: 'C:\Deployment\DynastyPay_Test'
               Overwrite: true
