@@ -1,7 +1,6 @@
 export const environment = {
     production: false,
-    basePath: 'https://testapi.dynastypay.net',
-    test_basePath: 'https://testapi.dynastypay.net',
+    basePath: ' https://testapi.phpay.co',
     APIkey: 'Default:DynastyPayApiKeyInternational2023!'
 };
   
