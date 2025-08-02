@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/dynastypay-frontend",
+            "outputPath": "dist/phpay-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "dynastypay-frontend:build:production"
+              "browserTarget": "phpay-frontend:build:production"
             },
             "development": {
-              "browserTarget": "dynastypay-frontend:build:development"
+              "browserTarget": "phpay-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dynastypay-frontend:build"
+            "browserTarget": "phpay-frontend:build"
           }
         },
         "test": {
