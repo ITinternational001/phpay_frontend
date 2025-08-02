@@ -3,9 +3,10 @@ $sidenav-width-default: 5rem;
 $sidenav-size-text: 24px;
 
 //THEME
-//$color-text-yellow : rgb(228, 50, 234);
+//$color-text-violet : rgb(228, 50, 234);
 
-$color-text-yellow : rgba(141, 32, 144, 1);
+$color-text-violet : rgba(141, 32, 144, 1);
+$color-text-violet : #EFB62C;
 $color-text-white:  rgba(255, 255, 255, 1);
 $color-bg-body: rgba(22, 22, 22, 1);
 $color-bg-sidenav: rgba(31, 31, 31, 0.7);
@@ -21,4 +22,4 @@ $page-title-text-color : #CECECE;
 $table-header : #BEBEBE;
 $table-title : #FFDF88;
 
-$spinner : rgb(228, 50, 234);
+$spinner : #EFB62C;;

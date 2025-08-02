@@ -34,18 +34,18 @@
 
 .mat-mdc-tab-group,
 .mat-mdc-tab-nav-bar {
-    --mdc-tab-indicator-active-indicator-color:rgb(228, 50, 234)!important;
+    --mdc-tab-indicator-active-indicator-color:$color-text-violet!important;
     --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38) !important;
     --mat-tab-header-pagination-icon-color: #000;
     --mat-tab-header-inactive-label-text-color: rgb(255, 255, 255) !important;
-    --mat-tab-header-active-label-text-color: rgb(228, 50, 234) !important;
+    --mat-tab-header-active-label-text-color: $color-text-violet !important;
     --mat-tab-header-active-ripple-color: #3f51b5 !important;
     --mat-tab-header-inactive-ripple-color: #3f51b5 !important;
     --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6) !important;
-    --mat-tab-header-inactive-hover-label-text-color:rgb(228, 50, 234) !important;
-    --mat-tab-header-active-focus-label-text-color: rgb(228, 50, 234) !important;
-    --mat-tab-header-active-hover-label-text-color: rgb(228, 50, 234) !important;
-    --mat-tab-header-active-focus-indicator-color: rgb(228, 50, 234) !important;
+    --mat-tab-header-inactive-hover-label-text-color:$color-text-violet !important;
+    --mat-tab-header-active-focus-label-text-color: $color-text-violet !important;
+    --mat-tab-header-active-hover-label-text-color: $color-text-violet !important;
+    --mat-tab-header-active-focus-indicator-color: $color-text-violet !important;
     --mat-tab-header-active-hover-indicator-color:rgb(255, 255, 255) !important;
 }
 
@@ -65,7 +65,7 @@ textarea {
 }
 
 .btn-add-method {
-    color: rgb(228, 50, 234);
+    color: $color-text-violet;
     cursor: pointer;
 }
 

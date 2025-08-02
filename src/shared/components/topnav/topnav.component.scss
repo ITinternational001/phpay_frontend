@@ -140,7 +140,7 @@ img{
         font-size: 14px;
         color: #333;
         &:hover {
-          background-color: rgba(141, 32, 144, 1);
+          background-color: $color-text-violet;
         }
       }
   
@@ -175,7 +175,7 @@ img{
   }
 
   .dropdown-item {
-    background-color: rgba(141, 32, 144, 1);
+    background-color: $color-text-violet;
     border-radius: .5rem;
   }
 

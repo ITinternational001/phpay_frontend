@@ -1,33 +1,12 @@
 
-@import "../../src/sass/variables";
+@import"/src/sass/variables";
 
 
 .login-body {
-    background:
-    url('../assets/dpay_bg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    background: rgb(30, 30, 30);
+
 }
 
-.logo-overlay {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 25%;
-    height: auto;
-    background-size: contain;
-    margin: 0;
-    padding: 0;
-    opacity: 0.8;
-}
 
 .login-container {
 
@@ -74,13 +53,13 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background: $color-text-yellow;
+    background: $color-text-violet;
     width: 100%;
 }
 
 button:hover {
     color: $color-text-white;
-    background: $color-text-yellow
+    background: $color-text-violet
 }
 
  #pincode {

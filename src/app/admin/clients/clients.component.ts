@@ -76,7 +76,7 @@ export class ClientsComponent implements OnInit {
     }
 
   navigateToConfigurePage(data: any): void {
-    this.router.navigate(['/admin/dpayclients/configure'], {
+    this.router.navigate(['/admin/phpayclients/configure'], {
       queryParams: { data: JSON.stringify(data) }
     });
   }
